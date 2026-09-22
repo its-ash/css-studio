@@ -101,19 +101,19 @@ useHead({ title: 'Gradient - CSS Studio' })
       </ControlGroup>
 
       <ControlGroup label="Color Stops" icon="ph-palette">
-        <div v-for="(stop, i) in state.stops" :key="i" class="flex flex-col gap-2 rounded-lg border border-line bg-bg p-3">
+        <div v-for="(stop, i) in state.stops" :key="i" class="flex flex-col gap-2.5 rounded-lg border border-line bg-bg p-3 transition-colors duration-150">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-fg">Stop {{ i + 1 }}</span>
             <div class="flex items-center gap-1">
               <button
-                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-fg"
+                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-line/30 hover:text-fg"
                 :aria-label="`Lock stop ${i + 1}`"
                 @click="updateStop(i, { locked: !stop.locked })"
               >
                 <Icon :name="stop.locked ? 'ph-lock-simple-fill' : 'ph-lock-simple'" :size="13" />
               </button>
               <button
-                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-rose-400 disabled:opacity-30"
+                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-rose-500/10 hover:text-rose-400 disabled:opacity-30 disabled:hover:bg-transparent"
                 :disabled="state.stops.length <= 2"
                 :aria-label="`Remove stop ${i + 1}`"
                 @click="removeStop(i)"
@@ -127,7 +127,7 @@ useHead({ title: 'Gradient - CSS Studio' })
           <SliderControl :model-value="stop.a" label="Alpha" :min="0" :max="100" @update:model-value="(v) => updateStop(i, { a: v })" />
         </div>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs text-muted transition-colors duration-150 hover:border-[var(--color-accent)]/50 hover:text-fg"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent/60 hover:text-fg"
           @click="addStop"
         >
           <Icon name="ph-plus" :size="13" /> Add stop

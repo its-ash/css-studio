@@ -49,10 +49,10 @@ useHead({ title: 'Color Tools - CSS Studio' })
 
 <template>
   <div class="flex min-h-dvh">
-    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel shadow-panel md:flex">
+    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel md:flex">
       <div class="flex h-14 shrink-0 items-center gap-2 border-b border-line px-4">
         <NuxtLink to="/" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-fg">
-          <Icon name="ph-paint-brush" :size="18" weight="duotone" class="text-accent" />
+          <Icon name="ph-paint-brush" :size="17" weight="duotone" class="text-accent" />
           CSS Studio
         </NuxtLink>
       </div>
@@ -68,16 +68,16 @@ useHead({ title: 'Color Tools - CSS Studio' })
       </header>
 
       <main class="mx-auto w-full max-w-4xl flex-1 px-6 py-8 lg:px-10">
-        <section class="grid gap-6 md:grid-cols-2">
-          <div class="flex flex-col gap-4 rounded-xl border border-line bg-panel p-5 shadow-panel">
-            <h2 class="text-sm font-medium text-fg">Pick a color</h2>
+        <section class="grid gap-4 md:grid-cols-2">
+          <div class="flex flex-col gap-3.5 rounded-xl border border-line bg-panel p-4 shadow-panel">
+            <h2 class="text-[13px] font-medium tracking-tight text-fg">Pick a color</h2>
             <label class="flex items-center gap-3">
-              <input v-model="color" type="color" class="h-12 w-20 cursor-pointer rounded-lg border border-line bg-bg p-0.5" aria-label="Foreground color" />
-              <input v-model="color" type="text" class="h-10 w-full rounded-lg border border-line bg-bg px-2 font-mono text-sm text-fg" aria-label="Foreground hex value" />
+              <input v-model="color" type="color" class="h-12 w-20 cursor-pointer rounded-lg border border-line bg-bg p-0.5 transition-colors duration-150 hover:border-line-strong" aria-label="Foreground color" />
+              <input v-model="color" type="text" class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 font-mono text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60" aria-label="Foreground hex value" />
             </label>
             <label class="flex items-center gap-3">
-              <input v-model="bg" type="color" class="h-12 w-20 cursor-pointer rounded-lg border border-line bg-bg p-0.5" aria-label="Background color" />
-              <input v-model="bg" type="text" class="h-10 w-full rounded-lg border border-line bg-bg px-2 font-mono text-sm text-fg" aria-label="Background hex value" />
+              <input v-model="bg" type="color" class="h-12 w-20 cursor-pointer rounded-lg border border-line bg-bg p-0.5 transition-colors duration-150 hover:border-line-strong" aria-label="Background color" />
+              <input v-model="bg" type="text" class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 font-mono text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60" aria-label="Background hex value" />
             </label>
             <div class="grid grid-cols-2 gap-2">
               <div
@@ -93,13 +93,13 @@ useHead({ title: 'Color Tools - CSS Studio' })
             </div>
             <div v-if="suggestion" class="rounded-lg border border-line bg-bg p-3 text-xs text-muted">
               Try
-              <button class="font-mono text-fg underline decoration-dotted" @click="useColor(suggestion.hex)">{{ suggestion.hex }}</button>
+              <button class="font-mono text-fg underline decoration-dotted transition-colors duration-150 hover:text-accent" @click="useColor(suggestion.hex)">{{ suggestion.hex }}</button>
               for AA contrast on this background.
             </div>
           </div>
 
-          <div class="flex flex-col gap-4 rounded-xl border border-line bg-panel p-5 shadow-panel">
-            <h2 class="text-sm font-medium text-fg">Formats</h2>
+          <div class="flex flex-col gap-3.5 rounded-xl border border-line bg-panel p-4 shadow-panel">
+            <h2 class="text-[13px] font-medium tracking-tight text-fg">Formats</h2>
             <div class="flex flex-col gap-2">
               <div v-for="f in formats" :key="f.label" class="flex items-center justify-between rounded-lg bg-bg px-3 py-2">
                 <span class="text-xs text-muted">{{ f.label }}</span>

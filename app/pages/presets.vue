@@ -142,10 +142,10 @@ useHead({ title: 'Presets - CSS Studio' })
 
 <template>
   <div class="flex min-h-dvh">
-    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel shadow-panel md:flex">
+    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel md:flex">
       <div class="flex h-14 shrink-0 items-center gap-2 border-b border-line px-4">
         <NuxtLink to="/" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-fg">
-          <Icon name="ph-paint-brush" :size="18" weight="duotone" class="text-accent" />
+          <Icon name="ph-paint-brush" :size="17" weight="duotone" class="text-accent" />
           CSS Studio
         </NuxtLink>
       </div>
@@ -166,15 +166,15 @@ useHead({ title: 'Presets - CSS Studio' })
             v-model="query"
             type="search"
             placeholder="Search presets..."
-            class="h-10 w-full max-w-xs rounded-lg border border-line bg-panel px-3 text-sm text-fg placeholder:text-muted"
+            class="h-9 w-full max-w-xs rounded-lg border border-line bg-panel px-3 text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60 placeholder:text-muted"
             aria-label="Search presets"
           />
           <div class="flex flex-wrap gap-1.5">
             <button
               v-for="cat in categories"
               :key="cat"
-              class="rounded-full border px-3 py-1.5 text-xs transition-[transform,color,background-color] duration-150 active:scale-[0.97]"
-              :class="activeCategory === cat ? 'border-transparent bg-accent/15 text-fg font-medium' : 'border-line bg-panel text-muted hover:text-fg'"
+              class="rounded-full border px-3 py-1.5 text-xs font-medium transition-[transform,color,background-color,border-color] duration-150 active:scale-[0.97]"
+              :class="activeCategory === cat ? 'border-transparent bg-accent/15 text-fg' : 'border-line bg-panel text-muted hover:text-fg hover:border-line-strong'"
               @click="activeCategory = cat"
             >
               {{ cat }}
@@ -200,7 +200,7 @@ useHead({ title: 'Presets - CSS Studio' })
                 <span class="text-sm font-medium text-fg">{{ entry.name }}</span>
                 <div class="flex items-center gap-1">
                   <button
-                    class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-fg"
+                    class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-line/30 hover:text-fg"
                     aria-label="Copy CSS"
                     title="Copy CSS"
                     @click="copyCss(entry)"
@@ -209,7 +209,7 @@ useHead({ title: 'Presets - CSS Studio' })
                   </button>
                   <NuxtLink
                     :to="entry.route"
-                    class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-fg"
+                    class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-line/30 hover:text-fg"
                     aria-label="Edit in generator"
                     title="Edit"
                   >

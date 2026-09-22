@@ -90,12 +90,12 @@ useHead({ title: 'Background - CSS Studio' })
 
     <template #controls>
       <ControlGroup label="Layers" icon="ph-stack">
-        <div v-for="(layer, i) in state.layers" :key="layer.id" class="flex flex-col gap-2 rounded-lg border border-line bg-bg p-3">
+        <div v-for="(layer, i) in state.layers" :key="layer.id" class="flex flex-col gap-2.5 rounded-lg border border-line bg-bg p-3 transition-colors duration-150">
           <div class="flex items-center justify-between">
             <span class="truncate text-xs font-medium text-fg">{{ layer.name }} · {{ layer.kind }}</span>
             <div class="flex items-center gap-1">
               <button
-                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-fg disabled:opacity-30"
+                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-line/30 hover:text-fg disabled:opacity-30 disabled:hover:bg-transparent"
                 :disabled="i === 0"
                 aria-label="Move layer up"
                 @click="moveLayer(layer.id, -1)"
@@ -103,7 +103,7 @@ useHead({ title: 'Background - CSS Studio' })
                 <Icon name="ph-arrow-up" :size="12" />
               </button>
               <button
-                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-fg disabled:opacity-30"
+                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-line/30 hover:text-fg disabled:opacity-30 disabled:hover:bg-transparent"
                 :disabled="i === state.layers.length - 1"
                 aria-label="Move layer down"
                 @click="moveLayer(layer.id, 1)"
@@ -111,7 +111,7 @@ useHead({ title: 'Background - CSS Studio' })
                 <Icon name="ph-arrow-down" :size="12" />
               </button>
               <button
-                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-rose-400 disabled:opacity-30"
+                class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-rose-500/10 hover:text-rose-400 disabled:opacity-30 disabled:hover:bg-transparent"
                 :disabled="state.layers.length <= 1"
                 :aria-label="`Remove ${layer.name}`"
                 @click="removeLayer(layer.id)"
@@ -144,7 +144,7 @@ useHead({ title: 'Background - CSS Studio' })
           <button
             v-for="k in LAYER_KINDS"
             :key="k.value"
-            class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line px-2 text-xs text-muted transition-colors duration-150 hover:border-[var(--color-accent)]/50 hover:text-fg"
+            class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line px-2 text-xs text-muted transition-colors duration-150 hover:border-accent/60 hover:text-fg"
             @click="addLayer(k.value)"
           >
             <Icon name="ph-plus" :size="12" /> {{ k.label }}

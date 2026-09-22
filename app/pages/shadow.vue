@@ -108,11 +108,11 @@ useHead({ title: 'Shadow - CSS Studio' })
       </ControlGroup>
 
       <ControlGroup label="Layers" icon="ph-stack">
-        <div v-for="(layer, i) in state.layers" :key="i" class="flex flex-col gap-2 rounded-lg border border-line bg-bg p-3">
+        <div v-for="(layer, i) in state.layers" :key="i" class="flex flex-col gap-2.5 rounded-lg border border-line bg-bg p-3 transition-colors duration-150">
           <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-fg">Layer {{ i + 1 }}</span>
             <button
-              class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-rose-400 disabled:opacity-30"
+              class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-rose-500/10 hover:text-rose-400 disabled:opacity-30 disabled:hover:bg-transparent"
               :disabled="state.layers.length <= 1"
               :aria-label="`Remove layer ${i + 1}`"
               @click="removeLayer(i)"
@@ -128,7 +128,7 @@ useHead({ title: 'Shadow - CSS Studio' })
           <ToggleControl v-if="state.kind === 'box'" :model-value="layer.inset" label="Inset" @update:model-value="(v) => updateLayer(i, { inset: v })" />
         </div>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs text-muted transition-colors duration-150 hover:border-[var(--color-accent)]/50 hover:text-fg"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent/60 hover:text-fg"
           @click="addLayer"
         >
           <Icon name="ph-plus" :size="13" /> Add layer

@@ -29,10 +29,10 @@ const generators = [
 
 <template>
   <div class="flex min-h-dvh">
-    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel shadow-panel md:flex">
+    <aside class="sticky top-0 hidden h-dvh w-56 shrink-0 flex-col border-r border-line bg-panel md:flex">
       <div class="flex h-14 shrink-0 items-center gap-2 border-b border-line px-4">
         <NuxtLink to="/" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-fg">
-          <Icon name="ph-paint-brush" :size="18" weight="duotone" class="text-accent" />
+          <Icon name="ph-paint-brush" :size="17" weight="duotone" class="text-accent" />
           CSS Studio
         </NuxtLink>
       </div>
@@ -44,7 +44,7 @@ const generators = [
     <div class="flex min-w-0 flex-1 flex-col">
       <header class="flex h-14 shrink-0 items-center justify-between border-b border-line bg-panel/80 px-4 shadow-panel backdrop-blur-md md:justify-end">
         <NuxtLink to="/" class="flex items-center gap-2 text-sm font-semibold tracking-tight text-fg md:hidden">
-          <Icon name="ph-paint-brush" :size="18" weight="duotone" class="text-accent" />
+          <Icon name="ph-paint-brush" :size="17" weight="duotone" class="text-accent" />
           CSS Studio
         </NuxtLink>
         <div class="flex items-center gap-2">
@@ -52,9 +52,9 @@ const generators = [
         </div>
       </header>
 
-      <main class="mx-auto w-full max-w-[1400px] flex-1 px-6 py-10 lg:px-10">
-        <section class="mb-14 max-w-2xl">
-          <h1 class="text-4xl font-semibold tracking-tighter text-fg md:text-5xl">
+      <main class="mx-auto w-full max-w-[1400px] flex-1 px-6 py-8 lg:px-10">
+        <section class="mb-10 max-w-2xl">
+          <h1 class="text-4xl font-semibold tracking-tighter leading-[1.05] text-fg md:text-5xl">
             Generate Beautiful CSS<br />Without Writing It
           </h1>
           <p class="mt-4 text-base leading-relaxed text-muted">
@@ -63,13 +63,13 @@ const generators = [
           <div class="mt-6 flex flex-wrap gap-2">
             <NuxtLink
               to="/gradient"
-              class="inline-flex h-10 items-center rounded-lg bg-accent px-5 text-sm font-medium text-zinc-950 transition-transform duration-150 active:scale-[0.97]"
+              class="inline-flex h-10 items-center rounded-lg bg-accent px-5 text-sm font-medium text-accent-fg transition-transform duration-150 active:scale-[0.97]"
             >
               Open Gradient Studio
             </NuxtLink>
             <NuxtLink
               to="/presets"
-              class="inline-flex h-10 items-center rounded-lg border border-line bg-panel px-5 text-sm text-fg transition-[transform,background-color] duration-150 hover:bg-line/40 active:scale-[0.97]"
+              class="inline-flex h-10 items-center rounded-lg border border-line bg-panel px-5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
             >
               Browse Presets
             </NuxtLink>
@@ -77,16 +77,16 @@ const generators = [
         </section>
 
         <section aria-labelledby="generators-heading">
-          <h2 id="generators-heading" class="mb-5 text-sm font-medium text-muted">Generators</h2>
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <h2 id="generators-heading" class="mb-4 text-xs font-medium tracking-wide text-muted uppercase">Generators</h2>
+          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <NuxtLink
               v-for="g in generators"
               :key="g.to"
               :to="g.to"
-              class="group flex flex-col gap-2 rounded-xl border border-line bg-panel p-5 shadow-panel transition-[transform,border-color,box-shadow] duration-150 hover:border-[var(--color-accent)]/50 hover:shadow-panel-lg active:scale-[0.99]"
+              class="group flex flex-col gap-2 rounded-xl border border-line bg-panel p-4 shadow-panel transition-[transform,border-color,box-shadow] duration-150 hover:border-accent/60 hover:shadow-panel-lg active:scale-[0.99]"
             >
-              <Icon :name="g.icon" :size="22" class="text-accent" />
-              <span class="text-sm font-medium text-fg">{{ g.title }}</span>
+              <Icon :name="g.icon" :size="20" class="text-accent" />
+              <span class="text-sm font-medium tracking-tight text-fg">{{ g.title }}</span>
               <span class="text-xs leading-relaxed text-muted">{{ g.desc }}</span>
             </NuxtLink>
           </div>

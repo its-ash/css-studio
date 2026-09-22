@@ -124,19 +124,19 @@ useHead({ title: 'Mesh Gradient - CSS Studio' })
       <ControlGroup label="Points" icon="ph-circle">
         <p class="text-[11px] text-muted">Drag the colored dots on the canvas to reposition. Click + to add more.</p>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs text-muted transition-colors duration-150 hover:border-[var(--color-accent)]/50 hover:text-fg"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-dashed border-line text-xs font-medium text-muted transition-[color,border-color] duration-150 hover:border-accent/60 hover:text-fg"
           @click="addPoint"
         >
           <Icon name="ph-plus" :size="13" /> Add point
         </button>
-        <div v-for="p in state.points" :key="p.id" class="flex flex-col gap-2 rounded-lg border border-line bg-bg p-3">
+        <div v-for="p in state.points" :key="p.id" class="flex flex-col gap-2.5 rounded-lg border border-line bg-bg p-3 transition-colors duration-150">
           <div class="flex items-center justify-between">
             <span class="flex items-center gap-2 text-xs font-medium text-fg">
               <span class="h-4 w-4 rounded-full border border-white/30" :style="{ backgroundColor: hslToHex({ h: p.h, s: p.s, l: p.l }) }"></span>
               Point {{ state.points.indexOf(p) + 1 }}
             </span>
             <button
-              class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted hover:text-rose-400 disabled:opacity-30"
+              class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted transition-colors duration-150 hover:bg-rose-500/10 hover:text-rose-400 disabled:opacity-30 disabled:hover:bg-transparent"
               :disabled="state.points.length <= 2"
               :aria-label="`Remove point`"
               @click="removePoint(p.id)"
