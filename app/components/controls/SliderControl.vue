@@ -22,7 +22,7 @@ function onInput(e: Event) {
   <label class="flex flex-col gap-1.5">
     <span class="flex items-baseline justify-between">
       <span class="text-xs font-medium text-fg">{{ label }}</span>
-      <span class="font-mono text-xs text-muted">{{ model }}{{ suffix }}</span>
+      <span class="font-mono text-xs tracking-tight text-muted">{{ model }}{{ suffix }}</span>
     </span>
     <input
       type="range"
@@ -30,7 +30,7 @@ function onInput(e: Event) {
       :min="min"
       :max="max"
       :step="step"
-      class="w-full accent-[var(--color-accent)]"
+      class="w-full accent-accent"
       :aria-label="label"
       @input="onInput"
     />

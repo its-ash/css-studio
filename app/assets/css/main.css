@@ -6,26 +6,31 @@
 @import "@fontsource/geist-mono/500.css";
 
 :root {
-  --bg: #f4f5f7;
+  --bg: #f5f5f4;
   --panel: #ffffff;
-  --line: #d4d7dd;
-  --fg: #1a1d23;
-  --muted: #6b7280;
-  --accent: #059669;
-  --panel-shadow: 0 1px 3px #0000000d, 0 1px 2px #0000000a;
-  --panel-shadow-lg: 0 4px 16px #00000010, 0 2px 6px #0000000a;
+  --line: #e0e0dd;
+  --line-strong: #c9c9c5;
+  --fg: #1c1c1a;
+  --muted: #71716c;
+  --accent: #b45309;
+  --accent-fg: #fffbeb;
+  --radius: 10px;
+  --panel-shadow: 0 1px 2px #1c1c1a0d, 0 1px 1px #1c1c1a08;
+  --panel-shadow-lg: 0 8px 24px #1c1c1a12, 0 2px 8px #1c1c1a0a;
   color-scheme: light;
 }
 
 html.dark {
-  --bg: #09090b;
-  --panel: #111114;
-  --line: #26262e;
-  --fg: #f4f4f5;
-  --muted: #8b8b96;
-  --accent: #34d399;
-  --panel-shadow: 0 1px 3px #00000040;
-  --panel-shadow-lg: 0 4px 24px #00000060;
+  --bg: #0a0a09;
+  --panel: #141412;
+  --line: #262621;
+  --line-strong: #38382f;
+  --fg: #f2f2ef;
+  --muted: #92928a;
+  --accent: #f59e0b;
+  --accent-fg: #1c1305;
+  --panel-shadow: 0 1px 2px #00000060, 0 1px 1px #00000040;
+  --panel-shadow-lg: 0 12px 32px #00000070, 0 2px 8px #00000050;
   color-scheme: dark;
 }
 
@@ -33,9 +38,12 @@ html.dark {
   --color-bg: var(--bg);
   --color-panel: var(--panel);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --radius-control: var(--radius);
 }
 
 code, pre, .font-mono {
@@ -46,14 +54,22 @@ code, pre, .font-mono {
   font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
 }
 
-code, pre, .font-mono {
-  font-family: "Geist Mono", ui-monospace, monospace;
-}
-
 body {
   background-color: var(--bg);
   color: var(--fg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.006em;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+p {
+  line-height: 1.6;
 }
 
 /* Utility semantic classes generated from theme tokens */
@@ -61,22 +77,25 @@ body {
   .bg-bg { background-color: var(--color-bg); }
   .bg-panel { background-color: var(--color-panel); }
   .border-line { border-color: var(--color-line); }
+  .border-line-strong { border-color: var(--color-line-strong); }
   .text-fg { color: var(--color-fg); }
   .text-muted { color: var(--color-muted); }
   .text-accent { color: var(--color-accent); }
   .bg-accent { background-color: var(--color-accent); }
+  .text-accent-fg { color: var(--color-accent-fg); }
   .shadow-panel { box-shadow: var(--panel-shadow); }
   .shadow-panel-lg { box-shadow: var(--panel-shadow-lg); }
 }
 
 ::selection {
-  background: #34d39944;
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
 }
 
 /* Focus visibility everywhere */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Slim scrollbars for panels */

@@ -35,11 +35,11 @@ const nav = [
       v-for="item in nav"
       :key="item.to"
       :to="item.to"
-      class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors duration-150 active:scale-[0.98]"
-      :class="route.path === item.to ? 'bg-accent/10 text-fg font-medium' : 'text-muted hover:text-fg hover:bg-line/30'"
+      class="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] transition-[background-color,color,transform] duration-150 active:scale-[0.98]"
+      :class="route.path === item.to ? 'bg-accent/12 text-fg font-medium' : 'text-muted hover:text-fg hover:bg-line/25'"
       :aria-current="route.path === item.to ? 'page' : undefined"
     >
-      <Icon :name="item.icon" :size="17" :class="route.path === item.to ? 'text-accent' : ''" />
+      <Icon :name="item.icon" :size="16" :class="route.path === item.to ? 'text-accent' : ''" />
       <span>{{ item.label }}</span>
     </NuxtLink>
   </nav>

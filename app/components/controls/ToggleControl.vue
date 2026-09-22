@@ -18,12 +18,12 @@ const model = defineModel<boolean>({ required: true })
       role="switch"
       :aria-checked="model"
       :aria-label="label"
-      class="relative h-5 w-9 rounded-full border transition-colors duration-150"
-      :class="model ? 'bg-accent/90 border-transparent' : 'bg-bg border-line'"
+      class="relative h-5 w-9 shrink-0 rounded-full border transition-colors duration-150 active:scale-[0.97]"
+      :class="model ? 'bg-accent border-transparent' : 'bg-bg border-line'"
       @click="model = !model"
     >
       <span
-        class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform duration-150 ease-out"
+        class="absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-[#fffbeb] shadow transition-transform duration-150 ease-out"
         :class="model ? 'translate-x-4' : ''"
       />
     </button>

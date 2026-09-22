@@ -62,7 +62,7 @@ useHotkeys(() => [
     <header class="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between gap-2 border-b border-line bg-panel/80 px-4 shadow-panel backdrop-blur-md">
       <div class="flex min-w-0 items-center gap-3">
         <NuxtLink to="/" class="flex shrink-0 items-center gap-2 text-sm font-semibold tracking-tight text-fg">
-          <Icon name="ph-paint-brush" :size="18" weight="duotone" class="text-accent" />
+          <Icon name="ph-paint-brush" :size="17" weight="duotone" class="text-accent" />
           <span class="hidden sm:inline">CSS Studio</span>
         </NuxtLink>
         <span class="hidden h-4 w-px bg-line md:block" aria-hidden="true"></span>
@@ -70,7 +70,7 @@ useHotkeys(() => [
       </div>
       <div class="flex items-center gap-1">
         <button
-          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-colors duration-150 hover:bg-line/40 hover:text-fg active:scale-95"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-[background-color,color,transform] duration-150 hover:bg-line/30 hover:text-fg active:scale-[0.95]"
           aria-label="Undo"
           title="Undo"
           @click="emit('undo')"
@@ -78,15 +78,16 @@ useHotkeys(() => [
           <Icon name="ph-arrow-counter-clockwise" :size="15" />
         </button>
         <button
-          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-colors duration-150 hover:bg-line/40 hover:text-fg active:scale-95"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-[background-color,color,transform] duration-150 hover:bg-line/30 hover:text-fg active:scale-[0.95]"
           aria-label="Redo"
           title="Redo"
           @click="emit('redo')"
         >
           <Icon name="ph-arrow-clockwise" :size="15" />
         </button>
+        <span class="mx-1 hidden h-4 w-px bg-line sm:block" aria-hidden="true"></span>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-[transform,background-color] duration-150 hover:bg-line/40 active:scale-[0.97]"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
           @click="copyCss"
           title="Copy CSS"
         >
@@ -94,28 +95,28 @@ useHotkeys(() => [
           <span class="hidden md:inline">Copy CSS</span>
         </button>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-[transform,background-color] duration-150 hover:bg-line/40 active:scale-[0.97]"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
           @click="emit('randomize')"
         >
           <Icon name="ph-shuffle" :size="14" class="text-accent" />
           <span class="hidden md:inline">Randomize</span>
         </button>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-[transform,background-color] duration-150 hover:bg-line/40 active:scale-[0.97]"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
           @click="emit('reset')"
         >
           <Icon name="ph-arrow-counter-clockwise" :size="14" />
           <span class="hidden md:inline">Reset</span>
         </button>
         <button
-          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-[transform,background-color] duration-150 hover:bg-line/40 active:scale-[0.97]"
+          class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
           @click="share"
         >
           <Icon name="ph-share-network" :size="14" />
           <span class="hidden md:inline">Share</span>
         </button>
         <button
-          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-colors duration-150 hover:bg-line/40 hover:text-fg active:scale-95"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition-[background-color,color] duration-150 hover:bg-line/30 hover:text-fg active:scale-[0.95]"
           :aria-label="colorMode.value === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
           @click="toggleTheme"
         >
@@ -126,7 +127,7 @@ useHotkeys(() => [
     </header>
 
     <div class="flex min-h-0 flex-1">
-      <aside class="hidden w-56 shrink-0 overflow-y-auto border-r border-line bg-panel shadow-panel md:block" aria-label="Generators">
+      <aside class="hidden w-56 shrink-0 overflow-y-auto border-r border-line bg-panel md:block" aria-label="Generators">
         <SidebarNav />
       </aside>
 
@@ -135,7 +136,7 @@ useHotkeys(() => [
           <slot name="preview" />
         </div>
 
-        <div class="flex w-full shrink-0 flex-col gap-4 border-t border-line bg-panel p-4 lg:w-[380px] lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
+        <div class="flex w-full shrink-0 flex-col gap-3.5 border-t border-line bg-panel p-3.5 lg:w-[380px] lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
           <slot name="controls" />
           <slot name="code" />
         </div>

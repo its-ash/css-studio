@@ -11,7 +11,7 @@ const model = defineModel<string>({ required: true })
       v-model="model"
       type="text"
       :placeholder="placeholder"
-      class="h-9 w-full rounded-lg border border-line bg-bg px-2 text-sm text-fg transition-colors duration-150 hover:border-muted"
+      class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60 placeholder:text-muted"
       :aria-label="label ?? 'Text input'"
     />
   </label>

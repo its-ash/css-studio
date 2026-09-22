@@ -10,7 +10,7 @@ const { toasts, dismiss } = useToasts()
       <div
         v-for="t in toasts"
         :key="t.id"
-        class="pointer-events-auto flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-2 text-sm shadow-lg"
+        class="pointer-events-auto flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-2 text-sm shadow-panel-lg"
         @click="dismiss(t.id)"
       >
         <Icon

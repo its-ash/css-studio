@@ -18,6 +18,10 @@ const inputEl = ref<HTMLInputElement | null>(null)
 const listRef = ref<HTMLDivElement | null>(null)
 const activeIndex = ref(0)
 
+/**
+ * Kept in sync with SidebarNav.vue's `nav` array — that component is the
+ * source of truth for the full page set.
+ */
 const commands = computed<PaletteCommand[]>(() => {
   const nav: { to: string; label: string; icon: string }[] = [
     { to: '/', label: 'Dashboard', icon: 'ph-house' },
@@ -32,6 +36,17 @@ const commands = computed<PaletteCommand[]>(() => {
     { to: '/border', label: 'Border', icon: 'ph-square' },
     { to: '/text', label: 'Text', icon: 'ph-text-aa' },
     { to: '/animation', label: 'Animation', icon: 'ph-sparkle' },
+    { to: '/component', label: 'Component', icon: 'ph-cube' },
+    { to: '/background', label: 'Background', icon: 'ph-layout' },
+    { to: '/loader', label: 'Loader', icon: 'ph-spinner-gap' },
+    { to: '/badge', label: 'Badge', icon: 'ph-tag' },
+    { to: '/divider', label: 'Divider', icon: 'ph-ruler' },
+    { to: '/scrollbar', label: 'Scrollbar', icon: 'ph-square-half' },
+    { to: '/cursor', label: 'Cursor & Selection', icon: 'ph-cursor' },
+    { to: '/filter', label: 'Filter', icon: 'ph-funnel' },
+    { to: '/spotlight', label: 'Spotlight', icon: 'ph-flashlight' },
+    { to: '/noise', label: 'Noise & Grain', icon: 'ph-dots-nine' },
+    { to: '/typescale', label: 'Type Scale', icon: 'ph-text-t' },
     { to: '/presets', label: 'Presets', icon: 'ph-bookmark' },
     { to: '/palette', label: 'Color Tools', icon: 'ph-palette' }
   ]
@@ -101,7 +116,7 @@ watch(paletteOpen, (open) => {
   <div>
     <!-- Trigger button -->
     <button
-      class="inline-flex items-center gap-2 rounded-lg border border-line bg-panel px-3 h-8 text-sm text-muted transition-colors duration-150 hover:text-fg active:scale-[0.97]"
+      class="inline-flex items-center gap-2 rounded-lg border border-line bg-panel px-3 h-8 text-sm text-muted transition-[color,border-color] duration-150 hover:text-fg hover:border-line-strong active:scale-[0.97]"
       aria-label="Open command palette"
       @click="toggle"
     >
@@ -122,7 +137,7 @@ watch(paletteOpen, (open) => {
           @click.self="paletteOpen = false"
         >
           <div
-            class="w-[min(92vw,560px)] rounded-xl border border-line bg-panel shadow-2xl overflow-hidden"
+            class="w-[min(92vw,560px)] rounded-xl border border-line bg-panel shadow-panel-lg overflow-hidden"
             @keydown="onKeydown"
           >
             <div class="flex items-center gap-2 border-b border-line px-4">
@@ -145,7 +160,7 @@ watch(paletteOpen, (open) => {
                 v-for="(cmd, i) in filtered"
                 :key="cmd.id"
                 class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors duration-100"
-                :class="i === activeIndex ? 'bg-accent/10 text-fg' : 'text-muted hover:text-fg'"
+                :class="i === activeIndex ? 'bg-accent/12 text-fg' : 'text-muted hover:text-fg'"
                 :data-index="i"
                 @mouseenter="activeIndex = i"
                 @click="runCommand(cmd)"

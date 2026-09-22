@@ -15,7 +15,7 @@ async function copy() {
 
 <template>
   <button
-    class="inline-flex items-center gap-1.5 rounded-lg border border-line bg-panel px-3 h-8 text-sm text-fg transition-[transform,background-color] ease-out duration-150 active:scale-[0.97] hover:bg-line/40"
+    class="inline-flex items-center gap-1.5 rounded-lg border border-line bg-panel px-3 h-8 text-sm font-medium text-fg transition-[transform,background-color,border-color] ease-out duration-150 active:scale-[0.97] hover:bg-line/30 hover:border-line-strong"
     :class="$props.class"
     @click="copy"
   >

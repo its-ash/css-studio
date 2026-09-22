@@ -14,7 +14,7 @@ const model = defineModel<number | string>({ required: true })
       v-model="model"
       type="text"
       inputmode="numeric"
-      class="h-9 w-full rounded-lg border border-line bg-bg px-2 font-mono text-sm text-fg transition-colors duration-150 hover:border-muted"
+      class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 font-mono text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60"
       :aria-label="label"
     />
   </label>

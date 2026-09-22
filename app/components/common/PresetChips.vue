@@ -13,7 +13,7 @@ const emit = defineEmits<{ apply: [index: number] }>()
       <button
         v-for="(p, i) in presets"
         :key="p.name"
-        class="inline-flex items-center rounded-full border border-line bg-bg px-3 py-1.5 text-xs text-muted transition-[transform,color,background-color] duration-150 hover:border-[var(--color-accent)]/40 hover:text-fg active:scale-[0.97]"
+        class="inline-flex items-center rounded-full border border-line bg-bg px-3 py-1.5 text-xs text-muted transition-[transform,color,background-color,border-color] duration-150 hover:border-accent/50 hover:text-fg active:scale-[0.97]"
         @click="emit('apply', i)"
       >
         {{ p.name }}

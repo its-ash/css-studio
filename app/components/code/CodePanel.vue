@@ -87,7 +87,7 @@ function download() {
           role="tab"
           :aria-selected="active === t.id"
           class="px-3 py-2.5 text-xs font-medium transition-colors duration-150"
-          :class="active === t.id ? 'text-fg border-b-2 border-[var(--color-accent)]' : 'text-muted hover:text-fg'"
+          :class="active === t.id ? 'text-fg border-b-2 border-accent' : 'text-muted hover:text-fg'"
           @click="active = t.id"
         >
           {{ t.label }}
@@ -95,11 +95,11 @@ function download() {
       </div>
       <div class="flex items-center gap-1">
         <label class="flex cursor-pointer items-center gap-1.5 text-[11px] text-muted">
-          <input v-model="minified" type="checkbox" class="h-3 w-3 accent-[var(--color-accent)]" />
+          <input v-model="minified" type="checkbox" class="h-3 w-3 accent-accent" />
           Minified
         </label>
         <button
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
+          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
           aria-label="Copy code"
           title="Copy"
           @click="copy"
@@ -107,7 +107,7 @@ function download() {
           <Icon name="ph-copy" :size="14" />
         </button>
         <button
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
+          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
           aria-label="Download code"
           title="Download"
           @click="download"
@@ -116,7 +116,7 @@ function download() {
         </button>
       </div>
      </div>
-    <div class="max-h-64 overflow-auto p-4">
+    <div class="max-h-64 overflow-auto p-3.5">
       <pre class="whitespace-pre-wrap break-words font-mono text-xs leading-relaxed text-fg">{{ display }}</pre>
     </div>
   </div>

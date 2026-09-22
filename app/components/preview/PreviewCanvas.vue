@@ -70,10 +70,10 @@ async function exportPng() {
   >
     <div class="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-line px-4">
       <div class="flex items-center gap-1.5">
-        <span v-if="title" class="text-xs font-medium text-muted">{{ title }}</span>
+        <span v-if="title" class="text-xs font-medium tracking-tight text-muted">{{ title }}</span>
         <span class="flex-1"></span>
       </div>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-0.5">
         <button
           v-for="vp in [
             { v: 'full', icon: 'ph-monitor', label: 'Full' },
@@ -82,8 +82,8 @@ async function exportPng() {
             { v: 'mobile', icon: 'ph-device-mobile-camera', label: 'Mobile' }
           ]"
           :key="vp.v"
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
-          :class="viewport === vp.v ? 'bg-accent/10 text-fg' : ''"
+          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
+          :class="viewport === vp.v ? 'bg-accent/12 text-fg' : ''"
           :aria-label="`Preview at ${vp.label} size`"
           :title="vp.label"
           @click="setViewport(vp.v as Viewport)"
@@ -92,8 +92,8 @@ async function exportPng() {
         </button>
         <span class="mx-1 h-4 w-px bg-line" aria-hidden="true"></span>
         <button
-          class="inline-flex h-7 items-center rounded-md px-2 text-xs text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
-          :class="fit === 'fit' ? 'bg-accent/10 text-fg' : ''"
+          class="inline-flex h-7 items-center rounded-md px-2 text-xs font-medium text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
+          :class="fit === 'fit' ? 'bg-accent/12 text-fg' : ''"
           aria-label="Fit preview"
           @click="setFit('fit')"
         >
@@ -102,8 +102,8 @@ async function exportPng() {
         <button
           v-for="z in [50, 75, 100, 150]"
           :key="z"
-          class="inline-flex h-7 items-center rounded-md px-2 text-xs text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
-          :class="fit === z ? 'bg-accent/10 text-fg' : ''"
+          class="inline-flex h-7 items-center rounded-md px-2 text-xs font-medium text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
+          :class="fit === z ? 'bg-accent/12 text-fg' : ''"
           :aria-label="`Zoom ${z}%`"
           @click="setFit(z)"
         >
@@ -111,7 +111,7 @@ async function exportPng() {
         </button>
         <span class="mx-1 h-4 w-px bg-line" aria-hidden="true"></span>
         <button
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
+          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
           aria-label="Export preview as PNG"
           title="Export PNG"
           @click="exportPng"
@@ -119,7 +119,7 @@ async function exportPng() {
           <Icon name="ph-download-simple" :size="14" />
         </button>
         <button
-          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/40 hover:text-fg"
+          class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
           :aria-label="isFullscreen ? 'Exit fullscreen' : 'Fullscreen preview'"
           :title="isFullscreen ? 'Exit fullscreen' : 'Fullscreen'"
           @click="toggleFullscreen"

@@ -39,15 +39,15 @@ function pick(ev: Event) {
 
 <template>
   <label class="flex items-center justify-between gap-3">
-    <span class="flex flex-col">
+    <span class="flex flex-col gap-0.5">
       <span class="text-xs font-medium text-fg">{{ label }}</span>
-      <span class="font-mono text-[11px] text-muted uppercase">{{ modelValue }}</span>
+      <span class="font-mono text-[11px] tracking-tight text-muted uppercase">{{ modelValue }}</span>
     </span>
     <span class="relative inline-block">
       <input
         type="color"
         :value="hexValue"
-        class="h-8 w-12 cursor-pointer rounded-lg border border-line bg-bg p-0.5"
+        class="h-8 w-12 cursor-pointer rounded-lg border border-line bg-bg p-0.5 transition-colors duration-150 hover:border-line-strong"
         :aria-label="label"
         @input="pick"
       />

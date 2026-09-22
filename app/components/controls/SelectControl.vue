@@ -15,7 +15,7 @@ const model = defineModel<string>({ required: true })
     <span class="text-xs font-medium text-fg">{{ label }}</span>
     <select
       v-model="model"
-      class="h-9 w-full rounded-lg border border-line bg-bg px-2 text-sm text-fg transition-colors duration-150 hover:border-muted"
+      class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60"
       :aria-label="label"
     >
       <option v-for="o in options" :key="o.value" :value="o.value">{{ o.label }}</option>
@@ -24,7 +24,7 @@ const model = defineModel<string>({ required: true })
   <select
     v-else
     v-model="model"
-    class="h-9 w-full rounded-lg border border-line bg-bg px-2 text-sm text-fg"
+    class="h-9 w-full rounded-lg border border-line bg-bg px-2.5 text-sm text-fg transition-colors duration-150 hover:border-line-strong focus:border-accent/60"
     aria-label="Select"
   >
     <option v-for="o in options" :key="o.value" :value="o.value">{{ o.label }}</option>
