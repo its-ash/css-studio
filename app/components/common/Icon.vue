@@ -8,7 +8,8 @@ import {
   PhLockSimple, PhX, PhPlus, PhArrowsLeftRight, PhCheckCircle, PhWarningCircle,
   PhInfo, PhPencilSimple, PhStack, PhPaintBucket, PhCode, PhCircleHalf,
   PhSquare, PhSquaresFour, PhArrowsOut, PhMonitor, PhDeviceTablet, PhDeviceMobileCamera,
-  PhCube, PhLayout, PhSpinnerGap, PhCursor, PhFunnel, PhRuler, PhTag, PhTextT, PhFlashlight, PhDotsNine
+  PhCube, PhLayout, PhSpinnerGap, PhCursor, PhFunnel, PhRuler, PhTag, PhTextT, PhFlashlight, PhDotsNine,
+  PhCornersOut, PhArrowsOutLineHorizontal
 } from '@phosphor-icons/vue'
 import { computed, type Component } from 'vue'
 
@@ -86,7 +87,9 @@ const registry: Record<string, Entry> = {
   'ph-tag': { c: PhTag },
   'ph-text-t': { c: PhTextT },
   'ph-flashlight': { c: PhFlashlight },
-  'ph-dots-nine': { c: PhDotsNine }
+  'ph-dots-nine': { c: PhDotsNine },
+  'ph-corners-out': { c: PhCornersOut },
+  'ph-arrows-out-line-horizontal': { c: PhArrowsOutLineHorizontal }
 }
 
 const resolved = computed<Entry>(() => registry[props.name] ?? { c: PhCircleDashed })

@@ -99,7 +99,7 @@ useHead({ title: 'Border - CSS Studio' })
         <SliderControl v-model="state.glowBlur" label="Glow blur" :min="0" :max="60" suffix="px" />
       </ControlGroup>
 
-      <ControlGroup label="Corners" icon="ph-rectangle">
+      <ControlGroup label="Corners" icon="ph-corners-out">
         <ToggleControl v-model="state.individualCorners" label="Individual corners" />
         <template v-if="state.individualCorners">
           <SliderControl v-model="state.radiusTL" label="Top Left" :min="0" :max="48" suffix="px" />
@@ -112,7 +112,7 @@ useHead({ title: 'Border - CSS Studio' })
         </template>
       </ControlGroup>
 
-      <ControlGroup label="Per-Side Width" icon="ph-rectangle">
+      <ControlGroup label="Per-Side Width" icon="ph-arrows-out-line-horizontal">
         <ToggleControl v-model="state.perSide" label="Individual sides" />
         <template v-if="state.perSide">
           <SliderControl v-model="state.widthT" label="Top" :min="0" :max="12" suffix="px" />
