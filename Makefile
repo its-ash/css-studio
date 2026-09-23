@@ -7,6 +7,7 @@ build:
 	mkdir -p docs
 	cp -r .output/public/* docs/
 	touch docs/.nojekyll
+	echo "css-studio.itsash.in" > docs/CNAME
 
 deploy: build
 	git checkout main
