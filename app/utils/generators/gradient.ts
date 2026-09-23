@@ -205,7 +205,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 330, s: 80, l: 60, a: 100, pos: 55, locked: false },
         { h: 260, s: 70, l: 45, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -221,7 +225,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 190, s: 90, l: 45, a: 100, pos: 0, locked: false },
         { h: 210, s: 80, l: 30, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -238,7 +246,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 190, s: 90, l: 50, a: 100, pos: 45, locked: false },
         { h: 270, s: 75, l: 55, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -254,7 +266,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 320, s: 100, l: 55, a: 100, pos: 0, locked: false },
         { h: 260, s: 100, l: 60, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -270,7 +286,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 340, s: 70, l: 85, a: 100, pos: 0, locked: false },
         { h: 200, s: 70, l: 88, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -288,7 +308,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 130, s: 80, l: 70, a: 100, pos: 60, locked: false },
         { h: 210, s: 90, l: 70, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -304,7 +328,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 0, s: 0, l: 8, a: 100, pos: 0, locked: false },
         { h: 220, s: 25, l: 18, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -320,7 +348,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 200, s: 30, l: 92, a: 48, pos: 0, locked: false },
         { h: 210, s: 40, l: 75, a: 32, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -339,7 +371,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 210, s: 10, l: 55, a: 100, pos: 78, locked: false },
         { h: 210, s: 12, l: 80, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -356,7 +392,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 190, s: 100, l: 50, a: 100, pos: 55, locked: false },
         { h: 45, s: 100, l: 60, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -372,7 +412,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 152, s: 76, l: 30, a: 100, pos: 0, locked: false },
         { h: 168, s: 84, l: 50, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -388,7 +432,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 28, s: 95, l: 75, a: 100, pos: 0, locked: false },
         { h: 350, s: 85, l: 80, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -405,7 +453,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 280, s: 50, l: 8, a: 100, pos: 60, locked: false },
         { h: 0, s: 0, l: 3, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -421,7 +473,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 160, s: 90, l: 80, a: 100, pos: 0, locked: false },
         { h: 190, s: 85, l: 65, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -438,7 +494,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 30, s: 45, l: 70, a: 100, pos: 50, locked: false },
         { h: 350, s: 40, l: 75, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -455,7 +515,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 260, s: 90, l: 60, a: 100, pos: 45, locked: false },
         { h: 195, s: 95, l: 55, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -471,7 +535,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 140, s: 55, l: 22, a: 100, pos: 0, locked: false },
         { h: 100, s: 45, l: 35, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -488,7 +556,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 15, s: 95, l: 55, a: 100, pos: 50, locked: false },
         { h: 330, s: 80, l: 50, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -504,7 +576,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 260, s: 60, l: 85, a: 100, pos: 0, locked: false },
         { h: 210, s: 65, l: 80, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -521,7 +597,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 25, s: 25, l: 45, a: 100, pos: 45, locked: false },
         { h: 25, s: 35, l: 75, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -537,7 +617,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 95, s: 95, l: 45, a: 100, pos: 0, locked: false },
         { h: 130, s: 85, l: 25, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -553,7 +637,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 270, s: 65, l: 30, a: 100, pos: 0, locked: false },
         { h: 290, s: 45, l: 12, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -571,7 +659,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 0, s: 0, l: 98, a: 100, pos: 12, locked: false },
         { h: 0, s: 0, l: 98, a: 100, pos: 25, locked: false }
       ],
-      repeating: true
+      repeating: true,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {
@@ -591,7 +683,11 @@ export const PRESETS_GRADIENT: { name: string; tags: string[]; state: GradientSt
         { h: 240, s: 90, l: 60, a: 100, pos: 80, locked: false },
         { h: 300, s: 90, l: 60, a: 100, pos: 100, locked: false }
       ],
-      repeating: false
+      repeating: false,
+      animate: false,
+      animationKind: 'pan',
+      animationDuration: 4,
+      animationDirection: 'normal'
     }
   },
   {

@@ -28,18 +28,22 @@ export function useEditor<T extends object>(opts: EditorOptions<T>) {
   const history = ref<string[]>([])
   const historyIndex = ref(-1)
 
+  function withDefaults(partial: Record<string, unknown>): T {
+    return { ...opts.defaultState, ...partial } as T
+  }
+
   function loadState(): T {
     const fromUrl = route.query.state as string | undefined
     if (fromUrl) {
       const decoded = decodeState<Record<string, unknown>>(fromUrl)
-      if (decoded) return opts.deserialize ? opts.deserialize(decoded) : (decoded as T)
+      if (decoded) return opts.deserialize ? opts.deserialize(withDefaults(decoded) as unknown as Record<string, unknown>) : withDefaults(decoded)
     }
     if (import.meta.client) {
       const raw = localStorage.getItem(key)
       if (raw) {
         try {
           const parsed = JSON.parse(raw) as Record<string, unknown>
-          return opts.deserialize ? opts.deserialize(parsed) : (parsed as T)
+          return opts.deserialize ? opts.deserialize(withDefaults(parsed) as unknown as Record<string, unknown>) : withDefaults(parsed)
         } catch {
           /* corrupted state falls back to defaults */
         }
