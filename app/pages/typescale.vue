@@ -30,7 +30,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Type Scale - CSS Studio' })
+useSeoMeta({
+  title: 'Type Scale - CSS Studio',
+  description: 'Fluid clamp() typography scale from a min/max viewport and ratio.',
+  ogTitle: 'Type Scale - CSS Studio',
+  ogDescription: 'Fluid clamp() typography scale from a min/max viewport and ratio.',
+  ogUrl: 'https://css-studio.itsash.in/typescale',
+  twitterTitle: 'Type Scale - CSS Studio',
+  twitterDescription: 'Fluid clamp() typography scale from a min/max viewport and ratio.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/typescale' }] })
 </script>
 
 <template>

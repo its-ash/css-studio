@@ -38,7 +38,16 @@ function onMouseMove(e: MouseEvent) {
   el.style.setProperty('--y', `${e.clientY - rect.top}px`)
 }
 
-useHead({ title: 'Spotlight - CSS Studio' })
+useSeoMeta({
+  title: 'Spotlight - CSS Studio',
+  description: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.',
+  ogTitle: 'Spotlight - CSS Studio',
+  ogDescription: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.',
+  ogUrl: 'https://css-studio.itsash.in/spotlight',
+  twitterTitle: 'Spotlight - CSS Studio',
+  twitterDescription: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/spotlight' }] })
 </script>
 
 <template>

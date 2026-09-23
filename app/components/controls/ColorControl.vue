@@ -17,16 +17,19 @@ const hexValue = computed<string>(() => {
   const v = props.modelValue.trim()
   if (/^#[0-9a-fA-F]{6}$/.test(v)) return v
   if (/^#[0-9a-fA-F]{3}$/.test(v)) return hslToHex(hexToHsl(v))
-  const probe = document.createElement('canvas').getContext('2d')
-  if (!probe) return '#000000'
-  probe.fillStyle = '#000000'
-  probe.fillStyle = v
-  const computedFill = probe.fillStyle
-  if (typeof computedFill === 'string' && computedFill.startsWith('#')) return computedFill
   if (v.startsWith('hsl')) {
     const nums = v.match(/-?[\d.]+/g)
     if (nums && nums.length >= 3) {
       return hslToHex({ h: Number(nums[0]), s: Number(nums[1]), l: Number(nums[2]) })
+    }
+  }
+  if (import.meta.client) {
+    const probe = document.createElement('canvas').getContext('2d')
+    if (probe) {
+      probe.fillStyle = '#000000'
+      probe.fillStyle = v
+      const computedFill = probe.fillStyle
+      if (typeof computedFill === 'string' && computedFill.startsWith('#')) return computedFill
     }
   }
   return '#000000'

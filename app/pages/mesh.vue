@@ -67,7 +67,16 @@ function removePoint(id: string) {
   pushHistory()
 }
 
-useHead({ title: 'Mesh Gradient - CSS Studio' })
+useSeoMeta({
+  title: 'Mesh Gradient - CSS Studio',
+  description: 'Draggable color points composited into layered radial gradients.',
+  ogTitle: 'Mesh Gradient - CSS Studio',
+  ogDescription: 'Draggable color points composited into layered radial gradients.',
+  ogUrl: 'https://css-studio.itsash.in/mesh',
+  twitterTitle: 'Mesh Gradient - CSS Studio',
+  twitterDescription: 'Draggable color points composited into layered radial gradients.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mesh' }] })
 </script>
 
 <template>

@@ -21,7 +21,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Neumorphism - CSS Studio' })
+useSeoMeta({
+  title: 'Neumorphism - CSS Studio',
+  description: 'Soft-UI dual shadows computed from a virtual light source.',
+  ogTitle: 'Neumorphism - CSS Studio',
+  ogDescription: 'Soft-UI dual shadows computed from a virtual light source.',
+  ogUrl: 'https://css-studio.itsash.in/neumorphism',
+  twitterTitle: 'Neumorphism - CSS Studio',
+  twitterDescription: 'Soft-UI dual shadows computed from a virtual light source.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/neumorphism' }] })
 </script>
 
 <template>

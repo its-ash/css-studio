@@ -31,7 +31,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Border - CSS Studio' })
+useSeoMeta({
+  title: 'Border - CSS Studio',
+  description: 'Solid, gradient, animated, and glow borders with per-side and corner controls.',
+  ogTitle: 'Border - CSS Studio',
+  ogDescription: 'Solid, gradient, animated, and glow borders with per-side and corner controls.',
+  ogUrl: 'https://css-studio.itsash.in/border',
+  twitterTitle: 'Border - CSS Studio',
+  twitterDescription: 'Solid, gradient, animated, and glow borders with per-side and corner controls.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/border' }] })
 </script>
 
 <template>

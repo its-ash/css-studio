@@ -21,7 +21,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Glassmorphism - CSS Studio' })
+useSeoMeta({
+  title: 'Glassmorphism - CSS Studio',
+  description: 'backdrop-filter frosted panels with border and glow controls.',
+  ogTitle: 'Glassmorphism - CSS Studio',
+  ogDescription: 'backdrop-filter frosted panels with border and glow controls.',
+  ogUrl: 'https://css-studio.itsash.in/glass',
+  twitterTitle: 'Glassmorphism - CSS Studio',
+  twitterDescription: 'backdrop-filter frosted panels with border and glow controls.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/glass' }] })
 </script>
 
 <template>

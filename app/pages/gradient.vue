@@ -62,7 +62,16 @@ function updateStop(i: number, patch: Partial<GradientStop>) {
   state.value = { ...state.value, stops }
 }
 
-useHead({ title: 'Gradient - CSS Studio' })
+useSeoMeta({
+  title: 'Gradient - CSS Studio',
+  description: 'Linear, radial, conic and repeating gradients with color stops and presets.',
+  ogTitle: 'Gradient - CSS Studio',
+  ogDescription: 'Linear, radial, conic and repeating gradients with color stops and presets.',
+  ogUrl: 'https://css-studio.itsash.in/gradient',
+  twitterTitle: 'Gradient - CSS Studio',
+  twitterDescription: 'Linear, radial, conic and repeating gradients with color stops and presets.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/gradient' }] })
 </script>
 
 <template>

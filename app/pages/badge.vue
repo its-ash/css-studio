@@ -29,7 +29,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Badge - CSS Studio' })
+useSeoMeta({
+  title: 'Badge - CSS Studio',
+  description: 'Pill shapes, status dots, notification counts and corner ribbons.',
+  ogTitle: 'Badge - CSS Studio',
+  ogDescription: 'Pill shapes, status dots, notification counts and corner ribbons.',
+  ogUrl: 'https://css-studio.itsash.in/badge',
+  twitterTitle: 'Badge - CSS Studio',
+  twitterDescription: 'Pill shapes, status dots, notification counts and corner ribbons.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/badge' }] })
 </script>
 
 <template>

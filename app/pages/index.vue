@@ -25,6 +25,17 @@ const generators = [
   { to: '/presets', title: 'Presets', desc: 'Browse the full library with previews.', icon: 'ph-bookmark' },
   { to: '/palette', title: 'Color Tools', desc: 'Harmonies, contrast checker, formats.', icon: 'ph-palette' }
 ]
+
+useSeoMeta({
+  title: 'CSS Studio - Free CSS Generators for Gradients, Shadows & Animations',
+  description: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS. Free, client-side CSS generator studio — no signup, export ready-to-use code instantly.',
+  ogTitle: 'CSS Studio',
+  ogDescription: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS.',
+  ogUrl: 'https://css-studio.itsash.in/',
+  twitterTitle: 'CSS Studio',
+  twitterDescription: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
 </script>
 
 <template>

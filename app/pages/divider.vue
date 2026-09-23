@@ -31,7 +31,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Divider - CSS Studio' })
+useSeoMeta({
+  title: 'Divider - CSS Studio',
+  description: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.',
+  ogTitle: 'Divider - CSS Studio',
+  ogDescription: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.',
+  ogUrl: 'https://css-studio.itsash.in/divider',
+  twitterTitle: 'Divider - CSS Studio',
+  twitterDescription: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/divider' }] })
 </script>
 
 <template>

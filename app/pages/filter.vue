@@ -30,7 +30,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Filter - CSS Studio' })
+useSeoMeta({
+  title: 'Filter - CSS Studio',
+  description: 'Blur, grayscale, contrast and duotone filter stack builder.',
+  ogTitle: 'Filter - CSS Studio',
+  ogDescription: 'Blur, grayscale, contrast and duotone filter stack builder.',
+  ogUrl: 'https://css-studio.itsash.in/filter',
+  twitterTitle: 'Filter - CSS Studio',
+  twitterDescription: 'Blur, grayscale, contrast and duotone filter stack builder.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/filter' }] })
 </script>
 
 <template>

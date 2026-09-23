@@ -29,7 +29,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Cursor & Selection - CSS Studio' })
+useSeoMeta({
+  title: 'Cursor & Selection - CSS Studio',
+  description: 'Custom cursor and ::selection color playground.',
+  ogTitle: 'Cursor & Selection - CSS Studio',
+  ogDescription: 'Custom cursor and ::selection color playground.',
+  ogUrl: 'https://css-studio.itsash.in/cursor',
+  twitterTitle: 'Cursor & Selection - CSS Studio',
+  twitterDescription: 'Custom cursor and ::selection color playground.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/cursor' }] })
 </script>
 
 <template>

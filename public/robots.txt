@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://css-studio.itsash.in/sitemap.xml

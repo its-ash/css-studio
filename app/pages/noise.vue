@@ -31,7 +31,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Noise & Grain - CSS Studio' })
+useSeoMeta({
+  title: 'Noise & Grain - CSS Studio',
+  description: 'Pure-CSS film grain, static and halftone texture overlays.',
+  ogTitle: 'Noise & Grain - CSS Studio',
+  ogDescription: 'Pure-CSS film grain, static and halftone texture overlays.',
+  ogUrl: 'https://css-studio.itsash.in/noise',
+  twitterTitle: 'Noise & Grain - CSS Studio',
+  twitterDescription: 'Pure-CSS film grain, static and halftone texture overlays.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/noise' }] })
 </script>
 
 <template>

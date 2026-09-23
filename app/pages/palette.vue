@@ -44,7 +44,16 @@ function useColor(c: string) {
   color.value = c
 }
 
-useHead({ title: 'Color Tools - CSS Studio' })
+useSeoMeta({
+  title: 'Color Tools - CSS Studio',
+  description: 'Color harmony generator, contrast checker and format converter.',
+  ogTitle: 'Color Tools - CSS Studio',
+  ogDescription: 'Color harmony generator, contrast checker and format converter.',
+  ogUrl: 'https://css-studio.itsash.in/palette',
+  twitterTitle: 'Color Tools - CSS Studio',
+  twitterDescription: 'Color harmony generator, contrast checker and format converter.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/palette' }] })
 </script>
 
 <template>

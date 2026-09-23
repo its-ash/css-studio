@@ -59,7 +59,16 @@ function updateLayer(i: number, patch: Partial<ShadowState['layers'][number]>) {
   }
 }
 
-useHead({ title: 'Shadow - CSS Studio' })
+useSeoMeta({
+  title: 'Shadow - CSS Studio',
+  description: 'Layered box and text shadows with inset support.',
+  ogTitle: 'Shadow - CSS Studio',
+  ogDescription: 'Layered box and text shadows with inset support.',
+  ogUrl: 'https://css-studio.itsash.in/shadow',
+  twitterTitle: 'Shadow - CSS Studio',
+  twitterDescription: 'Layered box and text shadows with inset support.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/shadow' }] })
 </script>
 
 <template>

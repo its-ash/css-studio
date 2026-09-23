@@ -65,7 +65,16 @@ function moveLayer(id: string, dir: -1 | 1) {
   pushHistory()
 }
 
-useHead({ title: 'Background - CSS Studio' })
+useSeoMeta({
+  title: 'Background - CSS Studio',
+  description: 'Layered gradients, patterns and glows composited into one background.',
+  ogTitle: 'Background - CSS Studio',
+  ogDescription: 'Layered gradients, patterns and glows composited into one background.',
+  ogUrl: 'https://css-studio.itsash.in/background',
+  twitterTitle: 'Background - CSS Studio',
+  twitterDescription: 'Layered gradients, patterns and glows composited into one background.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/background' }] })
 </script>
 
 <template>

@@ -34,7 +34,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Animation - CSS Studio' })
+useSeoMeta({
+  title: 'Animation - CSS Studio',
+  description: 'Visual keyframe builder with timing controls.',
+  ogTitle: 'Animation - CSS Studio',
+  ogDescription: 'Visual keyframe builder with timing controls.',
+  ogUrl: 'https://css-studio.itsash.in/animation',
+  twitterTitle: 'Animation - CSS Studio',
+  twitterDescription: 'Visual keyframe builder with timing controls.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/animation' }] })
 </script>
 
 <template>

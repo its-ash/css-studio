@@ -39,7 +39,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Loader - CSS Studio' })
+useSeoMeta({
+  title: 'Loader - CSS Studio',
+  description: 'CSS-only spinners, progress bars and skeleton shimmer.',
+  ogTitle: 'Loader - CSS Studio',
+  ogDescription: 'CSS-only spinners, progress bars and skeleton shimmer.',
+  ogUrl: 'https://css-studio.itsash.in/loader',
+  twitterTitle: 'Loader - CSS Studio',
+  twitterDescription: 'CSS-only spinners, progress bars and skeleton shimmer.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/loader' }] })
 </script>
 
 <template>

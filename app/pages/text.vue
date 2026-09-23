@@ -23,7 +23,16 @@ function applyPreset(i: number) {
 
 const html = computed(() => `<h1 class="text-effect">${state.value.text}</h1>`)
 
-useHead({ title: 'Text Effects - CSS Studio' })
+useSeoMeta({
+  title: 'Text Effects - CSS Studio',
+  description: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.',
+  ogTitle: 'Text Effects - CSS Studio',
+  ogDescription: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.',
+  ogUrl: 'https://css-studio.itsash.in/text',
+  twitterTitle: 'Text Effects - CSS Studio',
+  twitterDescription: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/text' }] })
 </script>
 
 <template>

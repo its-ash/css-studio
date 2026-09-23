@@ -29,7 +29,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Pattern - CSS Studio' })
+useSeoMeta({
+  title: 'Pattern - CSS Studio',
+  description: '12 tileable CSS-only patterns from repeating gradients.',
+  ogTitle: 'Pattern - CSS Studio',
+  ogDescription: '12 tileable CSS-only patterns from repeating gradients.',
+  ogUrl: 'https://css-studio.itsash.in/pattern',
+  twitterTitle: 'Pattern - CSS Studio',
+  twitterDescription: '12 tileable CSS-only patterns from repeating gradients.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/pattern' }] })
 </script>
 
 <template>

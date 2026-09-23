@@ -33,7 +33,7 @@ function genId(): string {
 
 export function useProjects() {
   const projects = ref<StoredProject[]>(readAll())
-  const currentId = ref<string>(localStorage.getItem(CURRENT_KEY) ?? '')
+  const currentId = ref<string>(import.meta.client ? (localStorage.getItem(CURRENT_KEY) ?? '') : '')
 
   function persist() {
     writeAll(projects.value)

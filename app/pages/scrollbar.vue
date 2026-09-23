@@ -28,7 +28,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Scrollbar - CSS Studio' })
+useSeoMeta({
+  title: 'Scrollbar - CSS Studio',
+  description: 'Custom ::-webkit-scrollbar and scrollbar-color styling.',
+  ogTitle: 'Scrollbar - CSS Studio',
+  ogDescription: 'Custom ::-webkit-scrollbar and scrollbar-color styling.',
+  ogUrl: 'https://css-studio.itsash.in/scrollbar',
+  twitterTitle: 'Scrollbar - CSS Studio',
+  twitterDescription: 'Custom ::-webkit-scrollbar and scrollbar-color styling.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scrollbar' }] })
 </script>
 
 <template>

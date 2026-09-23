@@ -137,7 +137,16 @@ async function copyCss(entry: PresetEntry) {
   }
 }
 
-useHead({ title: 'Presets - CSS Studio' })
+useSeoMeta({
+  title: 'Presets - CSS Studio',
+  description: 'Browse the full CSS Studio preset library with live previews.',
+  ogTitle: 'Presets - CSS Studio',
+  ogDescription: 'Browse the full CSS Studio preset library with live previews.',
+  ogUrl: 'https://css-studio.itsash.in/presets',
+  twitterTitle: 'Presets - CSS Studio',
+  twitterDescription: 'Browse the full CSS Studio preset library with live previews.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/presets' }] })
 </script>
 
 <template>

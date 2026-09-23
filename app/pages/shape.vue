@@ -21,7 +21,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Shape - CSS Studio' })
+useSeoMeta({
+  title: 'Shape - CSS Studio',
+  description: '16 pure-CSS shapes using border tricks, clip-path and border-radius.',
+  ogTitle: 'Shape - CSS Studio',
+  ogDescription: '16 pure-CSS shapes using border tricks, clip-path and border-radius.',
+  ogUrl: 'https://css-studio.itsash.in/shape',
+  twitterTitle: 'Shape - CSS Studio',
+  twitterDescription: '16 pure-CSS shapes using border tricks, clip-path and border-radius.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/shape' }] })
 </script>
 
 <template>

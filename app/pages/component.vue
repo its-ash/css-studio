@@ -37,7 +37,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Component - CSS Studio' })
+useSeoMeta({
+  title: 'Component - CSS Studio',
+  description: 'Buttons, cards, inputs, badges, navbars and hero blocks.',
+  ogTitle: 'Component - CSS Studio',
+  ogDescription: 'Buttons, cards, inputs, badges, navbars and hero blocks.',
+  ogUrl: 'https://css-studio.itsash.in/component',
+  twitterTitle: 'Component - CSS Studio',
+  twitterDescription: 'Buttons, cards, inputs, badges, navbars and hero blocks.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/component' }] })
 </script>
 
 <template>

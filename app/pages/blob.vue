@@ -37,7 +37,16 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useHead({ title: 'Blob - CSS Studio' })
+useSeoMeta({
+  title: 'Blob - CSS Studio',
+  description: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.',
+  ogTitle: 'Blob - CSS Studio',
+  ogDescription: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.',
+  ogUrl: 'https://css-studio.itsash.in/blob',
+  twitterTitle: 'Blob - CSS Studio',
+  twitterDescription: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.'
+})
+useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/blob' }] })
 </script>
 
 <template>
