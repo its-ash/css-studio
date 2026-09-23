@@ -13,14 +13,12 @@ export interface EditorOptions<T> {
   serialize?: (s: T) => unknown
   deserialize?: (raw: unknown) => T
   debounceMs?: number
-  urlDebounceMs?: number
 }
 
 const LS_PREFIX = 'css-studio:state:'
 
 export function useEditor<T extends object>(opts: EditorOptions<T>) {
   const route = useRoute()
-  const router = useRouter()
 
   const key = `${LS_PREFIX}${opts.id}`
   const rngSeed = ref<number>(randomSeed())
@@ -55,28 +53,6 @@ export function useEditor<T extends object>(opts: EditorOptions<T>) {
   // Seed history with initial snapshot
   history.value = [JSON.stringify(opts.serialize ? opts.serialize(state.value) : state.value)]
   historyIndex.value = 0
-
-  let urlTimer: ReturnType<typeof setTimeout> | null = null
-  let urlGeneration = 0
-
-  /** Live-sync state into the ?state= URL param (debounced, no history spam) so the URL is always shareable. */
-  function syncUrl() {
-    if (!import.meta.client) return
-    if (urlTimer) clearTimeout(urlTimer)
-    const gen = ++urlGeneration
-    urlTimer = setTimeout(() => {
-      if (gen !== urlGeneration) return
-      const payload = opts.serialize ? opts.serialize(state.value) : state.value
-      const code = encodeState(payload)
-      const url = `${route.path}?state=${code}`
-      window.history.replaceState(window.history.state, '', url)
-    }, opts.urlDebounceMs ?? 350)
-  }
-
-  // Fires only on user mutations, never on setup, so URL-loaded state isn't rewritten until tweaked.
-  if (import.meta.client) {
-    watch(state, syncUrl, { deep: true })
-  }
 
   let saveTimer: ReturnType<typeof setTimeout> | null = null
   watch(

@@ -25,7 +25,8 @@ const nav = [
   { to: '/spotlight', label: 'Spotlight', icon: 'ph-flashlight' },
   { to: '/noise', label: 'Noise & Grain', icon: 'ph-dots-nine' },
   { to: '/typescale', label: 'Type Scale', icon: 'ph-text-t' },
-  { to: '/palette', label: 'Color Tools', icon: 'ph-palette' }
+  { to: '/palette', label: 'Color Tools', icon: 'ph-palette' },
+  { to: '/css', label: 'SCSS Theme Engine', icon: 'ph-flask' }
 ]
 </script>
 

@@ -5,7 +5,7 @@ const GENERATOR_ROUTES = [
   '/', '/gradient', '/mesh', '/blob', '/pattern', '/shadow', '/shape', '/border', '/glass',
   '/neumorphism', '/text', '/animation', '/component', '/background', '/loader', '/badge',
   '/divider', '/scrollbar', '/cursor', '/filter', '/spotlight', '/noise', '/typescale',
-  '/presets', '/palette'
+  '/presets', '/palette', '/css'
 ]
 
 export default defineNuxtConfig({
