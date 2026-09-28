@@ -4,7 +4,9 @@ const SITE_URL = 'https://css-studio.itsash.in'
 const GENERATOR_ROUTES = [
   '/', '/gradient', '/mesh', '/blob', '/pattern', '/shadow', '/shape', '/border', '/glass',
   '/neumorphism', '/text', '/animation', '/component', '/background', '/loader', '/badge',
-  '/divider', '/scrollbar', '/cursor', '/filter', '/spotlight', '/noise', '/typescale',
+  '/divider', '/scrollbar', '/scroll-anim', '/tooltip', '/marquee', '/var-font', '/text-ring',
+  '/scroll-snap', '/mask', '/clip', '/aspect-fit', '/marker-list', '/conic-chart',
+  '/cursor', '/filter', '/spotlight', '/noise', '/typescale',
   '/presets', '/palette', '/css'
 ]
 

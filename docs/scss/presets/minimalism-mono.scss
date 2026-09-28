@@ -57,3 +57,83 @@ blockquote {
   .pagination-link, .pagination-previous, .pagination-next { border-color: rgba(255, 255, 255, .25); }
   .pagination-link:hover { background-color: rgba(255, 255, 255, .05); }
 }
+
+.tabs ul { border-bottom: 1px solid rgba(0, 0, 0, .1); }
+.tabs a { font-weight: 400; letter-spacing: .02em; }
+.tabs li.is-active a { font-weight: 500; color: var(--bulma-body-color); border-bottom-color: var(--bulma-body-color); }
+.tabs.is-boxed a { border-color: rgba(0, 0, 0, .12); }
+.tabs.is-boxed a.is-active { background: transparent; border-color: var(--bulma-body-color); }
+.tabs.is-toggle a { border-color: rgba(0, 0, 0, .12); }
+.tabs.is-toggle li.is-active a { background: var(--bulma-body-color); color: var(--bulma-body-background-color); }
+
+.dropdown-content { border-color: rgba(0, 0, 0, .12); box-shadow: 0 2px 8px rgba(0, 0, 0, .06); }
+.dropdown-item { font-weight: 400; }
+.dropdown-item:hover { background-color: rgba(0, 0, 0, .03); }
+.dropdown-divider { border-color: rgba(0, 0, 0, .1); }
+
+.message { border-color: rgba(0, 0, 0, .15); }
+.message-header { font-weight: 500; }
+.message-body { font-weight: 400; }
+
+.modal-card { border: 1px solid rgba(0, 0, 0, .12); box-shadow: 0 4px 16px rgba(0, 0, 0, .08); }
+.modal-card-head { border-bottom-color: rgba(0, 0, 0, .12); font-weight: 500; }
+.modal-card-foot { border-top-color: rgba(0, 0, 0, .12); }
+.modal-card-title { font-weight: 500; }
+
+.file-cta { border-color: rgba(0, 0, 0, .25); background: transparent; font-weight: 500; }
+.file-name { border-color: rgba(0, 0, 0, .12); }
+
+.panel { border-color: rgba(0, 0, 0, .1); }
+.panel-heading { background: transparent; font-weight: 500; }
+.panel-tabs a { font-weight: 400; }
+.panel-tabs a.is-active { font-weight: 500; }
+.panel-block { border-color: rgba(0, 0, 0, .1); }
+
+.menu-label { font-weight: 500; }
+.menu-list a { font-weight: 400; }
+.menu-list a.is-active { background: transparent; color: var(--bulma-body-color); font-weight: 500; text-decoration: underline; }
+
+.is-skeleton, .has-skeleton::after, .skeleton-block, .skeleton-lines > div { border-radius: .125rem !important; background: rgba(0, 0, 0, .04); }
+
+.footer { border-top: 1px solid rgba(0, 0, 0, .12); background: var(--bulma-body-background-color); }
+
+.hero.is-primary .title, .hero.is-primary .subtitle { color: var(--bulma-primary-invert) !important; }
+
+.button.is-rounded { border-radius: .125rem !important; }
+.button.is-text { text-decoration: underline; }
+.button.is-inverted.is-primary { background: var(--bulma-body-background-color) !important; color: var(--bulma-primary) !important; }
+.button.is-light { background: transparent !important; color: var(--bulma-body-color) !important; }
+
+.tag { border-radius: .125rem !important; font-weight: 400; }
+.tag.is-rounded { border-radius: .125rem !important; }
+.tag.is-light { background: transparent; border: 1px solid rgba(0, 0, 0, .25); color: var(--bulma-body-color); }
+
+.card-footer-item { font-weight: 400; }
+.card-footer-item:hover { background-color: rgba(0, 0, 0, .03); }
+.card-footer-item:not(:last-child) { border-color: rgba(0, 0, 0, .1); }
+
+code, .code { border-radius: .125rem !important; background: rgba(0, 0, 0, .04); }
+kbd { border-radius: .125rem !important; border: 1px solid rgba(0, 0, 0, .25); }
+mark { border-radius: .125rem; background: rgba(0, 0, 0, .06); }
+
+[data-theme="dark"] {
+  .tabs ul { border-bottom-color: rgba(255, 255, 255, .1); }
+  .tabs.is-boxed a { border-color: rgba(255, 255, 255, .12); }
+  .tabs.is-toggle a { border-color: rgba(255, 255, 255, .12); }
+  .dropdown-content { border-color: rgba(255, 255, 255, .12); }
+  .dropdown-divider { border-color: rgba(255, 255, 255, .1); }
+  .message { border-color: rgba(255, 255, 255, .15); }
+  .modal-card { border-color: rgba(255, 255, 255, .12); }
+  .modal-card-head { border-bottom-color: rgba(255, 255, 255, .12); }
+  .modal-card-foot { border-top-color: rgba(255, 255, 255, .12); }
+  .file-cta { border-color: rgba(255, 255, 255, .25); }
+  .file-name { border-color: rgba(255, 255, 255, .12); }
+  .panel { border-color: rgba(255, 255, 255, .1); }
+  .panel-block { border-color: rgba(255, 255, 255, .1); }
+  .footer { border-top-color: rgba(255, 255, 255, .12); }
+  .tag.is-light { border-color: rgba(255, 255, 255, .25); }
+  .card-footer-item:not(:last-child) { border-color: rgba(255, 255, 255, .1); }
+  code, .code { background: rgba(255, 255, 255, .06); }
+  kbd { border-color: rgba(255, 255, 255, .25); }
+  mark { background: rgba(255, 255, 255, .1); }
+}

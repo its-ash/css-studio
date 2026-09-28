@@ -49,32 +49,42 @@ export function generateBulmaPalette(primaryHex: string, mode: 'light' | 'dark' 
   }
 }
 
+export type PresetShadow = 'none' | 'soft' | 'hard' | 'clay' | 'neu' | 'glass' | 'gloss' | 'paper' | 'glow'
+
 export interface ThemePreset {
   key: string
   label: string
   forceMode?: 'light' | 'dark'
+  /** Visual DNA rendered by the preset-picker tiles. */
+  visual: {
+    radius: number
+    border: number
+    shadow: PresetShadow
+    mono?: boolean
+    upper?: boolean
+  }
 }
 
 export const BULMA_THEME_PRESETS: ThemePreset[] = [
-  { key: 'default', label: 'Default' },
-  { key: 'flat', label: 'Flat' },
-  { key: 'material', label: 'Material' },
-  { key: 'neumorphism', label: 'Neumorphism' },
-  { key: 'glassmorphism', label: 'Glassmorphism' },
-  { key: 'brutalism', label: 'Brutalism' },
-  { key: 'maximalism', label: 'Maximalism' },
-  { key: 'skeuomorphism', label: 'Skeuomorphism' },
-  { key: 'skeuominimalism', label: 'Skeuominimalism' },
-  { key: 'dark-highcontrast', label: 'Dark High Contrast', forceMode: 'dark' },
-  { key: 'retro-8bit', label: 'Retro 8-bit' },
-  { key: 'cyberpunk', label: 'Cyberpunk', forceMode: 'dark' },
-  { key: 'claymorphism', label: 'Claymorphism' },
-  { key: 'bauhaus', label: 'Bauhaus' },
-  { key: 'organic', label: 'Organic' },
-  { key: 'typographic', label: 'Typographic' },
-  { key: 'minimalism-mono', label: 'Minimalism Mono' },
-  { key: 'papercut', label: 'Papercut' },
-  { key: 'skeuomorphism-classic', label: 'Skeuomorphism Classic' }
+  { key: 'default', label: 'Default', visual: { radius: 6, border: 1, shadow: 'soft' } },
+  { key: 'flat', label: 'Flat', visual: { radius: 0, border: 2, shadow: 'none' } },
+  { key: 'material', label: 'Material', visual: { radius: 4, border: 0, shadow: 'soft', upper: true } },
+  { key: 'neumorphism', label: 'Neumorphism', visual: { radius: 16, border: 0, shadow: 'neu' } },
+  { key: 'glassmorphism', label: 'Glassmorphism', visual: { radius: 16, border: 0, shadow: 'glass' } },
+  { key: 'brutalism', label: 'Brutalism', visual: { radius: 0, border: 3, shadow: 'hard', mono: true, upper: true } },
+  { key: 'maximalism', label: 'Maximalism', visual: { radius: 24, border: 4, shadow: 'hard', upper: true } },
+  { key: 'skeuomorphism', label: 'Skeuomorphism', visual: { radius: 6, border: 0, shadow: 'gloss' } },
+  { key: 'skeuominimalism', label: 'Skeuominimalism', visual: { radius: 6, border: 0, shadow: 'soft' } },
+  { key: 'dark-highcontrast', label: 'Dark High Contrast', forceMode: 'dark', visual: { radius: 4, border: 2, shadow: 'hard' } },
+  { key: 'retro-8bit', label: 'Retro 8-bit', visual: { radius: 0, border: 2, shadow: 'hard', mono: true, upper: true } },
+  { key: 'cyberpunk', label: 'Cyberpunk', forceMode: 'dark', visual: { radius: 4, border: 1, shadow: 'glow', upper: true } },
+  { key: 'claymorphism', label: 'Claymorphism', visual: { radius: 16, border: 0, shadow: 'clay' } },
+  { key: 'bauhaus', label: 'Bauhaus', visual: { radius: 0, border: 2, shadow: 'none', upper: true } },
+  { key: 'organic', label: 'Organic', visual: { radius: 24, border: 0, shadow: 'soft' } },
+  { key: 'typographic', label: 'Typographic', visual: { radius: 0, border: 0, shadow: 'none', upper: true } },
+  { key: 'minimalism-mono', label: 'Minimalism Mono', visual: { radius: 2, border: 1, shadow: 'none', mono: true } },
+  { key: 'papercut', label: 'Papercut', visual: { radius: 8, border: 0, shadow: 'paper' } },
+  { key: 'skeuomorphism-classic', label: 'Skeuomorphism Classic', visual: { radius: 6, border: 0, shadow: 'gloss' } }
 ]
 
 export function effectiveMode(themeKey: string, mode: 'light' | 'dark'): 'light' | 'dark' {
@@ -227,6 +237,7 @@ export interface BulmaThemeState {
   bodyFont: string
   bodyFontManual: boolean
   primaryManual: boolean
+  headingFontManual: boolean
 }
 
 export const DEFAULT_BULMA_THEME: BulmaThemeState = {
@@ -236,7 +247,37 @@ export const DEFAULT_BULMA_THEME: BulmaThemeState = {
   headingFont: 'Inter',
   bodyFont: 'Source Sans 3',
   bodyFontManual: false,
-  primaryManual: false
+  primaryManual: false,
+  headingFontManual: false
+}
+
+/** Per-preset font DNA: the heading font each aesthetic was born to wear. */
+const THEME_FONT_DNA: Record<string, string> = {
+  default: 'Inter',
+  flat: 'Roboto',
+  material: 'Roboto',
+  neumorphism: 'Nunito',
+  glassmorphism: 'Outfit',
+  brutalism: 'Oswald',
+  maximalism: 'Montserrat',
+  skeuomorphism: 'Open Sans',
+  skeuominimalism: 'Source Sans 3',
+  'dark-highcontrast': 'Inter',
+  'retro-8bit': 'Space Grotesk',
+  cyberpunk: 'Space Grotesk',
+  claymorphism: 'Nunito',
+  bauhaus: 'Work Sans',
+  organic: 'Quicksand',
+  typographic: 'Bebas Neue',
+  'minimalism-mono': 'JetBrains Mono',
+  papercut: 'DM Sans',
+  'skeuomorphism-classic': 'Lato'
+}
+
+/** Best-fit heading font for a theme preset, falling back to the app default. */
+export function bestFitFontsForTheme(themeKey: string): { headingFont: string; bodyFont: string } {
+  const headingFont = THEME_FONT_DNA[themeKey] ?? DEFAULT_BULMA_THEME.headingFont
+  return { headingFont, bodyFont: suggestBodyFont(headingFont) }
 }
 
 /** Best-fit primary color for a theme preset: the top-scoring suggested palette entry, falling back to the app default. */
@@ -244,17 +285,94 @@ export function bestFitPrimaryForTheme(themeKey: string): string {
   return suggestedPalettesForTheme(themeKey)[0]?.color ?? DEFAULT_BULMA_THEME.primary
 }
 
+export interface PresetTileStyle {
+  radius: number
+  border: number
+  borderColor: string
+  background: string
+  boxShadow: string
+  letterSpacing: string
+  textTransform: 'none' | 'uppercase'
+  fontFamily: string
+}
+
+const TILE_SAT = 62
+const TILE_LIGHT = 52
+
+/** Concrete tile surface for a theme preset at a given primary, so picker tiles genuinely preview the preset's look. */
+export function presetTileStyle(themeKey: string, primary: string, mode: 'light' | 'dark'): PresetTileStyle {
+  const preset = BULMA_THEME_PRESETS.find((p) => p.key === themeKey)
+  const v = preset?.visual ?? { radius: 6, border: 1, shadow: 'soft' as PresetShadow }
+  const hsl = hexToHsl(primary)
+  const dark = mode === 'dark'
+  const h = hsl.h
+  const p = (s: number, l: number) => `hsl(${Math.round(h)} ${Math.round(clamp(s, 0, 100))}% ${Math.round(clamp(l, 0, 100))}%)`
+  const a = (s: number, l: number, alpha: number) => `hsl(${Math.round(h)} ${Math.round(clamp(s, 0, 100))}% ${Math.round(clamp(l, 0, 100))}% / ${alpha})`
+  const surface = dark ? 10 : 100
+  const fg = dark ? 90 : 16
+
+  const shadows: Record<PresetShadow, (r: number) => string> = {
+    none: () => 'none',
+    soft: () => `0 1px 2px ${a(20, dark ? 0 : 30, .25)}, 0 4px 12px ${a(20, dark ? 0 : 30, .12)}`,
+    hard: () => `3px 3px 0 ${p(hsl.s, dark ? 80 : 22)}`,
+    clay: () => `4px 4px 10px ${a(20, dark ? 0 : 25, .18)}, -3px -3px 8px ${a(20, dark ? 90 : 100, dark ? .05 : .8)}`,
+    neu: () => `4px 4px 8px ${a(15, dark ? 0 : 55, .5)}, -4px -4px 8px ${a(15, dark ? 95 : 100, dark ? .06 : .9)}`,
+    glass: () => `0 6px 20px ${a(20, dark ? 0 : 35, .22)}`,
+    gloss: () => `inset 0 1px 0 ${a(20, 100, .5)}, 0 2px 4px ${a(20, dark ? 0 : 25, .3)}`,
+    paper: () => `0 1px 2px ${a(20, dark ? 0 : 30, .18)}, 0 4px 10px ${a(20, dark ? 0 : 30, .12)}`,
+    glow: () => `0 0 10px ${a(hsl.s, hsl.l, .6)}`
+  }
+
+  return {
+    radius: v.radius,
+    border: v.border,
+    borderColor: v.border > 0 ? p(dark ? 15 : Math.max(hsl.s, 8), dark ? 85 : 20) : 'transparent',
+    background: `linear-gradient(160deg, ${p(hsl.s * .35, dark ? surface + 6 : Math.min(98, surface))}, ${p(hsl.s * .5, dark ? surface : Math.max(88, surface - 6))})`,
+    boxShadow: shadows[v.shadow](v.radius),
+    letterSpacing: v.upper ? '.04em' : v.mono ? '-.01em' : '0',
+    textTransform: v.upper ? 'uppercase' : 'none',
+    fontFamily: v.mono ? 'ui-monospace, monospace' : 'inherit'
+  }
+}
+
+/** Short one-line description shown under each preset in the picker. */
+export function presetDescription(themeKey: string): string {
+  const descriptions: Record<string, string> = {
+    default: 'Balanced Bulma baseline',
+    flat: 'No shadows, bold borders',
+    material: 'Elevation shadows, uppercase labels',
+    neumorphism: 'Soft extruded dual shadows',
+    glassmorphism: 'Frosted blur and translucency',
+    brutalism: 'Raw borders, hard offsets',
+    maximalism: 'Loud gradients, thick frames',
+    skeuomorphism: 'Glossy faux-realistic surfaces',
+    skeuominimalism: 'Subtle depth, minimal chrome',
+    'dark-highcontrast': 'Pure black, white edges',
+    'retro-8bit': 'Pixel-era chunky UI',
+    cyberpunk: 'Neon glows on deep dark',
+    claymorphism: 'Puffy clay-like volume',
+    bauhaus: 'Primary shapes, geometric',
+    organic: 'Rounded, wavy, friendly',
+    typographic: 'Type does the talking',
+    'minimalism-mono': 'Monospace, hairline borders',
+    papercut: 'Layered paper sheets',
+    'skeuomorphism-classic': 'iOS 6-style glossy buttons'
+  }
+  return descriptions[themeKey] ?? ''
+}
+
 export function randomizeBulmaTheme(s: BulmaThemeState, rng: () => number): BulmaThemeState {
   const theme = BULMA_THEME_PRESETS[Math.floor(rng() * BULMA_THEME_PRESETS.length)]!
   const palette = BULMA_PALETTES[Math.floor(rng() * BULMA_PALETTES.length)]!
-  const headingFont = GOOGLE_FONTS[Math.floor(rng() * GOOGLE_FONTS.length)]!
+  const fit = bestFitFontsForTheme(theme.key)
   return {
     theme: theme.key,
     primary: palette.color,
     mode: theme.forceMode ?? (rng() > 0.5 ? 'dark' : 'light'),
-    headingFont,
-    bodyFont: suggestBodyFont(headingFont),
+    headingFont: fit.headingFont,
+    bodyFont: suggestBodyFont(fit.headingFont),
     bodyFontManual: false,
-    primaryManual: false
+    primaryManual: false,
+    headingFontManual: false
   }
 }

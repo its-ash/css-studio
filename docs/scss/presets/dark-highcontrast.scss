@@ -76,3 +76,95 @@ blockquote {
   color: #fff;
   font-weight: 700;
 }
+
+.tabs ul { border-bottom: 2px solid #fff; }
+.tabs a { font-weight: 700; border-bottom: 3px solid transparent; color: #fff; }
+.tabs a:hover { color: #000; background: #fff; }
+.tabs li.is-active a { border-bottom-color: #fff; color: #fff; font-weight: 800; }
+.tabs.is-boxed a { border: 2px solid #fff; border-radius: 0; background: #000; }
+.tabs.is-boxed a:hover { background: #fff; color: #000; }
+.tabs.is-boxed a.is-active { background: #fff; color: #000; }
+.tabs.is-toggle a { border: 2px solid #fff; background: #000; }
+.tabs.is-toggle li.is-active a { background: #fff; color: #000; }
+
+.dropdown-content {
+  background: #000 !important;
+  border: 2px solid #fff !important;
+  box-shadow: 6px 6px 0 rgba(255, 255, 255, .5) !important;
+}
+.dropdown-item { font-weight: 700; border-bottom: 1px solid rgba(255, 255, 255, .25); }
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background: #fff; color: #000; }
+.dropdown-divider { border-color: #fff; }
+
+.message { border: 2px solid #fff; background: #000; border-radius: 0; }
+.message.is-primary { border-color: #fff; }
+.message.is-danger { border-color: var(--bulma-danger); color: var(--bulma-danger); }
+.message-header { background: #fff; color: #000; font-weight: 800; }
+.message.is-danger .message-header { background: var(--bulma-danger); color: #000; }
+.message-body { border: none; color: #fff; }
+
+.modal-card { background: #000 !important; border: 2px solid #fff !important; border-radius: 0; box-shadow: 0 0 0 4px #000, 0 0 0 6px #fff !important; }
+.modal-card-head { background: #000; border-bottom: 2px solid #fff; }
+.modal-card-title { color: #fff; font-weight: 800; }
+.modal-card-foot { background: #000; border-top: 2px solid #fff; }
+
+.file-cta { background: #000; border: 2px solid #fff; color: #fff; font-weight: 700; }
+.file-name { border: 2px solid #fff; border-left: none; background: #000; color: #fff; }
+
+.panel { border: 2px solid #fff; background: #000; }
+.panel-heading { background: #fff; color: #000; font-weight: 800; }
+.panel-tabs { border-bottom: 2px solid #fff; background: #000; }
+.panel-tabs a { color: #fff; font-weight: 700; }
+.panel-tabs a.is-active { background: #fff; color: #000; }
+.panel-block { background: #000 !important; color: #fff !important; border: 2px solid #fff !important; margin-bottom: -2px; }
+.panel-block.is-active { background: #fff !important; color: #000 !important; }
+
+.menu-label { color: #fff; font-weight: 800; text-transform: uppercase; }
+.menu-list a { color: #fff; font-weight: 700; }
+.menu-list a:hover { background: #fff; color: #000; }
+.menu-list a.is-active { background: #fff; color: #000; }
+
+.is-skeleton, .has-skeleton::after, .skeleton-block, .skeleton-lines > div {
+  background: rgba(255, 255, 255, .15);
+  border-radius: 0 !important;
+}
+
+.footer { background: #000 !important; border-top: 2px solid #fff; }
+
+.hero.is-primary { background: #fff !important; }
+.hero.is-primary .title { color: #000; }
+.hero.is-primary .subtitle { color: #000; }
+
+.loader { border-color: rgba(255, 255, 255, .25); border-right-color: transparent; border-top-color: #fff; }
+
+.button.is-text { color: #fff; }
+.button.is-text:hover { background: rgba(255, 255, 255, .15); color: #fff; }
+.button.is-rounded { border-radius: 0 !important; }
+.button.is-inverted.is-primary { background: #000 !important; color: #fff !important; border: 2px solid #fff !important; }
+
+.tag.is-rounded { border-radius: 0 !important; }
+.tag.is-light { background: #000; border: 2px solid #fff; color: #fff; }
+
+.card-footer { border-top: 2px solid #fff; background: #000; }
+.card-footer-item { color: #fff; font-weight: 700; }
+.card-footer-item:hover { background: #fff; color: #000; }
+.card-header-title { color: #fff; font-weight: 800; }
+
+code, .code {
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 700;
+}
+kbd {
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  box-shadow: 2px 2px 0 #fff;
+}
+mark {
+  background: #fff;
+  color: #000;
+  border: 1px solid #fff;
+}

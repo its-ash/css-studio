@@ -11,6 +11,10 @@ export interface PatternState {
   color: string
   bg: string
   opacity: number
+  animate: boolean
+  animationKind: 'drift' | 'slide' | 'pulse' | 'blink'
+  animationDuration: number
+  animationDirection: 'normal' | 'alternate' | 'reverse' | 'alternate-reverse'
 }
 
 export const PATTERN_KINDS: { value: PatternKind; label: string }[] = [
@@ -28,6 +32,13 @@ export const PATTERN_KINDS: { value: PatternKind; label: string }[] = [
   { value: 'waves', label: 'Waves' }
 ]
 
+export const PATTERN_ANIMATION_KINDS: { value: NonNullable<PatternState['animationKind']>; label: string }[] = [
+  { value: 'drift', label: 'Drift' },
+  { value: 'slide', label: 'Slide' },
+  { value: 'pulse', label: 'Pulse' },
+  { value: 'blink', label: 'Blink' }
+]
+
 export const DEFAULT_PATTERN: PatternState = {
   kind: 'dots',
   size: 24,
@@ -36,7 +47,11 @@ export const DEFAULT_PATTERN: PatternState = {
   rotation: 0,
   color: '#34d39966',
   bg: '#09090b',
-  opacity: 100
+  opacity: 100,
+  animate: false,
+  animationKind: 'drift',
+  animationDuration: 6,
+  animationDirection: 'normal'
 }
 
 function rHex(c: string): string {
@@ -156,8 +171,45 @@ export function patternFullCss(s: PatternState): string {
     if (position && position !== '0 0') lines.push(`background-position: ${position};`)
   }
   if (s.rotation !== 0) lines.push(`/* rotate container or use a wrapper with transform: rotate(${s.rotation}deg) */`)
+  if (s.animate) {
+    const animName = `pattern-${s.animationKind}`
+    lines.push(`animation: ${animName} ${s.animationDuration}s ${s.animationDirection} infinite linear;`)
+    if ((s.animationKind === 'drift' || s.animationKind === 'slide' || s.animationKind === 'pulse') && size !== 'auto') {
+      lines.push(`/* keep background-size so position animation tracks the tile */`)
+    }
+  }
   const body = lines.map((l) => `  ${l}`).join('\n')
-  return `.pattern {\n${body}\n}`
+  const out = [`.pattern {\n${body}\n}`]
+  if (s.animate) out.push('', patternKeyframes(s))
+  return out.join('\n')
+}
+
+/** Keyframes for the pattern animation. Position values are multiples of one tile so the loop is seamless. */
+export function patternKeyframes(s: PatternState): string {
+  const name = `pattern-${s.animationKind}`
+  const step = Math.max(4, s.size + Math.max(0, s.spacing))
+  switch (s.animationKind) {
+    case 'drift':
+      return `@keyframes ${name} {
+  from { background-position: 0 0; }
+  to { background-position: ${step}px ${step}px; }
+}`
+    case 'slide':
+      return `@keyframes ${name} {
+  from { background-position: 0 0; }
+  to { background-position: ${step}px 0; }
+}`
+    case 'pulse':
+      return `@keyframes ${name} {
+  0%, 100% { background-size: 100% 100%; }
+  50% { background-size: 130% 130%; }
+}`
+    case 'blink':
+      return `@keyframes ${name} {
+  0%, 100% { opacity: 1; }
+  50% { opacity: ${Math.max(0.15, (s.opacity / 100) * 0.4).toFixed(2)}; }
+}`
+  }
 }
 
 export function patternVars(s: PatternState): Record<string, string> {
@@ -172,11 +224,17 @@ export function patternVars(s: PatternState): Record<string, string> {
 export function patternPreviewStyle(s: PatternState): Record<string, string> {
   const { image, size, position } = patternCss(s)
   const st: Record<string, string> = { 'background-color': `#${rHex(s.bg)}` }
-  if (image) st['background-image'] = image
-  if (size && size !== 'auto') st['background-size'] = size
-  if (position && position !== '0 0') st['background-position'] = position
+  if (image) {
+    st['background-image'] = image
+    st['background-size'] = size === 'auto' ? 'auto' : size
+    st['background-position'] = position || '0 0'
+  }
   if (s.opacity < 100) st['opacity'] = `${s.opacity / 100}`
-  if (s.rotation !== 0) st['--pattern-rotation'] = `${s.rotation}deg`
+  if (s.animate) {
+    const animName = `pattern-${s.animationKind}`
+    st['animation'] = `${animName} ${s.animationDuration}s ${s.animationDirection} infinite linear`
+    if (s.animationKind === 'pulse') st['background-size'] = '100% 100%'
+  }
   return st
 }
 
@@ -189,7 +247,10 @@ export function randomizePattern(s: PatternState, rng: import('../rng').Rng): Pa
     thickness: Math.round(rng.range(1, 4)),
     color: `#${((Math.floor(rng.range(0.3, 1) * 0xffffff) << 8) | Math.floor(rng.range(0x33, 0x99))).toString(16).padStart(6, '0')}`,
     bg: `#${Math.floor(rng.range(0, 0x222222)).toString(16).padStart(6, '0')}`,
-    rotation: rng.pick([0, 45, 90, 135])
+    rotation: rng.pick([0, 45, 90, 135]),
+    animate: rng.chance(0.35),
+    animationKind: rng.pick(['drift', 'slide', 'pulse', 'blink'] as const),
+    animationDuration: Math.round(rng.range(3, 12) * 2) / 2
   }
 }
 
@@ -222,5 +283,22 @@ export const PRESETS_PATTERN: { name: string; tags: string[]; state: PatternStat
   { name: 'Poison Dots', tags: ['wow', 'dots'], state: { ...DEFAULT_PATTERN, kind: 'dots', color: '#a3e635cc', size: 14, thickness: 3, bg: '#0a0f00' } },
   { name: 'Magenta Waves', tags: ['wow', 'waves'], state: { ...DEFAULT_PATTERN, kind: 'waves', color: '#ec489966', size: 20, thickness: 3, bg: '#0d0010' } },
   { name: 'Galaxy Dots', tags: ['wow', 'dots', 'dark'], state: { ...DEFAULT_PATTERN, kind: 'halftone', color: '#a78bfa55', size: 12, thickness: 4, bg: '#050010' } },
-  { name: 'Vapor Checker', tags: ['wow', 'checkerboard', 'playful'], state: { ...DEFAULT_PATTERN, kind: 'checkerboard', color: '#c084fc88', size: 20, thickness: 2, bg: '#1a0a2e' } }
+  { name: 'Vapor Checker', tags: ['wow', 'checkerboard', 'playful'], state: { ...DEFAULT_PATTERN, kind: 'checkerboard', color: '#c084fc88', size: 20, thickness: 2, bg: '#1a0a2e' } },
+  { name: 'Drifting Dots', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'dots', color: '#34d39988', size: 16, thickness: 2, bg: '#02120c', animate: true, animationKind: 'drift', animationDuration: 6, animationDirection: 'normal' } },
+  { name: 'Matrix Rain', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'vertical', color: '#22c55e77', size: 6, thickness: 2, bg: '#010a03', animate: true, animationKind: 'slide', animationDuration: 2, animationDirection: 'normal' } },
+  { name: 'Crawling Grid', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'grid', color: '#38bdf855', size: 28, thickness: 1, bg: '#020b16', animate: true, animationKind: 'drift', animationDuration: 8, animationDirection: 'normal' } },
+  { name: 'Pulsing Halftone', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'halftone', color: '#f472b688', size: 12, thickness: 4, bg: '#150210', animate: true, animationKind: 'pulse', animationDuration: 4, animationDirection: 'normal' } },
+  { name: 'Scrolling Stripes', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'diagonal', color: '#fbbf2499', size: 18, thickness: 6, bg: '#1c1917', animate: true, animationKind: 'slide', animationDuration: 3, animationDirection: 'reverse' } },
+  { name: 'Blinking Stars', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'dots', color: '#e2e8f0aa', size: 22, thickness: 1, bg: '#020617', animate: true, animationKind: 'blink', animationDuration: 3, animationDirection: 'alternate' } },
+  { name: 'Flowing Waves', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'waves', color: '#22d3ee77', size: 24, thickness: 2, bg: '#083344', animate: true, animationKind: 'drift', animationDuration: 10, animationDirection: 'normal' } },
+  { name: 'Checker Slide', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'checkerboard', color: '#a78bfa66', size: 16, thickness: 2, bg: '#170a33', animate: true, animationKind: 'slide', animationDuration: 4, animationDirection: 'normal' } },
+  { name: 'Hazard Roll', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'horizontal', color: '#f59e0bcc', size: 10, thickness: 4, bg: '#12100a', animate: true, animationKind: 'drift', animationDuration: 2.5, animationDirection: 'reverse' } },
+  { name: 'Zigzag Pulse', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'zigzag', color: '#fbbf2488', size: 14, thickness: 3, bg: '#1c1917', animate: true, animationKind: 'pulse', animationDuration: 5, animationDirection: 'normal' } },
+  { name: 'Racing Bars', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'vertical', color: '#f9731666', size: 10, thickness: 3, bg: '#170a05', animate: true, animationKind: 'slide', animationDuration: 1.5, animationDirection: 'alternate' } },
+  { name: 'Plus Ticker', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'plus', color: '#34d39966', size: 26, thickness: 2, bg: '#022c22', animate: true, animationKind: 'drift', animationDuration: 12, animationDirection: 'alternate' } },
+  { name: 'Dazzle Cross', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'crosshatch', color: '#34d39955', size: 18, thickness: 1, bg: '#052e26', animate: true, animationKind: 'drift', animationDuration: 9, animationDirection: 'normal' } },
+  { name: 'Diamond Flow', tags: ['animated'], state: { ...DEFAULT_PATTERN, kind: 'diamond', color: '#a78bfa55', size: 16, thickness: 2, bg: '#1e1b4b', animate: true, animationKind: 'slide', animationDuration: 5, animationDirection: 'normal' } },
+  { name: 'Aurora Dots', tags: ['animated', 'wow'], state: { ...DEFAULT_PATTERN, kind: 'dots', color: '#22d3ee88', size: 12, thickness: 2, bg: '#01080f', animate: true, animationKind: 'blink', animationDuration: 2.5, animationDirection: 'alternate' } },
+  { name: 'Neon Crawl', tags: ['animated', 'wow'], state: { ...DEFAULT_PATTERN, kind: 'grid', color: '#a3e63566', size: 20, thickness: 1, bg: '#0a0f00', animate: true, animationKind: 'slide', animationDuration: 6, animationDirection: 'alternate' } },
+  { name: 'Lava Pulse', tags: ['animated', 'wow'], state: { ...DEFAULT_PATTERN, kind: 'crosshatch', color: '#f9731666', size: 14, thickness: 1, bg: '#0d0000', animate: true, animationKind: 'pulse', animationDuration: 5, animationDirection: 'normal' } }
 ]

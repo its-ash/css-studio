@@ -165,3 +165,64 @@ blockquote {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, .02), transparent);
   }
 }
+
+.tabs ul { border-bottom: 1px solid rgba(0, 0, 0, .08); }
+.tabs a { font-weight: 500; border-radius: .25rem .25rem 0 0; }
+.tabs li.is-active a { color: var(--bulma-primary); border-bottom-color: var(--bulma-primary); }
+.tabs.is-boxed a { border-color: rgba(0, 0, 0, .1); border-radius: .375rem; }
+.tabs.is-boxed a:hover { background: rgba(0, 0, 0, .02); }
+.tabs.is-boxed a.is-active { background: var(--bulma-body-background-color); border-color: rgba(0, 0, 0, .12); color: var(--bulma-primary); }
+.tabs.is-toggle a { border-color: rgba(0, 0, 0, .1); border-radius: .375rem; }
+.tabs.is-toggle li.is-active a { background: var(--bulma-primary); border-color: var(--bulma-primary); color: var(--bulma-primary-invert); }
+
+.dropdown-content { border-radius: .5rem; border: 1px solid rgba(0, 0, 0, .06); box-shadow: 0 2px 8px rgba(0, 0, 0, .1); }
+.dropdown-item { font-weight: 500; border-radius: .25rem; }
+.dropdown-item:hover { background: rgba(var(--bulma-primary-rgb), .05); }
+.dropdown-divider { border-color: rgba(0, 0, 0, .06); }
+
+.message { border-radius: .5rem; box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+.message-header { font-weight: 600; border-radius: .5rem .5rem 0 0; }
+.message-body { border-radius: 0 0 .5rem .5rem; }
+
+.modal-card { border-radius: .625rem; box-shadow: 0 4px 16px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .1); }
+.modal-card-head { border-radius: .625rem .625rem 0 0; border-bottom: 1px solid rgba(0, 0, 0, .05); background-image: linear-gradient(to bottom, rgba(255, 255, 255, .5), transparent); }
+.modal-card-title { font-weight: 600; }
+.modal-card-foot { border-radius: 0 0 .625rem .625rem; border-top: 1px solid rgba(0, 0, 0, .05); }
+
+.file-cta { border-radius: .375rem 0 0 .375rem; font-weight: 500; }
+.file-name { border-radius: 0 .375rem .375rem 0; }
+
+.panel { border-radius: .5rem; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+.panel-heading { border-radius: .5rem .5rem 0 0; background-image: linear-gradient(to bottom, rgba(255, 255, 255, .6), transparent); font-weight: 600; }
+.panel-tabs a { font-weight: 500; }
+.panel-tabs a.is-active { color: var(--bulma-primary); }
+.panel-block.is-active { border-left: none; box-shadow: inset 2px 0 0 var(--bulma-primary); color: var(--bulma-primary); }
+
+.menu-label { font-weight: 600; }
+.menu-list a { border-radius: .25rem; font-weight: 500; }
+.menu-list a.is-active { background: var(--bulma-primary); color: var(--bulma-primary-invert); }
+
+.is-skeleton, .has-skeleton::after, .skeleton-block, .skeleton-lines > div { border-radius: .25rem !important; background: rgba(0, 0, 0, .04); }
+
+.footer { background-image: linear-gradient(to bottom, rgba(255, 255, 255, .4), transparent); border-top: 1px solid rgba(0, 0, 0, .05); }
+
+.hero.is-primary { box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
+.hero.is-primary .title, .hero.is-primary .subtitle { color: var(--bulma-primary-invert); }
+
+.button.is-rounded { border-radius: 999px !important; }
+.button.is-text { background: none !important; box-shadow: none !important; }
+.button.is-inverted.is-primary { background: var(--bulma-primary-invert) !important; color: var(--bulma-primary) !important; }
+.button.is-light { background: var(--bulma-body-background-color) !important; color: var(--bulma-body-color) !important; }
+
+.tag { border-radius: .25rem !important; box-shadow: 0 1px 1px rgba(0, 0, 0, .06); }
+.tag.is-rounded { border-radius: 999px !important; }
+.tag.is-light { background: rgba(0, 0, 0, .04); color: var(--bulma-body-color); }
+
+.card-footer { background-image: linear-gradient(to bottom, rgba(255, 255, 255, .3), transparent); border-top: 1px solid rgba(0, 0, 0, .05); }
+.card-footer-item { font-weight: 500; }
+.card-footer-item:hover { background: rgba(var(--bulma-primary-rgb), .04); }
+.card-footer-item:not(:last-child) { border-color: rgba(0, 0, 0, .06); }
+
+code, .code { border-radius: .25rem !important; background: rgba(0, 0, 0, .03); }
+kbd { border-radius: .25rem !important; background: rgba(0, 0, 0, .04); border: 1px solid rgba(0, 0, 0, .15); box-shadow: 0 1px 1px rgba(0, 0, 0, .08); }
+mark { border-radius: .2rem; background: rgba(var(--bulma-warning-rgb), .25); }

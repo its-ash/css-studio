@@ -66,7 +66,7 @@ async function exportPng() {
 <template>
   <div
     class="flex min-h-0 flex-1 flex-col"
-    :class="isFullscreen ? 'fixed inset-0 z-[80] bg-bg' : ''"
+    :class="isFullscreen ? 'fixed inset-0 z-80 bg-bg' : ''"
   >
     <div class="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-line px-4">
       <div class="flex items-center gap-1.5">
@@ -128,23 +128,25 @@ async function exportPng() {
         </button>
       </div>
     </div>
-    <div ref="containerEl" class="relative min-h-0 flex-1 overflow-hidden" style="background-color: var(--color-bg)">
+    <div ref="containerEl" class="flex min-h-0 flex-1 flex-col overflow-hidden" style="background-color: var(--color-bg)">
       <slot name="presets" />
-      <div class="absolute inset-0 flex items-center justify-center p-6">
-        <div
-          ref="stageEl"
-          class="relative flex max-h-full h-full items-center justify-center overflow-hidden rounded-xl shadow-panel-lg transition-[width] duration-200 ease-out"
-          :style="{
-            width: viewportWidths[viewport],
-            maxWidth: '100%',
-            transform: `scale(${zoom})`,
-            transformOrigin: 'center center',
-            backgroundSize: '16px 16px',
-            backgroundPosition: '0 0, 8px 8px',
-            backgroundColor: 'var(--color-panel)'
-          }"
-        >
-          <slot />
+      <div class="relative min-h-0 flex-1">
+        <div class="absolute inset-0 flex items-center justify-center p-6">
+          <div
+            ref="stageEl"
+            class="relative flex max-h-full h-full items-center justify-center overflow-hidden rounded-xl shadow-panel-lg transition-[width] duration-200 ease-out"
+            :style="{
+              width: viewportWidths[viewport],
+              maxWidth: '100%',
+              transform: `scale(${zoom})`,
+              transformOrigin: 'center center',
+              backgroundSize: '16px 16px',
+              backgroundPosition: '0 0, 8px 8px',
+              backgroundColor: 'var(--color-panel)'
+            }"
+          >
+            <slot />
+          </div>
         </div>
       </div>
     </div>

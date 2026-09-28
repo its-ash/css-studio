@@ -124,6 +124,13 @@ export async function compileBulmaTheme(
   const bulmaUse = `@use "bulma/bulma-entry" with (\n${configBody}\n);`
   const entry = `${bulmaUse}\n${presetSrc}\n${fontOverrideCss}`
 
+  /** Silent logger: vendored Bulma emits Sass if()-function deprecation warnings that would
+   *  otherwise surface as console errors in the Nuxt dev overlay on every recompile. */
+  const silentLogger = {
+    warn() {},
+    debug() {}
+  } as unknown as import('sass').Logger
+
   const customImporter: import('sass').Importer<'async'> = {
     async canonicalize(url, ctx) {
       const stripped = url.startsWith('~') ? url.slice(1) : url
@@ -153,7 +160,8 @@ export async function compileBulmaTheme(
 
   const result = await sass.compileStringAsync(entry, {
     importers: [customImporter],
-    url: new URL('file:///scss/entry.scss')
+    url: new URL('file:///scss/entry.scss'),
+    logger: silentLogger
   })
 
   return result.css

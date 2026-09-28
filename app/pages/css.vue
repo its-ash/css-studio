@@ -6,9 +6,12 @@ import {
   BULMA_THEME_PRESETS,
   DEFAULT_BULMA_THEME,
   GOOGLE_FONTS,
+  bestFitFontsForTheme,
   bestFitPrimaryForTheme,
   effectiveMode,
   generateBulmaPalette,
+  presetDescription,
+  presetTileStyle,
   suggestBodyFont,
   suggestedPalettesForTheme
 } from '~/utils/generators/bulmaTheme'
@@ -32,10 +35,34 @@ function loadState(): BulmaThemeState {
     s.primaryManual = true
   }
   if (mode === 'light' || mode === 'dark') s.mode = mode
-  if (headingFont && GOOGLE_FONTS.includes(headingFont)) s.headingFont = headingFont
+  if (headingFont && GOOGLE_FONTS.includes(headingFont)) {
+    s.headingFont = headingFont
+    s.headingFontManual = true
+  }
   if (bodyFont && GOOGLE_FONTS.includes(bodyFont)) {
     s.bodyFont = bodyFont
     s.bodyFontManual = true
+  }
+  // Theme in the URL: fit primary and fonts to the preset unless they were passed or saved manually.
+  const saved = import.meta.client ? (() => {
+    try {
+      const raw = localStorage.getItem(LS_KEY)
+      return raw ? (JSON.parse(raw) as Partial<BulmaThemeState>) : null
+    } catch {
+      return null
+    }
+  })() : null
+
+  if (theme && !primary && !saved?.primaryManual) {
+    s.primary = bestFitPrimaryForTheme(theme)
+    s.primaryManual = false
+  }
+  if (theme && !headingFont && !saved?.headingFontManual) {
+    const fit = bestFitFontsForTheme(theme)
+    s.headingFont = fit.headingFont
+    s.bodyFont = fit.bodyFont
+    s.headingFontManual = false
+    s.bodyFontManual = false
   }
   if (theme || primary || mode || headingFont || bodyFont) return s
 
@@ -49,18 +76,55 @@ function loadState(): BulmaThemeState {
       }
     }
   }
-  // Fresh visit, no saved state: start with the primary color that best fits the default theme.
+  // Fresh visit, no saved state: start with the primary color and fonts that best fit the default theme.
   s.primary = bestFitPrimaryForTheme(s.theme)
+  const fit = bestFitFontsForTheme(s.theme)
+  s.headingFont = fit.headingFont
+  s.bodyFont = fit.bodyFont
   return s
 }
 
 const state = ref<BulmaThemeState>(loadState())
 
 const fontOptions = GOOGLE_FONTS.map((f) => ({ value: f, label: f }))
-const themeOptions = BULMA_THEME_PRESETS.map((p) => ({ value: p.key, label: p.label }))
 
 const suggestedPalettes = computed(() => suggestedPalettesForTheme(state.value.theme))
-const selectedThemeLabel = computed(() => BULMA_THEME_PRESETS.find((p) => p.key === state.value.theme)?.label ?? state.value.theme)
+const activePreset = computed(() => BULMA_THEME_PRESETS.find((p) => p.key === state.value.theme))
+const selectedThemeLabel = computed(() => activePreset.value?.label ?? state.value.theme)
+const presetDesc = computed(() => presetDescription(state.value.theme))
+
+/** Visual DNA of the active preset, applied to the preview frame chrome so the studio itself nods to the theme. */
+const frameStyle = computed(() => {
+  const mode = effectiveMode(state.value.theme, state.value.mode)
+  return presetTileStyle(state.value.theme, state.value.primary, mode)
+})
+const frameRadius = computed(() => `${Math.min(frameStyle.value.radius, 20)}px`)
+
+/** Each picker tile previews its preset using the active primary (or the preset's best-fit). */
+function tilePrimary(key: string): string {
+  return state.value.primaryManual ? state.value.primary : bestFitPrimaryForTheme(key)
+}
+
+function tileStyleFor(key: string): Record<string, string> {
+  const t = presetTileStyle(key, tilePrimary(key), state.value.mode)
+  return {
+    borderRadius: `${t.radius}px`,
+    border: `${t.border}px solid ${t.borderColor}`,
+    background: t.background,
+    boxShadow: t.boxShadow
+  }
+}
+
+function tileTextFor(key: string): Record<string, string> {
+  const t = presetTileStyle(key, tilePrimary(key), state.value.mode)
+  const dark = state.value.mode === 'dark' || BULMA_THEME_PRESETS.find((p) => p.key === key)?.forceMode === 'dark'
+  return {
+    color: dark ? '#ececec' : '#2a2a28',
+    letterSpacing: t.letterSpacing,
+    textTransform: t.textTransform,
+    fontFamily: t.fontFamily
+  }
+}
 
 function isActivePalette(color: string): boolean {
   return color.toLowerCase() === state.value.primary.toLowerCase()
@@ -123,6 +187,19 @@ function syncStateToUrl() {
   window.history.replaceState(window.history.state, '', `${route.path}?${params.toString()}`)
 }
 
+// Burger toggles its navbar menu (Bulma ships no JS). Runs in a scripts-only sandbox, isolated from the app origin.
+const GALLERY_SCRIPT = `document.addEventListener('click', (e) => {
+  const b = e.target.closest('.navbar-burger'); if (!b) return
+  e.preventDefault()
+  const m = document.getElementById(b.getAttribute('aria-controls'))
+  const open = !b.classList.contains('is-active')
+  b.classList.toggle('is-active', open); m && m.classList.toggle('is-active', open)
+  b.setAttribute('aria-expanded', String(open))
+})
+document.addEventListener('keydown', (e) => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.navbar-burger')) { e.preventDefault(); e.target.click() }
+})`
+
 function iframeDoc(css: string, mode: 'light' | 'dark'): string {
   return `<!DOCTYPE html><html data-theme="${mode}"><head><meta charset="UTF-8" /><style>
 * { box-sizing: border-box; }
@@ -132,7 +209,7 @@ body { margin: 0; padding: 1.5rem; }
 .section-title { text-transform: uppercase; font-size: .85rem; font-weight: 700; margin-bottom: .75rem; opacity: .6; }
 </style>
 <style id="theme-stylesheet">${css}</style>
-</head><body>${BULMA_GALLERY_HTML}</body></html>`
+</head><body>${BULMA_GALLERY_HTML}<script>${GALLERY_SCRIPT}<\/script></body></html>`
 }
 
 let renderToken = 0
@@ -162,6 +239,17 @@ async function render() {
 watch(state, render, { deep: true })
 onMounted(render)
 
+function pickPreset(key: string) {
+  state.value.theme = key
+  if (!state.value.primaryManual) {
+    state.value.primary = bestFitPrimaryForTheme(key)
+  }
+  // Fonts follow the preset DNA unless the user chose them manually.
+  const fit = bestFitFontsForTheme(key)
+  if (!state.value.headingFontManual) state.value.headingFont = fit.headingFont
+  if (!state.value.bodyFontManual) state.value.bodyFont = suggestBodyFont(fit.headingFont)
+}
+
 function pickPalette(color: string) {
   state.value.primary = color
   state.value.primaryManual = true
@@ -179,6 +267,7 @@ function onThemeChange() {
 }
 
 function onHeadingFontChange() {
+  state.value.headingFontManual = true
   if (!state.value.bodyFontManual) {
     state.value.bodyFont = suggestBodyFont(state.value.headingFont)
   }
@@ -219,7 +308,13 @@ async function shareUrl() {
 }
 
 function reset() {
-  state.value = { ...DEFAULT_BULMA_THEME }
+  const fit = bestFitFontsForTheme(DEFAULT_BULMA_THEME.theme)
+  state.value = {
+    ...DEFAULT_BULMA_THEME,
+    primary: bestFitPrimaryForTheme(DEFAULT_BULMA_THEME.theme),
+    headingFont: fit.headingFont,
+    bodyFont: fit.bodyFont
+  }
 }
 
 useSeoMeta({
@@ -251,7 +346,13 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/css' }]
     <div class="flex min-w-0 flex-1 flex-col lg:flex-row">
       <div class="flex min-w-0 flex-1 flex-col">
         <header class="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between gap-2 border-b border-line bg-panel/80 px-4 shadow-panel backdrop-blur-md">
-          <h1 class="truncate text-sm font-medium text-fg">SCSS Theme Engine</h1>
+          <div class="flex min-w-0 items-center gap-2.5">
+            <h1 class="truncate text-sm font-medium text-fg">SCSS Theme Engine</h1>
+            <span class="hidden items-center gap-1.5 rounded-full border border-line bg-bg px-2 py-0.5 text-[11px] font-medium text-muted sm:inline-flex">
+              <Icon name="ph-swatches" :size="12" class="text-accent" />
+              {{ selectedThemeLabel }}
+            </span>
+          </div>
           <div class="flex items-center gap-1">
             <button
               class="inline-flex h-8 items-center gap-1.5 rounded-lg border border-line bg-bg px-2.5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
@@ -299,7 +400,10 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/css' }]
         </div>
 
         <div class="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-line bg-panel px-4">
-          <span class="text-xs font-medium tracking-tight text-muted">Preview</span>
+          <div class="flex min-w-0 items-center gap-2">
+            <span class="text-xs font-medium tracking-tight text-muted">Preview</span>
+            <span class="hidden truncate text-[11px] text-muted/70 md:block">{{ presetDesc }}</span>
+          </div>
           <div class="flex items-center gap-0.5">
             <button
               v-for="vp in [
@@ -326,8 +430,8 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/css' }]
           :class="colorMode.value === 'dark' ? 'bg-zinc-950' : 'bg-zinc-100'"
         >
           <div
-            class="relative h-full w-full overflow-hidden rounded-xl border shadow-panel transition-[width] duration-200 ease-out"
-            :style="{ width: PREVIEW_WIDTHS[previewViewport], maxWidth: '100%' }"
+            class="relative h-full w-full overflow-hidden border shadow-panel transition-[width,border-radius] duration-200 ease-out"
+            :style="{ width: PREVIEW_WIDTHS[previewViewport], maxWidth: '100%', borderRadius: frameRadius }"
             :class="colorMode.value === 'dark' ? 'border-white/10 bg-black' : 'border-black/10 bg-white'"
           >
             <div
@@ -342,41 +446,64 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/css' }]
               ref="iframeRef"
               title="Bulma theme preview"
               class="block h-full w-full border-0"
-              sandbox="allow-same-origin"
+              sandbox="allow-scripts"
             />
           </div>
         </main>
       </div>
 
       <aside class="flex w-full shrink-0 flex-col gap-3.5 border-t border-line bg-panel p-3.5 lg:w-95 lg:overflow-y-auto lg:border-l lg:border-t-0">
+        <ControlGroup label="Theme preset" icon="ph-palette">
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              v-for="p in BULMA_THEME_PRESETS"
+              :key="p.key"
+              type="button"
+              class="group flex flex-col gap-1.5 rounded-lg border p-1.5 text-left transition-[border-color,background-color,transform] duration-150 hover:bg-line/15 active:scale-[0.97]"
+              :class="state.theme === p.key ? 'border-accent/70 bg-accent/8' : 'border-line'"
+              :aria-pressed="state.theme === p.key"
+              :title="presetDescription(p.key)"
+              @click="pickPreset(p.key)"
+            >
+              <span
+                class="flex aspect-2/1 w-full items-center justify-center overflow-hidden"
+                :style="tileStyleFor(p.key)"
+              >
+                <span
+                  class="max-w-full truncate px-1 text-[9px] font-bold"
+                  :style="tileTextFor(p.key)"
+                >Aa</span>
+              </span>
+              <span class="line-clamp-1 text-[10px] font-medium leading-tight" :class="state.theme === p.key ? 'text-fg' : 'text-muted'">{{ p.label }}</span>
+            </button>
+          </div>
+          <p v-if="presetDesc" class="text-[11px] leading-relaxed text-muted">{{ presetDesc }}</p>
+        </ControlGroup>
+
         <ControlGroup label="Fonts" icon="ph-text-aa">
           <SelectControl v-model="state.headingFont" label="Heading font" :options="fontOptions" @update:model-value="onHeadingFontChange" />
           <SelectControl v-model="state.bodyFont" label="Body font" :options="fontOptions" @update:model-value="onBodyFontChange" />
         </ControlGroup>
 
-        <ControlGroup label="Theme" icon="ph-palette">
-          <SelectControl v-model="state.theme" label="Style preset" :options="themeOptions" @update:model-value="onThemeChange" />
-          <ColorControl :model-value="state.primary" label="Primary color" @update:model-value="setPrimary" />
-        </ControlGroup>
-
-        <ControlGroup label="Suggested palettes" icon="ph-sparkle">
-          <p class="text-[11px] text-muted">Curated colors that suit the <span class="font-medium text-fg">{{ selectedThemeLabel }}</span> preset.</p>
-          <div class="grid grid-cols-4 gap-2">
+        <ControlGroup label="Primary color" icon="ph-drop">
+          <ColorControl :model-value="state.primary" label="Primary" @update:model-value="setPrimary" />
+          <p class="text-[11px] text-muted">Curated colors that suit <span class="font-medium text-fg">{{ selectedThemeLabel }}</span>.</p>
+          <div class="flex flex-col gap-1">
             <button
               v-for="p in suggestedPalettes"
               :key="p.name"
               type="button"
-              class="group flex flex-col items-center gap-1.5 rounded-lg p-1.5 transition-colors duration-150 hover:bg-line/20"
-              :aria-label="`Use ${p.name}`"
+              class="group flex items-center gap-2.5 rounded-lg border px-2 py-1.5 text-left transition-[border-color,background-color] duration-150 hover:bg-line/15"
+              :class="isActivePalette(p.color) ? 'border-accent/70 bg-accent/8' : 'border-line'"
               :aria-pressed="isActivePalette(p.color)"
               @click="pickPalette(p.color)"
             >
               <span
-                class="aspect-square w-full rounded-lg border transition-transform duration-150 group-hover:scale-105 group-active:scale-95"
-                :class="isActivePalette(p.color) ? 'border-accent ring-2 ring-accent ring-offset-2 ring-offset-panel' : 'border-line'"
+                class="h-5 w-5 shrink-0 rounded-md border border-line"
                 :style="{ background: p.color }"
               />
-              <span class="line-clamp-1 w-full text-center text-[10px] leading-tight text-muted">{{ p.name }}</span>
+              <span class="line-clamp-1 text-xs font-medium" :class="isActivePalette(p.color) ? 'text-fg' : 'text-muted'">{{ p.name }}</span>
+              <Icon v-if="isActivePalette(p.color)" name="ph-check" :size="13" class="ml-auto text-accent" />
             </button>
           </div>
         </ControlGroup>

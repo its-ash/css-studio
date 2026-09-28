@@ -2,9 +2,11 @@
 import { useEditor } from '~/composables/useEditor'
 import {
   DEFAULT_PATTERN,
+  PATTERN_ANIMATION_KINDS,
   PATTERN_KINDS,
   PRESETS_PATTERN,
   patternFullCss,
+  patternKeyframes,
   patternPreviewStyle,
   patternVars,
   randomizePattern
@@ -23,6 +25,7 @@ watchEffect(() => setShareUrl(shareUrlRef.value))
 const css = computed(() => patternFullCss(state.value))
 const vars = computed(() => patternVars(state.value))
 const style = computed(() => patternPreviewStyle(state.value))
+const keyframesCss = computed(() => (state.value.animate ? `<style>${patternKeyframes(state.value)}</style>` : ''))
 
 function applyPreset(i: number) {
   state.value = JSON.parse(JSON.stringify(PRESETS_PATTERN[i]!.state)) as PatternState
@@ -58,6 +61,8 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/pattern
         <template #presets>
           <PreviewPresets :presets="PRESETS_PATTERN" @apply="applyPreset" />
         </template>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-html="keyframesCss" aria-hidden="true"></div>
         <div class="h-80 w-full max-w-2xl rounded-xl" :style="style" aria-label="Pattern preview"></div>
       </PreviewCanvas>
     </template>
@@ -75,6 +80,24 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/pattern
         <ColorControl :model-value="state.bg" label="Background" @update:model-value="(v) => (state.bg = v)" />
         <SliderControl v-model="state.opacity" label="Opacity" :min="10" :max="100" suffix="%" />
         <SliderControl v-model="state.rotation" label="Rotation" :min="0" :max="360" suffix="°" />
+      </ControlGroup>
+
+      <ControlGroup label="Animation" icon="ph-sparkle">
+        <ToggleControl v-model="state.animate" label="Animate pattern" />
+        <template v-if="state.animate">
+          <SelectControl v-model="state.animationKind" label="Animation type" :options="PATTERN_ANIMATION_KINDS" />
+          <SliderControl v-model="state.animationDuration" label="Duration" :min="0.5" :max="15" :step="0.5" suffix="s" />
+          <SelectControl
+            v-model="state.animationDirection"
+            label="Direction"
+            :options="[
+              { value: 'normal', label: 'Normal' },
+              { value: 'alternate', label: 'Alternate' },
+              { value: 'reverse', label: 'Reverse' },
+              { value: 'alternate-reverse', label: 'Alternate Reverse' }
+            ]"
+          />
+        </template>
       </ControlGroup>
     </template>
 

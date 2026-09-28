@@ -7,15 +7,15 @@ const emit = defineEmits<{ apply: [index: number] }>()
 </script>
 
 <template>
-  <div
-    class="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-center p-3"
-    aria-label="Presets"
-  >
-    <div class="pointer-events-auto flex max-w-full flex-wrap items-center justify-center gap-1.5 rounded-xl border border-line bg-panel/90 p-1.5 shadow-panel-lg backdrop-blur-md">
+  <div class="shrink-0 border-b border-line bg-panel px-2" aria-label="Presets">
+    <div
+      class="flex max-w-full items-center gap-0.5 overflow-x-auto py-1.5 scrollbar-none [&::-webkit-scrollbar]:hidden"
+      role="tablist"
+    >
       <button
         v-for="(p, i) in presets"
         :key="p.name"
-        class="inline-flex items-center rounded-full border border-transparent px-2.5 py-1 text-[11px] font-medium text-muted transition-[transform,color,background-color,border-color] duration-150 hover:border-accent/50 hover:text-fg active:scale-[0.97]"
+        class="inline-flex shrink-0 items-center whitespace-nowrap rounded-full border border-transparent px-2.5 py-1 text-[11px] font-medium text-muted transition-[transform,color,background-color,border-color] duration-150 hover:border-accent/50 hover:text-fg active:scale-[0.97]"
         :title="p.tags.join(', ')"
         @click="emit('apply', i)"
       >
