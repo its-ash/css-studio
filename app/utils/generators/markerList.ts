@@ -10,7 +10,6 @@ export interface MarkerListState {
   fontWeight: number
   gap: number
   padding: number
-  markerSize: number
   showCounter: boolean
   counterStart: number
 }

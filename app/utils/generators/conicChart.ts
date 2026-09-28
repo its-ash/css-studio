@@ -30,6 +30,7 @@ export const DEFAULT_CONIC_CHART: ConicChartState = {
   gap: 0,
   legend: true,
   showLabels: false,
+  centerLabel: '100%',
   bg: '#09090b',
   textColor: '#e4e4e7'
 }

@@ -28,9 +28,21 @@ const generators = [
   { to: '/aspect-fit', title: 'Aspect & Fit', desc: 'aspect-ratio frames with object-fit comparison.', icon: 'ph-crop' },
   { to: '/marker-list', title: 'List Markers', desc: 'Custom ::marker bullets, glyphs and counters.', icon: 'ph-list-bullets' },
   { to: '/conic-chart', title: 'Conic Chart', desc: 'Pie and donut charts from conic-gradient data.', icon: 'ph-chart-pie-slice' },
-  { to: '/presets', title: 'Presets', desc: 'Browse the full library with previews.', icon: 'ph-bookmark' },
   { to: '/palette', title: 'Color Tools', desc: 'Harmonies, contrast checker, formats.', icon: 'ph-palette' }
 ]
+
+const search = ref('')
+const filteredGenerators = computed(() => {
+  const q = search.value.trim().toLowerCase()
+  if (!q) return generators
+  return generators.filter((g) => g.title.toLowerCase().includes(q) || g.desc.toLowerCase().includes(q))
+})
+
+const { open } = useCommandPalette()
+
+function focusSearch() {
+  document.getElementById('home-search')?.focus()
+}
 
 useSeoMeta({
   title: 'CSS Studio - Free CSS Generators for Gradients, Shadows & Animations',
@@ -70,6 +82,31 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
       </header>
 
       <main class="mx-auto w-full max-w-[1400px] flex-1 px-6 py-8 lg:px-10">
+        <section class="mx-auto mb-10 flex max-w-xl flex-col items-center text-center">
+          <label for="home-search" class="sr-only">Search generators</label>
+          <span class="relative w-full">
+            <button
+              type="button"
+              class="absolute left-3 top-1/2 -translate-y-1/2 text-muted transition-colors duration-150 hover:text-fg"
+              aria-label="Open command palette"
+              title="Open command palette (⌘K)"
+              @click="open()"
+            >
+              <Icon name="ph-magnifying-glass" :size="16" />
+            </button>
+            <input
+              id="home-search"
+              v-model="search"
+              type="search"
+              placeholder="Search generators…"
+              class="h-11 w-full rounded-full border border-line bg-panel pl-9 pr-16 text-sm text-fg shadow-panel transition-[border-color,background-color] duration-150 hover:border-line-strong focus:border-accent/60 focus:outline-none placeholder:text-muted"
+              aria-label="Search generators"
+              @keydown.meta.k.prevent="open()"
+            />
+            <kbd class="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center rounded border border-line bg-bg px-1.5 font-mono text-[10px] text-muted sm:inline-flex">⌘K</kbd>
+          </span>
+        </section>
+
         <section class="mb-10 max-w-2xl">
           <h1 class="text-4xl font-semibold tracking-tighter leading-[1.05] text-fg md:text-5xl">
             Generate Beautiful CSS<br />Without Writing It
@@ -84,20 +121,14 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
             >
               Open Gradient Studio
             </NuxtLink>
-            <NuxtLink
-              to="/presets"
-              class="inline-flex h-10 items-center rounded-lg border border-line bg-panel px-5 text-sm font-medium text-fg transition-[transform,background-color,border-color] duration-150 hover:bg-line/30 hover:border-line-strong active:scale-[0.97]"
-            >
-              Browse Presets
-            </NuxtLink>
           </div>
         </section>
 
         <section aria-labelledby="generators-heading">
           <h2 id="generators-heading" class="mb-4 text-xs font-medium tracking-wide text-muted uppercase">Generators</h2>
-          <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div v-if="filteredGenerators.length" class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <NuxtLink
-              v-for="g in generators"
+              v-for="g in filteredGenerators"
               :key="g.to"
               :to="g.to"
               class="group flex flex-col gap-2 rounded-xl border border-line bg-panel p-4 shadow-panel transition-[transform,border-color,box-shadow] duration-150 hover:border-accent/60 hover:shadow-panel-lg active:scale-[0.99]"
@@ -106,6 +137,10 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
               <span class="text-sm font-medium tracking-tight text-fg">{{ g.title }}</span>
               <span class="text-xs leading-relaxed text-muted">{{ g.desc }}</span>
             </NuxtLink>
+          </div>
+          <div v-else class="flex flex-col items-center gap-2 py-12 text-center">
+            <Icon name="ph-magnifying-glass" :size="24" class="text-muted" />
+            <p class="text-sm text-muted">No generators match your search.</p>
           </div>
         </section>
       </main>

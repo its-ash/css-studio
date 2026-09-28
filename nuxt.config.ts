@@ -7,7 +7,7 @@ const GENERATOR_ROUTES = [
   '/divider', '/scrollbar', '/scroll-anim', '/tooltip', '/marquee', '/var-font', '/text-ring',
   '/scroll-snap', '/mask', '/clip', '/aspect-fit', '/marker-list', '/conic-chart',
   '/cursor', '/filter', '/spotlight', '/noise', '/typescale',
-  '/presets', '/palette', '/css'
+  '/palette'
 ]
 
 export default defineNuxtConfig({

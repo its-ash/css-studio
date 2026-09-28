@@ -84,7 +84,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mask' }
           <SliderControl v-model="state.dotSize" label="Dot size" :min="2" :max="16" suffix="px" />
           <SliderControl v-model="state.stripeGap" label="Spacing" :min="2" :max="24" suffix="px" />
         </template>
-        <ToggleControl v-if="state.kind !== 'linear' && state.kind !== 'radial' && state.kind !== 'radial-inverse'" v-model="state.repeat" label="Repeat tile" />
+        <ToggleControl v-if="state.kind === 'stripe' || state.kind === 'dots'" :model-value="state.repeat !== 'no-repeat'" label="Repeat tile" @update:model-value="(v) => (state.repeat = v ? 'repeat' : 'no-repeat')" />
       </ControlGroup>
 
       <ControlGroup label="Colors" icon="ph-palette">
