@@ -62,16 +62,8 @@ function updateStop(i: number, patch: Partial<GradientStop>) {
   state.value = { ...state.value, stops }
 }
 
-useSeoMeta({
-  title: 'Gradient - CSS Studio',
-  description: 'Linear, radial, conic and repeating gradients with color stops and presets.',
-  ogTitle: 'Gradient - CSS Studio',
-  ogDescription: 'Linear, radial, conic and repeating gradients with color stops and presets.',
-  ogUrl: 'https://css-studio.itsash.in/gradient',
-  twitterTitle: 'Gradient - CSS Studio',
-  twitterDescription: 'Linear, radial, conic and repeating gradients with color stops and presets.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/gradient' }] })
+
+const variants = computed(() => PRESETS_GRADIENT.map((p) => ({ name: p.name, css: gradientFullCss(p.state), html: gradientHtml() })))
 </script>
 
 <template>
@@ -87,7 +79,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/gradien
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Gradient preview" filename="css-studio-gradient">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Gradient preview" filename="css-studio-gradient">
         <template #presets>
           <PreviewPresets :presets="PRESETS_GRADIENT" @apply="applyPreset" />
         </template>

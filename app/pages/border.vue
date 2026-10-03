@@ -31,16 +31,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Border - CSS Studio',
-  description: 'Solid, gradient, animated, and glow borders with per-side and corner controls.',
-  ogTitle: 'Border - CSS Studio',
-  ogDescription: 'Solid, gradient, animated, and glow borders with per-side and corner controls.',
-  ogUrl: 'https://css-studio.itsash.in/border',
-  twitterTitle: 'Border - CSS Studio',
-  twitterDescription: 'Solid, gradient, animated, and glow borders with per-side and corner controls.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/border' }] })
+
+const variants = computed(() => PRESETS_BORDER.map((p) => ({ name: p.name, css: borderCss(p.state), html: borderHtml() })))
 </script>
 
 <template>
@@ -56,7 +48,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/border'
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Border preview" filename="css-studio-border">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Border preview" filename="css-studio-border">
         <template #presets>
           <PreviewPresets :presets="PRESETS_BORDER" @apply="applyPreset" />
         </template>

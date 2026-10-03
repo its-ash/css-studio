@@ -1,3 +1,4 @@
+import { SURFACE_SIZE } from '../demo'
 import { gradientCss, DEFAULT_GRADIENT, randomizeGradient } from './gradient'
 import { DEFAULT_BLOB } from './blob'
 import { patternCss, DEFAULT_PATTERN } from './pattern'
@@ -89,7 +90,7 @@ export function layersBackground(layers: Layer[]): { css: string; style: Record<
 }
 
 function consolidatedCss(layers: Layer[], images: string[]): string {
-  const lines = [`.layer-stack {`]
+  const lines = [`.layer-stack {`, ...SURFACE_SIZE]
   const colorLayer = layers.find((l) => l.kind === 'color' && l.visible)
   if (colorLayer) lines.push(`  background-color: ${colorLayer.color};`)
   if (images.length) lines.push(`  background-image: ${images.join(',\n    ')};`)

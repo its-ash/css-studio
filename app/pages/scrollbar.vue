@@ -28,16 +28,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Scrollbar - CSS Studio',
-  description: 'Custom ::-webkit-scrollbar and scrollbar-color styling.',
-  ogTitle: 'Scrollbar - CSS Studio',
-  ogDescription: 'Custom ::-webkit-scrollbar and scrollbar-color styling.',
-  ogUrl: 'https://css-studio.itsash.in/scrollbar',
-  twitterTitle: 'Scrollbar - CSS Studio',
-  twitterDescription: 'Custom ::-webkit-scrollbar and scrollbar-color styling.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scrollbar' }] })
+
+const variants = computed(() => PRESETS_SCROLLBAR.map((p) => ({ name: p.name, css: scrollbarCss(p.state), html: scrollbarHtml() })))
 </script>
 
 <template>
@@ -53,7 +45,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scrollb
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Scrollbar preview" filename="css-studio-scrollbar">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Scrollbar preview" filename="css-studio-scrollbar">
         <template #presets>
           <PreviewPresets :presets="PRESETS_SCROLLBAR" @apply="applyPreset" />
         </template>

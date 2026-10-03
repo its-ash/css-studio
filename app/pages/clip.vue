@@ -56,16 +56,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Clip-path Editor - CSS Studio',
-  description: 'Draggable clip-path editor: polygon, circle, ellipse and inset.',
-  ogTitle: 'Clip-path Editor - CSS Studio',
-  ogDescription: 'Draggable clip-path editor: polygon, circle, ellipse and inset.',
-  ogUrl: 'https://css-studio.itsash.in/clip',
-  twitterTitle: 'Clip-path Editor - CSS Studio',
-  twitterDescription: 'Draggable clip-path editor: polygon, circle, ellipse and inset.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/clip' }] })
+
+const variants = computed(() => PRESETS_CLIP.map((p) => ({ name: p.name, css: clipCss(p.state), html: clipHtml() })))
 </script>
 
 <template>
@@ -81,7 +73,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/clip' }
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Clip-path preview" filename="css-studio-clip">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Clip-path preview" filename="css-studio-clip">
         <template #presets>
           <PreviewPresets :presets="PRESETS_CLIP" @apply="applyPreset" />
         </template>

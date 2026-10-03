@@ -67,16 +67,8 @@ function removePoint(id: string) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Mesh Gradient - CSS Studio',
-  description: 'Draggable color points composited into layered radial gradients.',
-  ogTitle: 'Mesh Gradient - CSS Studio',
-  ogDescription: 'Draggable color points composited into layered radial gradients.',
-  ogUrl: 'https://css-studio.itsash.in/mesh',
-  twitterTitle: 'Mesh Gradient - CSS Studio',
-  twitterDescription: 'Draggable color points composited into layered radial gradients.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mesh' }] })
+
+const variants = computed(() => PRESETS_MESH_GRADIENT.map((p) => ({ name: p.name, css: meshGradientFullCss(p.state), html: meshGradientHtml() })))
 </script>
 
 <template>
@@ -92,7 +84,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mesh' }
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Mesh gradient preview" filename="css-studio-mesh">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Mesh gradient preview" filename="css-studio-mesh">
         <template #presets>
           <PreviewPresets :presets="PRESETS_MESH_GRADIENT" @apply="applyPreset" />
         </template>

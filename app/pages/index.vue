@@ -28,10 +28,53 @@ const generators = [
   { to: '/aspect-fit', title: 'Aspect & Fit', desc: 'aspect-ratio frames with object-fit comparison.', icon: 'ph-crop' },
   { to: '/marker-list', title: 'List Markers', desc: 'Custom ::marker bullets, glyphs and counters.', icon: 'ph-list-bullets' },
   { to: '/conic-chart', title: 'Conic Chart', desc: 'Pie and donut charts from conic-gradient data.', icon: 'ph-chart-pie-slice' },
-  { to: '/palette', title: 'Color Tools', desc: 'Harmonies, contrast checker, formats.', icon: 'ph-palette' }
+  { to: '/cursor', title: 'Cursor & Selection', desc: 'Custom cursors and ::selection colors.', icon: 'ph-cursor' },
+  { to: '/filter', title: 'Filter', desc: 'Blur, grayscale, contrast and duotone filter stacks.', icon: 'ph-funnel' },
+  { to: '/spotlight', title: 'Spotlight', desc: 'Cursor-follow radial-gradient glow.', icon: 'ph-flashlight' },
+  { to: '/noise', title: 'Noise & Grain', desc: 'Film grain, static and halftone overlays.', icon: 'ph-dots-nine' },
+  { to: '/typescale', title: 'Type Scale', desc: 'Fluid clamp() typography scale.', icon: 'ph-text-t' },
+  { to: '/palette', title: 'Color Tools', desc: 'Harmonies, contrast checker, formats.', icon: 'ph-palette' },
+  { to: '/hover', title: 'Hover Effects', desc: 'Lift, glow, underline sweep, fill, tilt, shine hovers.', icon: 'ph-cursor-click' },
+  { to: '/toggle', title: 'Toggles & Checkboxes', desc: 'Switches, checkboxes, radios and skeleton loaders.', icon: 'ph-toggle-left' },
+  { to: '/input', title: 'Input Fields', desc: 'Outline, underline, floating label and glow inputs.', icon: 'ph-textbox' },
+  { to: '/flip-card', title: 'Flip Card', desc: '3D hover flip cards with front/back faces.', icon: 'ph-rectangle' },
+  { to: '/compare', title: 'Before / After', desc: 'Pure-CSS image comparison with split handle.', icon: 'ph-arrows-left-right' },
+  { to: '/text-anim', title: 'Text Animations', desc: 'Typewriter, wave, glitch, blur-in, stagger.', icon: 'ph-text-aa' },
+  { to: '/link', title: 'Link Underlines', desc: '10 animated underline micro-interactions.', icon: 'ph-link' },
+  { to: '/squircle', title: 'Squircle', desc: 'iOS-style superellipse corner smoothing.', icon: 'ph-rectangle' },
+  { to: '/accordion', title: 'Accordion', desc: 'Details/summary accordions with smooth animation.', icon: 'ph-list' },
+  { to: '/chat', title: 'Chat Bubbles', desc: 'Sent/received bubbles, tails, typing dots.', icon: 'ph-chats' },
+  { to: '/terminal', title: 'Terminal Window', desc: 'macOS-style terminal and code mockups.', icon: 'ph-terminal-window' },
+  { to: '/hamburger', title: 'Hamburger Icons', desc: 'Animated menu-to-X morphs without JS.', icon: 'ph-list' },
+  { to: '/avatar', title: 'Avatar Stack', desc: 'Overlapping groups, rings, +N badges.', icon: 'ph-users-three' },
+  { to: '/pagination', title: 'Pagination', desc: 'Dots, arrows, pills and glow active states.', icon: 'ph-dots-three' },
+  { to: '/timeline', title: 'Timeline', desc: 'Vertical timelines with animated lines.', icon: 'ph-clock-counter-clockwise' },
+  { to: '/rating', title: 'Star Rating', desc: 'Stars, hearts and distribution bars.', icon: 'ph-star' },
+  { to: '/orbit', title: '3D Orbit', desc: 'Rotating cubes, planets, gyros and spheres.', icon: 'ph-orbit' },
+  { to: '/aurora', title: 'Aurora Background', desc: 'Aurora, starfield, sunset and moonlight scenes.', icon: 'ph-sparkle' },
+  { to: '/table', title: 'Table Styles', desc: 'Zebra rows, sticky headers, rounded frames.', icon: 'ph-table' },
+  { to: '/kbd', title: 'Kbd & Code Chips', desc: 'Keyboard keycaps and inline code chips.', icon: 'ph-keyboard' },
+  { to: '/trail', title: 'Cursor Trail', desc: 'Sparkle trails and scroll progress indicators.', icon: 'ph-cursor-click' },
+  { to: '/navbar', title: 'Navbar Builder', desc: 'Floating, underline, pill and sidebar navs.', icon: 'ph-list-magnifying-glass' },
+  { to: '/toast', title: 'Toasts', desc: 'Variants, skins, timers and entrance animations.', icon: 'ph-bell' },
+  { to: '/progress-bar', title: 'Progress Bar', desc: 'Gradient, striped, indeterminate progress.', icon: 'ph-activity' },
+  { to: '/skeleton', title: 'Skeleton Loaders', desc: 'Shimmer, wave and pulse placeholders.', icon: 'ph-spiral' },
+  { to: '/gradient-text', title: 'Gradient Text', desc: 'Flowing gradient and outline text.', icon: 'ph-text-aa' },
+  { to: '/modal', title: 'Modal & Dialog', desc: 'Overlays, sheets and dialogs with animations.', icon: 'ph-browser' },
+  { to: '/card', title: 'Card Styles', desc: 'Elevated, glass, gradient-border cards.', icon: 'ph-cards' },
+  { to: '/wave', title: 'Wave Dividers', desc: 'Sine, zigzag, step and blob waves.', icon: 'ph-waves' }
 ]
 
-const search = ref('')
+const route = useRoute()
+const search = ref(typeof route.query.q === 'string' ? route.query.q.slice(0, 100) : '')
+
+const faqs = [
+  { q: 'Is CSS Studio free?', a: 'Yes. Every generator is completely free, runs entirely in your browser and requires no signup or account.' },
+  { q: 'Does CSS Studio output real CSS?', a: 'Yes. Every effect is pure, production-ready HTML and CSS you can copy or download instantly — no frameworks, canvas or runtime dependencies.' },
+  { q: 'How many CSS generators are available?', a: `${generators.length} tools covering gradients, shadows, glassmorphism, animations, scroll-driven effects, UI components, text effects, backgrounds and color utilities.` },
+  { q: 'Is my work saved?', a: 'Your settings are saved locally in your browser, with undo/redo history and shareable links that encode the full state in the URL. Nothing is uploaded to a server.' },
+  { q: 'Can I use the generated code in commercial projects?', a: 'Yes. The CSS you generate is yours to use in personal and commercial projects without attribution.' }
+]
 const filteredGenerators = computed(() => {
   const q = search.value.trim().toLowerCase()
   if (!q) return generators
@@ -44,16 +87,38 @@ function focusSearch() {
   document.getElementById('home-search')?.focus()
 }
 
-useSeoMeta({
-  title: 'CSS Studio - Free CSS Generators for Gradients, Shadows & Animations',
-  description: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS. Free, client-side CSS generator studio — no signup, export ready-to-use code instantly.',
-  ogTitle: 'CSS Studio',
-  ogDescription: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS.',
-  ogUrl: 'https://css-studio.itsash.in/',
-  twitterTitle: 'CSS Studio',
-  twitterDescription: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS.'
+
+/** FAQPage + ItemList structured data for rich results on the dashboard. */
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'FAQPage',
+            mainEntity: faqs.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a }
+            }))
+          },
+          {
+            '@type': 'ItemList',
+            name: 'CSS Generators',
+            itemListElement: generators.map((g, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: g.title,
+              url: absUrl(g.to)
+            }))
+          }
+        ]
+      })
+    }
+  ]
 })
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
 </script>
 
 <template>
@@ -112,7 +177,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
             Generate Beautiful CSS<br />Without Writing It
           </h1>
           <p class="mt-4 text-base leading-relaxed text-muted">
-            Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS.
+            {{ generators.length }} free online CSS generators for gradients, box shadows, glassmorphism, animations, loaders, patterns and UI components. Tweak visually, copy pure CSS + HTML — no signup, nothing leaves your browser.
           </p>
           <div class="mt-6 flex flex-wrap gap-2">
             <NuxtLink
@@ -141,6 +206,19 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/' }] })
           <div v-else class="flex flex-col items-center gap-2 py-12 text-center">
             <Icon name="ph-magnifying-glass" :size="24" class="text-muted" />
             <p class="text-sm text-muted">No generators match your search.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="faq-heading" class="mt-16 max-w-3xl">
+          <h2 id="faq-heading" class="mb-4 text-xs font-medium tracking-wide text-muted uppercase">Frequently asked questions</h2>
+          <div class="divide-y divide-line rounded-xl border border-line bg-panel">
+            <details v-for="f in faqs" :key="f.q" class="group px-4 py-3">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-fg">
+                <h3>{{ f.q }}</h3>
+                <Icon name="ph-caret-down" :size="14" class="shrink-0 text-muted transition-transform duration-150 group-open:rotate-180" />
+              </summary>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{{ f.a }}</p>
+            </details>
           </div>
         </section>
       </main>

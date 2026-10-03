@@ -29,16 +29,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Badge - CSS Studio',
-  description: 'Pill shapes, status dots, notification counts and corner ribbons.',
-  ogTitle: 'Badge - CSS Studio',
-  ogDescription: 'Pill shapes, status dots, notification counts and corner ribbons.',
-  ogUrl: 'https://css-studio.itsash.in/badge',
-  twitterTitle: 'Badge - CSS Studio',
-  twitterDescription: 'Pill shapes, status dots, notification counts and corner ribbons.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/badge' }] })
+
+const variants = computed(() => PRESETS_BADGE.map((p) => ({ name: p.name, css: badgeCss(p.state), html: badgeHtml(p.state) })))
 </script>
 
 <template>
@@ -54,7 +46,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/badge' 
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Badge preview" filename="css-studio-badge">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Badge preview" filename="css-studio-badge">
         <template #presets>
           <PreviewPresets :presets="PRESETS_BADGE" @apply="applyPreset" />
         </template>

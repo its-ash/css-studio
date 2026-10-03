@@ -30,16 +30,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Type Scale - CSS Studio',
-  description: 'Fluid clamp() typography scale from a min/max viewport and ratio.',
-  ogTitle: 'Type Scale - CSS Studio',
-  ogDescription: 'Fluid clamp() typography scale from a min/max viewport and ratio.',
-  ogUrl: 'https://css-studio.itsash.in/typescale',
-  twitterTitle: 'Type Scale - CSS Studio',
-  twitterDescription: 'Fluid clamp() typography scale from a min/max viewport and ratio.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/typescale' }] })
+
+const variants = computed(() => PRESETS_TYPESCALE.map((p) => ({ name: p.name, css: typeScaleCss(p.state), html: typeScaleHtml(p.state) })))
 </script>
 
 <template>
@@ -55,7 +47,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/typesca
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Type scale preview" filename="css-studio-typescale">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Type scale preview" filename="css-studio-typescale">
         <template #presets>
           <PreviewPresets :presets="PRESETS_TYPESCALE" @apply="applyPreset" />
         </template>

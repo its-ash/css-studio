@@ -1,6 +1,28 @@
 <script setup lang="ts">
 const route = useRoute()
 
+const navEl = ref<HTMLElement | null>(null)
+const activeEl = ref<HTMLElement | null>(null)
+
+// Keep the active generator link visible: when switching tools, scroll the
+// sidebar only if the newly-active item is out of view — never jump to top.
+watch(
+  () => route.path,
+  async () => {
+    await nextTick()
+    const el = navEl.value?.querySelector<HTMLElement>('[aria-current="page"]')
+    activeEl.value = el
+    const container = el?.closest('.overflow-y-auto') as HTMLElement | null
+    if (!el || !container) return
+    const eTop = el.offsetTop
+    const eBottom = eTop + el.offsetHeight
+    if (eTop < container.scrollTop || eBottom > container.scrollTop + container.clientHeight) {
+      container.scrollTo({ top: Math.max(0, eTop - container.clientHeight / 2 + el.offsetHeight / 2), behavior: 'smooth' })
+    }
+  },
+  { immediate: true }
+)
+
 const nav = [
   { to: '/', label: 'Dashboard', icon: 'ph-house' },
   { to: '/gradient', label: 'Gradient', icon: 'ph-drop' },
@@ -31,16 +53,46 @@ const nav = [
   { to: '/aspect-fit', label: 'Aspect & Fit', icon: 'ph-crop' },
   { to: '/marker-list', label: 'List Markers', icon: 'ph-list-bullets' },
   { to: '/conic-chart', label: 'Conic Chart', icon: 'ph-chart-pie-slice' },
+  { to: '/cursor', label: 'Cursor & Selection', icon: 'ph-cursor' },
   { to: '/filter', label: 'Filter', icon: 'ph-funnel' },
   { to: '/spotlight', label: 'Spotlight', icon: 'ph-flashlight' },
   { to: '/noise', label: 'Noise & Grain', icon: 'ph-dots-nine' },
   { to: '/typescale', label: 'Type Scale', icon: 'ph-text-t' },
+  { to: '/hover', label: 'Hover Effects', icon: 'ph-cursor-click' },
+  { to: '/toggle', label: 'Toggles & Checkboxes', icon: 'ph-toggle-left' },
+  { to: '/input', label: 'Input Fields', icon: 'ph-textbox' },
+  { to: '/flip-card', label: 'Flip Card', icon: 'ph-rectangle' },
+  { to: '/compare', label: 'Before / After', icon: 'ph-arrows-left-right' },
+  { to: '/text-anim', label: 'Text Animations', icon: 'ph-text-aa' },
+  { to: '/link', label: 'Link Underlines', icon: 'ph-link' },
+  { to: '/squircle', label: 'Squircle', icon: 'ph-rectangle' },
+  { to: '/accordion', label: 'Accordion', icon: 'ph-list' },
+  { to: '/chat', label: 'Chat Bubbles', icon: 'ph-chats' },
+  { to: '/terminal', label: 'Terminal Window', icon: 'ph-terminal-window' },
+  { to: '/hamburger', label: 'Hamburger Icons', icon: 'ph-list' },
+  { to: '/avatar', label: 'Avatar Stack', icon: 'ph-users-three' },
+  { to: '/pagination', label: 'Pagination', icon: 'ph-dots-three' },
+  { to: '/timeline', label: 'Timeline', icon: 'ph-clock-counter-clockwise' },
+  { to: '/rating', label: 'Star Rating', icon: 'ph-star' },
+  { to: '/orbit', label: '3D Orbit', icon: 'ph-orbit' },
+  { to: '/aurora', label: 'Aurora Background', icon: 'ph-sparkle' },
+  { to: '/table', label: 'Table Styles', icon: 'ph-table' },
+  { to: '/kbd', label: 'Kbd & Code Chips', icon: 'ph-keyboard' },
+  { to: '/trail', label: 'Cursor Trail', icon: 'ph-cursor-click' },
+  { to: '/navbar', label: 'Navbar Builder', icon: 'ph-list-magnifying-glass' },
+  { to: '/toast', label: 'Toasts', icon: 'ph-bell' },
+  { to: '/progress-bar', label: 'Progress Bar', icon: 'ph-activity' },
+  { to: '/skeleton', label: 'Skeleton Loaders', icon: 'ph-spiral' },
+  { to: '/gradient-text', label: 'Gradient Text', icon: 'ph-text-aa' },
+  { to: '/modal', label: 'Modal & Dialog', icon: 'ph-browser' },
+  { to: '/card', label: 'Card Styles', icon: 'ph-cards' },
+  { to: '/wave', label: 'Wave Dividers', icon: 'ph-waves' },
   { to: '/palette', label: 'Color Tools', icon: 'ph-palette' }
 ]
 </script>
 
 <template>
-  <nav class="flex flex-col gap-0.5 p-2" aria-label="Generators">
+  <nav ref="navEl" class="flex flex-col gap-0.5 p-2" aria-label="Generators">
     <NuxtLink
       v-for="item in nav"
       :key="item.to"

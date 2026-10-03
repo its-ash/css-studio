@@ -32,16 +32,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Pattern - CSS Studio',
-  description: '12 tileable CSS-only patterns from repeating gradients.',
-  ogTitle: 'Pattern - CSS Studio',
-  ogDescription: '12 tileable CSS-only patterns from repeating gradients.',
-  ogUrl: 'https://css-studio.itsash.in/pattern',
-  twitterTitle: 'Pattern - CSS Studio',
-  twitterDescription: '12 tileable CSS-only patterns from repeating gradients.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/pattern' }] })
+
+const variants = computed(() => PRESETS_PATTERN.map((p) => ({ name: p.name, css: patternFullCss(p.state), html: `<div class="pattern"></div>` })))
 </script>
 
 <template>
@@ -57,7 +49,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/pattern
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Pattern preview" filename="css-studio-pattern">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Pattern preview" filename="css-studio-pattern">
         <template #presets>
           <PreviewPresets :presets="PRESETS_PATTERN" @apply="applyPreset" />
         </template>

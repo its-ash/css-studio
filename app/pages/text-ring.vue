@@ -32,16 +32,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Circular Text Ring - CSS Studio',
-  description: 'Rotating text-on-a-circle badge in pure CSS with spin controls.',
-  ogTitle: 'Circular Text Ring - CSS Studio',
-  ogDescription: 'Rotating text-on-a-circle badge in pure CSS with spin controls.',
-  ogUrl: 'https://css-studio.itsash.in/text-ring',
-  twitterTitle: 'Circular Text Ring - CSS Studio',
-  twitterDescription: 'Rotating text-on-a-circle badge in pure CSS with spin controls.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/text-ring' }] })
+
+const variants = computed(() => PRESETS_TEXT_RING.map((p) => ({ name: p.name, css: textRingCss(p.state), html: textRingHtml(p.state) })))
 </script>
 
 <template>
@@ -57,7 +49,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/text-ri
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Text ring preview" filename="css-studio-text-ring">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Text ring preview" filename="css-studio-text-ring">
         <template #presets>
           <PreviewPresets :presets="PRESETS_TEXT_RING" @apply="applyPreset" />
         </template>

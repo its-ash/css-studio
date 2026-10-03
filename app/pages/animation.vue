@@ -34,16 +34,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Animation - CSS Studio',
-  description: 'Visual keyframe builder with timing controls.',
-  ogTitle: 'Animation - CSS Studio',
-  ogDescription: 'Visual keyframe builder with timing controls.',
-  ogUrl: 'https://css-studio.itsash.in/animation',
-  twitterTitle: 'Animation - CSS Studio',
-  twitterDescription: 'Visual keyframe builder with timing controls.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/animation' }] })
+
+const variants = computed(() => PRESETS_ANIMATION.map((p) => ({ name: p.name, css: animationCss(p.state), html: `<div class="animated">Content</div>` })))
 </script>
 
 <template>
@@ -58,7 +50,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/animati
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Animation preview" filename="css-studio-animation">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Animation preview" filename="css-studio-animation">
         <template #presets>
           <PreviewPresets :presets="PRESETS_ANIMATION" @apply="applyPreset" />
         </template>

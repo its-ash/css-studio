@@ -37,16 +37,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Blob - CSS Studio',
-  description: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.',
-  ogTitle: 'Blob - CSS Studio',
-  ogDescription: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.',
-  ogUrl: 'https://css-studio.itsash.in/blob',
-  twitterTitle: 'Blob - CSS Studio',
-  twitterDescription: 'Organic CSS blobs built from border-radius, with gradients, shadows and morphing animation.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/blob' }] })
+
+const variants = computed(() => PRESETS_BLOB.map((p) => ({ name: p.name, css: blobCss(p.state), html: blobHtml() })))
 </script>
 
 <template>
@@ -62,7 +54,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/blob' }
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Blob preview" filename="css-studio-blob">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Blob preview" filename="css-studio-blob">
         <template #presets>
           <PreviewPresets :presets="PRESETS_BLOB" @apply="applyPreset" />
         </template>

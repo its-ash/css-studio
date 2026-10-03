@@ -37,16 +37,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Component - CSS Studio',
-  description: 'Buttons, cards, inputs, badges, navbars and hero blocks.',
-  ogTitle: 'Component - CSS Studio',
-  ogDescription: 'Buttons, cards, inputs, badges, navbars and hero blocks.',
-  ogUrl: 'https://css-studio.itsash.in/component',
-  twitterTitle: 'Component - CSS Studio',
-  twitterDescription: 'Buttons, cards, inputs, badges, navbars and hero blocks.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/component' }] })
+
+const variants = computed(() => PRESETS_COMPONENT.map((p) => ({ name: p.name, css: componentCss(p.state), html: componentHtml(p.state) })))
 </script>
 
 <template>
@@ -62,7 +54,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/compone
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Component preview" filename="css-studio-component">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Component preview" filename="css-studio-component">
         <template #presets>
           <PreviewPresets :presets="PRESETS_COMPONENT" @apply="applyPreset" />
         </template>

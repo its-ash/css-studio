@@ -130,3 +130,20 @@ export function paletteFromHue(rng: () => number, hue: number, count = 3): Hsl[]
     }
   })
 }
+const HEX6 = /^#?[0-9a-f]{6}$/i
+
+/** Linear sRGB mix of two hex colours; t = 0 returns a, t = 1 returns b. Invalid input falls back to a. */
+export function mixHex(a: string, b: string, t: number): string {
+  if (!HEX6.test(a) || !HEX6.test(b)) return a
+  const x = hexToRgb(a)
+  const y = hexToRgb(b)
+  const k = clamp(t, 0, 1)
+  const ch = (m: number, n: number) => Math.round(m + (n - m) * k).toString(16).padStart(2, '0')
+  return `#${ch(x.r, y.r)}${ch(x.g, y.g)}${ch(x.b, y.b)}`
+}
+
+/** Near-black or near-white, whichever reads better on the given background. */
+export function readableInk(bg: string, dark = '#18181b', light = '#fafafa'): string {
+  if (!HEX6.test(bg)) return light
+  return contrastRatio(dark, bg) >= contrastRatio(light, bg) ? dark : light
+}

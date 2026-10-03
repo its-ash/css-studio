@@ -1,0 +1,22 @@
+import{A as e,C as t,M as n,R as r,S as i,X as a,ct as o,lt as s,w as c,wt as l}from"./MitKKUeq.js";import{a as u,i as d,n as f,o as p,r as m,s as h,t as g}from"./DJLqZT_o.js";import{t as _}from"./Dh2B6pZ8.js";import{t as v}from"./BYmGHvE7.js";var y={size:160,smoothing:.6,radius:40,bg:`#10b981`,accent:`#22d3ee`,showRadiusComparison:!0};function b(e){let t=e.radius,n=Math.min(1,Math.max(0,e.smoothing)),r=Math.round(t*(1-n));return`.squircle {
+  width: ${e.size}px;
+  height: ${e.size}px;
+  background: ${e.bg};
+  border-radius: ${t}px;
+}
+
+.squircle::before {
+  content: '';
+  position: absolute;
+  inset: ${Math.max(1,Math.round(e.size*.02))}px;
+  border-radius: ${Math.max(1,r)}px;
+  background: inherit;
+}
+
+.squircle-plain {
+  width: ${e.size}px;
+  height: ${e.size}px;
+  background: ${e.accent};
+  border-radius: ${t}px;
+}`}function x(e){return e.showRadiusComparison?`<div class="squircle"></div>
+<div class="squircle-plain"></div>`:`<div class="squircle"></div>`}function S(e){return{"--squircle-radius":`${e.radius}px`,"--squircle-smoothing":`${e.smoothing}`}}function C(e,t){let n=Math.floor(t.range(0,360));return{...e,size:Math.round(t.range(120,200)),smoothing:Number(t.range(.2,.95).toFixed(2)),radius:Math.round(t.range(20,60)),bg:`hsl(${n} 75% 52%)`,accent:`hsl(${(n+160)%360} 75% 52%)`}}var w=[{name:`iOS Icon`,tags:[`apple`],state:{...y,bg:`#0a84ff`,accent:`#5e5ce6`,radius:44,smoothing:.6}},{name:`Emerald Smooth`,tags:[`brand`],state:{...y}},{name:`Subtle Smooth`,tags:[`minimal`],state:{...y,smoothing:.25,bg:`#f4f4f5`,accent:`#a1a1aa`}},{name:`Max Squircle`,tags:[`extreme`],state:{...y,smoothing:.95,radius:48,bg:`#8b5cf6`}},{name:`Neon Tile`,tags:[`neon`],state:{...y,bg:`#22d3ee`,accent:`#083344`,radius:36}},{name:`Tiny Chip`,tags:[`chip`],state:{...y,size:96,radius:24,smoothing:.5}},{name:`Plain Radius`,tags:[`compare`],state:{...y,smoothing:0,bg:`#f43f5e`}},{name:`Amber Blob`,tags:[`warm`,`soft`],state:{...y,size:180,radius:60,smoothing:.8,bg:`#f59e0b`}}],T=[`innerHTML`],E={class:`flex h-full w-full max-w-2xl items-center justify-center p-6`},D={class:`preview-stack`,"aria-label":`Squircle comparison`},O=[`innerHTML`],k=n({__name:`squircle`,setup(n){let{state:k,randomize:A,reset:j,undo:M,redo:N,pushHistory:P,shareUrlRef:F}=g({id:`squircle`,defaultState:JSON.parse(JSON.stringify(y)),randomize:C}),I=r(`editor:shareUrl`,()=>{});o(()=>I(F.value));let L=i(()=>b(k.value)),R=i(()=>x(k.value)),z=i(()=>S(k.value)),B=i(()=>`<style>.preview-stack { display: flex; gap: 24px; } .preview-stack > div { position: relative; } ${L.value}</style>`);function V(e){k.value=JSON.parse(JSON.stringify(w[e].state)),P()}let H=i(()=>w.map(e=>({name:e.name,css:b(e.state),html:x(e.state)})));return(n,r)=>{let i=h,o=p,g=u,y=_,b=d,x=v,S=m,C=f;return a(),c(C,{title:`Squircle Studio`,description:`iOS-style corner smoothing — pure CSS approximation.`,css:l(L),html:l(R),vars:l(z),onRandomize:l(A),onReset:l(j),onUndo:l(M),onRedo:l(N)},{preview:s(()=>[e(o,{variants:l(H),onApplyVariant:V,title:`Squircle preview`,filename:`css-studio-squircle`},{presets:s(()=>[e(i,{presets:l(w),onApply:V},null,8,[`presets`])]),default:s(()=>[t(`div`,{innerHTML:l(B),"aria-hidden":`true`},null,8,T),t(`div`,E,[t(`div`,D,[t(`div`,{innerHTML:l(R)},null,8,O)])])]),_:1},8,[`variants`])]),controls:s(()=>[e(b,{label:`Shape`,icon:`ph-rectangle`},{default:s(()=>[e(g,{modelValue:l(k).size,"onUpdate:modelValue":r[0]||=e=>l(k).size=e,label:`Size`,min:80,max:240,suffix:`px`},null,8,[`modelValue`]),e(g,{modelValue:l(k).radius,"onUpdate:modelValue":r[1]||=e=>l(k).radius=e,label:`Radius`,min:0,max:80,suffix:`px`},null,8,[`modelValue`]),e(g,{modelValue:l(k).smoothing,"onUpdate:modelValue":r[2]||=e=>l(k).smoothing=e,label:`Smoothing`,min:0,max:1,step:.05},null,8,[`modelValue`]),e(y,{modelValue:l(k).showRadiusComparison,"onUpdate:modelValue":r[3]||=e=>l(k).showRadiusComparison=e,label:`Show plain radius comparison`},null,8,[`modelValue`])]),_:1}),e(b,{label:`Colors`,icon:`ph-palette`},{default:s(()=>[e(x,{"model-value":l(k).bg,label:`Squircle`,"onUpdate:modelValue":r[4]||=e=>l(k).bg=e},null,8,[`model-value`]),e(x,{"model-value":l(k).accent,label:`Plain`,"onUpdate:modelValue":r[5]||=e=>l(k).accent=e},null,8,[`model-value`])]),_:1})]),code:s(()=>[e(S,{css:l(L),html:l(R),vars:l(z),filename:`css-studio-squircle`},null,8,[`css`,`html`,`vars`])]),_:1},8,[`css`,`html`,`vars`,`onRandomize`,`onReset`,`onUndo`,`onRedo`])}}});export{k as default};

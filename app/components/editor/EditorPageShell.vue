@@ -21,6 +21,12 @@ const emit = defineEmits<{
 }>()
 
 const colorMode = useColorMode()
+const route = useRoute()
+const seo = computed(() => pageSeo(route.path))
+const related = computed(() => {
+  const cur = seo.value
+  return cur ? PAGES.filter((p) => p.category === cur.category && p.path !== cur.path).slice(0, 6) : []
+})
 
 function toggleTheme() {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
@@ -131,7 +137,7 @@ useHotkeys(() => [
         <SidebarNav />
       </aside>
 
-      <div class="flex min-w-0 flex-1 flex-col lg:flex-row">
+      <main class="flex min-w-0 flex-1 flex-col lg:flex-row">
         <div class="flex min-w-0 flex-1 flex-col">
           <slot name="preview" />
         </div>
@@ -139,8 +145,20 @@ useHotkeys(() => [
         <div class="flex w-full shrink-0 flex-col gap-3.5 border-t border-line bg-panel p-3.5 lg:w-[380px] lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
           <slot name="controls" />
           <slot name="code" />
+          <section aria-labelledby="about-heading" class="mt-2 border-t border-line pt-3.5 text-xs leading-relaxed text-muted">
+            <h2 id="about-heading" class="mb-1 text-[11px] font-medium tracking-wide uppercase">About this generator</h2>
+            <p>{{ seo?.description ?? description }}</p>
+            <nav v-if="related.length" aria-label="Related generators" class="mt-3">
+              <h2 class="mb-1.5 text-[11px] font-medium tracking-wide uppercase">Related {{ seo?.category.toLowerCase() }} tools</h2>
+              <ul class="flex flex-wrap gap-1.5">
+                <li v-for="r in related" :key="r.path">
+                  <NuxtLink :to="r.path" class="inline-flex rounded-md border border-line px-2 py-1 text-fg transition-colors duration-150 hover:border-accent/60">{{ r.name }}</NuxtLink>
+                </li>
+              </ul>
+            </nav>
+          </section>
         </div>
-      </div>
+      </main>
     </div>
   </div>
 </template>

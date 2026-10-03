@@ -4,10 +4,12 @@ import {
   DEFAULT_NOISE,
   PRESETS_NOISE,
   NOISE_KINDS,
+  NOISE_BACKDROPS,
+  NOISE_BLENDS,
   noiseCss,
   noiseHtml,
-  noisePreviewStyle,
   noiseVars,
+  normalizeNoise,
   randomizeNoise
 } from '~/utils/generators/noise'
 import type { NoiseState } from '~/utils/generators/noise'
@@ -15,38 +17,30 @@ import type { NoiseState } from '~/utils/generators/noise'
 const { state, randomize, reset, undo, redo, pushHistory, shareUrlRef } = useEditor<NoiseState>({
   id: 'noise',
   defaultState: JSON.parse(JSON.stringify(DEFAULT_NOISE)) as NoiseState,
-  randomize: randomizeNoise
+  randomize: randomizeNoise,
+  deserialize: (raw) => normalizeNoise(raw as unknown as NoiseState)
 })
 
 const setShareUrl = inject<(url: string) => void>('editor:shareUrl', () => {})
 watchEffect(() => setShareUrl(shareUrlRef.value))
 
 const css = computed(() => noiseCss(state.value))
-const html = computed(() => noiseHtml())
+const html = computed(() => noiseHtml(state.value))
 const vars = computed(() => noiseVars(state.value))
-const style = computed(() => noisePreviewStyle(state.value))
+const demoStyle = computed(() => `<style>${css.value}</style>`)
 
 function applyPreset(i: number) {
   state.value = JSON.parse(JSON.stringify(PRESETS_NOISE[i]!.state)) as NoiseState
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Noise & Grain - CSS Studio',
-  description: 'Pure-CSS film grain, static and halftone texture overlays.',
-  ogTitle: 'Noise & Grain - CSS Studio',
-  ogDescription: 'Pure-CSS film grain, static and halftone texture overlays.',
-  ogUrl: 'https://css-studio.itsash.in/noise',
-  twitterTitle: 'Noise & Grain - CSS Studio',
-  twitterDescription: 'Pure-CSS film grain, static and halftone texture overlays.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/noise' }] })
+const variants = computed(() => PRESETS_NOISE.map((p) => ({ name: p.name, css: noiseCss(p.state), html: noiseHtml(p.state) })))
 </script>
 
 <template>
   <EditorPageShell
     title="Noise & Grain Generator"
-    description="Pure-CSS film grain, static and halftone texture overlays."
+    description="Pure-CSS grain, film, static, halftone, paper and scanline texture overlays."
     :css="css"
     :html="html"
     :vars="vars"
@@ -56,22 +50,34 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/noise' 
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Noise preview" filename="css-studio-noise">
+      <PreviewCanvas :variants="variants" title="Noise preview" filename="css-studio-noise" @apply-variant="applyPreset">
         <template #presets>
           <PreviewPresets :presets="PRESETS_NOISE" @apply="applyPreset" />
         </template>
-        <div class="h-[420px] w-full max-w-3xl rounded-xl" :style="style" aria-label="Noise preview"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-html="demoStyle" aria-hidden="true"></div>
+        <div class="flex h-full w-full items-center justify-center p-6">
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <div class="w-full max-w-2xl" v-html="html"></div>
+        </div>
       </PreviewCanvas>
     </template>
 
     <template #controls>
-      <ControlGroup label="Noise" icon="ph-dots-nine">
+      <ControlGroup label="Texture" icon="ph-dots-nine">
         <SelectControl v-model="state.kind" label="Type" :options="NOISE_KINDS" />
-        <ColorControl :model-value="state.baseColor" label="Base color" @update:model-value="(v) => (state.baseColor = v)" />
-        <ColorControl :model-value="state.noiseColor" label="Noise color" @update:model-value="(v) => (state.noiseColor = v)" />
-        <SliderControl v-model="state.opacity" label="Opacity" :min="1" :max="50" suffix="%" />
-        <SliderControl v-model="state.tileSize" label="Tile size" :min="2" :max="12" suffix="px" />
-        <SliderControl v-if="state.kind === 'halftone'" v-model="state.density" label="Dot density" :min="10" :max="100" suffix="%" />
+        <SliderControl v-model="state.opacity" label="Strength" :min="5" :max="100" suffix="%" />
+        <SliderControl v-model="state.size" label="Grain size" :min="0.5" :max="4" :step="0.25" suffix="x" />
+        <SelectControl v-model="state.blend" label="Blend mode" :options="NOISE_BLENDS" />
+        <ColorControl :model-value="state.noiseColor" label="Grain color" @update:model-value="(v) => (state.noiseColor = v)" />
+        <ToggleControl v-model="state.animate" label="Animate grain" :hint="state.kind === 'static' ? 'Static always moves' : undefined" />
+      </ControlGroup>
+
+      <ControlGroup label="Backdrop" icon="ph-layout">
+        <SelectControl v-model="state.backdrop" label="Backdrop" :options="NOISE_BACKDROPS" />
+        <ColorControl :model-value="state.baseColor" label="Color 1" @update:model-value="(v) => (state.baseColor = v)" />
+        <ColorControl v-if="state.backdrop === 'gradient'" :model-value="state.baseColor2" label="Color 2" @update:model-value="(v) => (state.baseColor2 = v)" />
+        <ToggleControl v-model="state.content" label="Sample headline" />
       </ControlGroup>
     </template>
 

@@ -48,16 +48,8 @@ function updateSlice(i: number, patch: Partial<ConicSlice>) {
   state.value = { ...state.value, slices: state.value.slices.map((sl, idx) => (idx === i ? { ...sl, ...patch } : sl)) }
 }
 
-useSeoMeta({
-  title: 'Conic Chart Builder - CSS Studio',
-  description: 'conic-gradient pie and donut charts with legend, gaps and center label.',
-  ogTitle: 'Conic Chart Builder - CSS Studio',
-  ogDescription: 'conic-gradient pie and donut charts in pure CSS.',
-  ogUrl: 'https://css-studio.itsash.in/conic-chart',
-  twitterTitle: 'Conic Chart Builder - CSS Studio',
-  twitterDescription: 'conic-gradient pie and donut charts in pure CSS.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/conic-chart' }] })
+
+const variants = computed(() => PRESETS_CONIC_CHART.map((p) => ({ name: p.name, css: conicChartCss(p.state), html: conicChartHtml(p.state) })))
 </script>
 
 <template>
@@ -73,7 +65,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/conic-c
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Conic chart preview" filename="css-studio-conic-chart">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Conic chart preview" filename="css-studio-conic-chart">
         <template #presets>
           <PreviewPresets :presets="PRESETS_CONIC_CHART" @apply="applyPreset" />
         </template>

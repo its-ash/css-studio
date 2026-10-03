@@ -50,16 +50,8 @@ function setRatio(w: number, h: number) {
   state.value.ratioH = h
 }
 
-useSeoMeta({
-  title: 'Aspect Ratio & Object Fit - CSS Studio',
-  description: 'aspect-ratio frames with object-fit comparison: fill, contain, cover, none, scale-down.',
-  ogTitle: 'Aspect Ratio & Object Fit - CSS Studio',
-  ogDescription: 'aspect-ratio frames with object-fit comparison.',
-  ogUrl: 'https://css-studio.itsash.in/aspect-fit',
-  twitterTitle: 'Aspect Ratio & Object Fit - CSS Studio',
-  twitterDescription: 'aspect-ratio frames with object-fit comparison.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/aspect-fit' }] })
+
+const variants = computed(() => PRESETS_ASPECT_FIT.map((p) => ({ name: p.name, css: aspectFitCss(p.state), html: aspectFitHtml(p.state) })))
 </script>
 
 <template>
@@ -75,7 +67,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/aspect-
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Aspect & fit preview" filename="css-studio-aspect-fit">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Aspect & fit preview" filename="css-studio-aspect-fit">
         <template #presets>
           <PreviewPresets :presets="PRESETS_ASPECT_FIT" @apply="applyPreset" />
         </template>

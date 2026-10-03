@@ -31,16 +31,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Divider - CSS Studio',
-  description: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.',
-  ogTitle: 'Divider - CSS Studio',
-  ogDescription: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.',
-  ogUrl: 'https://css-studio.itsash.in/divider',
-  twitterTitle: 'Divider - CSS Studio',
-  twitterDescription: 'Gradient-fade, dashed, dotted, double and zigzag section dividers.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/divider' }] })
+
+const variants = computed(() => PRESETS_DIVIDER.map((p) => ({ name: p.name, css: dividerCss(p.state), html: dividerHtml() })))
 </script>
 
 <template>
@@ -56,7 +48,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/divider
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Divider preview" filename="css-studio-divider">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Divider preview" filename="css-studio-divider">
         <template #presets>
           <PreviewPresets :presets="PRESETS_DIVIDER" @apply="applyPreset" />
         </template>

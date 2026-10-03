@@ -1,4 +1,8 @@
+# Search engines and AI crawlers welcome. A single group so every bot gets the same rules.
 User-agent: *
 Allow: /
+Disallow: /*?state=
+Disallow: /*&state=
+Disallow: /*_payload.json
 
 Sitemap: https://css-studio.itsash.in/sitemap.xml

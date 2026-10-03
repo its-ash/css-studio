@@ -32,16 +32,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Marquee Builder - CSS Studio',
-  description: 'Infinite scrolling marquee: direction, speed, gap, edge fade and pause-on-hover.',
-  ogTitle: 'Marquee Builder - CSS Studio',
-  ogDescription: 'Infinite scrolling marquee: direction, speed, gap, edge fade and pause-on-hover.',
-  ogUrl: 'https://css-studio.itsash.in/marquee',
-  twitterTitle: 'Marquee Builder - CSS Studio',
-  twitterDescription: 'Infinite scrolling marquee: direction, speed, gap, edge fade and pause-on-hover.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/marquee' }] })
+
+const variants = computed(() => PRESETS_MARQUEE.map((p) => ({ name: p.name, css: marqueeCss(p.state), html: marqueeHtml(p.state) })))
 </script>
 
 <template>
@@ -57,7 +49,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/marquee
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Marquee preview" filename="css-studio-marquee">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Marquee preview" filename="css-studio-marquee">
         <template #presets>
           <PreviewPresets :presets="PRESETS_MARQUEE" @apply="applyPreset" />
         </template>

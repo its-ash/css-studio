@@ -30,16 +30,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Mask Studio - CSS Studio',
-  description: 'mask-image fades, holes, stripes and dot grids in pure CSS.',
-  ogTitle: 'Mask Studio - CSS Studio',
-  ogDescription: 'mask-image fades, holes, stripes and dot grids in pure CSS.',
-  ogUrl: 'https://css-studio.itsash.in/mask',
-  twitterTitle: 'Mask Studio - CSS Studio',
-  twitterDescription: 'mask-image fades, holes, stripes and dot grids in pure CSS.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mask' }] })
+
+const variants = computed(() => PRESETS_MASK.map((p) => ({ name: p.name, css: maskFullCss(p.state), html: maskHtml(p.state) })))
 </script>
 
 <template>
@@ -55,7 +47,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/mask' }
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Mask preview" filename="css-studio-mask">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Mask preview" filename="css-studio-mask">
         <template #presets>
           <PreviewPresets :presets="PRESETS_MASK" @apply="applyPreset" />
         </template>

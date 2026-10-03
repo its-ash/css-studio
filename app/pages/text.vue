@@ -23,23 +23,15 @@ function applyPreset(i: number) {
 
 const html = computed(() => `<h1 class="text-effect">${state.value.text}</h1>`)
 
-useSeoMeta({
-  title: 'Text Effects - CSS Studio',
-  description: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.',
-  ogTitle: 'Text Effects - CSS Studio',
-  ogDescription: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.',
-  ogUrl: 'https://css-studio.itsash.in/text',
-  twitterTitle: 'Text Effects - CSS Studio',
-  twitterDescription: 'Gradient, neon, 3D, metallic and glass text styles in pure CSS.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/text' }] })
+
+const variants = computed(() => PRESETS_TEXT_EFFECT.map((p) => ({ name: p.name, css: textEffectCss(p.state), html: `<h1 class="text-effect">${p.state.text}</h1>` })))
 </script>
 
 <template>
     <EditorPageShell title="Text Effects" description="Gradient, neon, 3D, metallic and glass text styles in pure CSS."
         :css="css" :html="html" :vars="vars" @randomize="randomize" @reset="reset" @undo="undo" @redo="redo">
         <template #preview>
-            <PreviewCanvas title="Text effect preview" filename="css-studio-text">
+            <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Text effect preview" filename="css-studio-text">
                 <template #presets>
                     <PreviewPresets :presets="PRESETS_TEXT_EFFECT" @apply="applyPreset" />
                 </template>

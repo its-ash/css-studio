@@ -21,6 +21,11 @@ export const DEFAULT_SCROLLBAR: ScrollbarState = {
 export function scrollbarCss(s: ScrollbarState): string {
   const radius = s.rounded ? `${s.radius}px` : '0px'
   const lines = [
+    `.scroll-area {`,
+    `  scrollbar-width: auto;`,
+    `  scrollbar-color: auto;`,
+    `}`,
+    ``,
     `.scroll-area::-webkit-scrollbar {`,
     `  width: ${s.width}px;`,
     `  height: ${s.width}px;`,
@@ -41,7 +46,16 @@ export function scrollbarCss(s: ScrollbarState): string {
     `}`
   ]
   if (s.useFirefox) {
-    lines.push(``, `.scroll-area {`, `  scrollbar-width: thin;`, `  scrollbar-color: ${s.thumbColor} ${s.trackColor};`, `}`)
+    lines.push(
+      ``,
+      `/* Firefox ignores ::-webkit-scrollbar; standard properties there. */`,
+      `@supports not selector(::-webkit-scrollbar) {`,
+      `  .scroll-area {`,
+      `    scrollbar-width: thin;`,
+      `    scrollbar-color: ${s.thumbColor} ${s.trackColor};`,
+      `  }`,
+      `}`
+    )
   }
   return lines.join('\n')
 }
@@ -79,7 +93,17 @@ export const PRESETS_SCROLLBAR: { name: string; tags: string[]; state: Scrollbar
   { name: 'Hairline', tags: ['minimal'], state: { ...DEFAULT_SCROLLBAR, width: 5, thumbColor: '#3f3f46', trackColor: 'transparent' } },
   { name: 'Ocean', tags: ['cool'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#0ea5e9', thumbHoverColor: '#38bdf8', trackColor: '#0c1a24' } },
   { name: 'Violet Glow', tags: ['brand', 'playful'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#8b5cf6', thumbHoverColor: '#a78bfa', trackColor: '#150f24' } },
-  { name: 'Invisible Track', tags: ['minimal', 'dark'], state: { ...DEFAULT_SCROLLBAR, trackColor: 'transparent', thumbColor: '#3f3f4680', width: 8 } }
+  { name: 'Invisible Track', tags: ['minimal', 'dark'], state: { ...DEFAULT_SCROLLBAR, trackColor: 'transparent', thumbColor: '#3f3f4680', width: 8 } },
+  { name: 'Amber Warm', tags: ['warm'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#f59e0b', thumbHoverColor: '#fbbf24', trackColor: '#271a08', width: 12 } },
+  { name: 'Rose Blush', tags: ['warm', 'light'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#f43f5e', thumbHoverColor: '#fb7185', trackColor: '#2a0d14' } },
+  { name: 'Cyber Neon', tags: ['playful', 'neon'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#22d3ee', thumbHoverColor: '#67e8f9', trackColor: '#083344', width: 14, radius: 4 } },
+  { name: 'Paper Light', tags: ['light', 'minimal'], state: { ...DEFAULT_SCROLLBAR, width: 8, trackColor: '#fafafa', thumbColor: '#d4d4d8', thumbHoverColor: '#a1a1aa', radius: 6 } },
+  { name: 'Chunky Pill', tags: ['playful'], state: { ...DEFAULT_SCROLLBAR, width: 18, thumbColor: '#71717a', thumbHoverColor: '#a1a1aa', trackColor: '#27272a', radius: 999 } },
+  { name: 'Forest', tags: ['cool', 'dark'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#22c55e', thumbHoverColor: '#4ade80', trackColor: '#0b1f14', width: 10 } },
+  { name: 'Ghost Overlay', tags: ['minimal', 'dark'], state: { ...DEFAULT_SCROLLBAR, width: 6, trackColor: 'transparent', thumbColor: '#ffffff26', thumbHoverColor: '#ffffff4d', radius: 999 } },
+  { name: 'Indigo Deep', tags: ['cool', 'brand'], state: { ...DEFAULT_SCROLLBAR, thumbColor: '#6366f1', thumbHoverColor: '#818cf8', trackColor: '#12122b', width: 11 } },
+  { name: 'Square Track Rounded Thumb', tags: ['mono'], state: { ...DEFAULT_SCROLLBAR, width: 12, rounded: true, radius: 8, thumbColor: '#a1a1aa', thumbHoverColor: '#d4d4d8', trackColor: '#18181b' } },
+  { name: 'Sunset Orange', tags: ['warm', 'playful'], state: { ...DEFAULT_SCROLLBAR, width: 13, thumbColor: '#fb923c', thumbHoverColor: '#fdba74', trackColor: '#2a1408' } }
 ]
 
 // ---------------------------------------------------------------------------

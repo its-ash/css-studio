@@ -24,7 +24,7 @@ watchEffect(() => setShareUrl(shareUrlRef.value))
 const css = computed(() => scrollSnapCss(state.value))
 const vars = computed(() => scrollSnapVars(state.value))
 const html = computed(() => scrollSnapHtml(state.value))
-const demoStyle = computed(() => `<style>${css.value}\n.carousel > * { width: ${state.value.cardWidth}px; height: ${state.value.cardHeight}px; border-radius: ${state.value.radius}px; background: ${state.value.accent}; color: #04140e; font-weight: 700; display: grid; place-items: center; font-size: 18px; }</style>`)
+const demoStyle = computed(() => `<style>${css.value}\n.carousel { max-height: 100%; max-width: 100%; }\n.carousel > * { width: ${state.value.cardWidth}px; height: ${state.value.cardHeight}px; border-radius: ${state.value.radius}px; background: ${state.value.accent}; color: #04140e; font-weight: 700; display: grid; place-items: center; font-size: 18px; }</style>`)
 const demoHtml = computed(() => html.value)
 
 function applyPreset(i: number) {
@@ -32,16 +32,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Scroll-snap Carousel - CSS Studio',
-  description: 'scroll-snap-type and scroll-snap-align carousel builder.',
-  ogTitle: 'Scroll-snap Carousel - CSS Studio',
-  ogDescription: 'scroll-snap-type and scroll-snap-align carousel builder.',
-  ogUrl: 'https://css-studio.itsash.in/scroll-snap',
-  twitterTitle: 'Scroll-snap Carousel - CSS Studio',
-  twitterDescription: 'scroll-snap-type and scroll-snap-align carousel builder.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scroll-snap' }] })
+
+const variants = computed(() => PRESETS_SCROLL_SNAP.map((p) => ({ name: p.name, css: scrollSnapCss(p.state), html: scrollSnapHtml(p.state) })))
 </script>
 
 <template>
@@ -57,7 +49,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scroll-
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Scroll-snap preview" filename="css-studio-scroll-snap">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Scroll-snap preview" filename="css-studio-scroll-snap">
         <template #presets>
           <PreviewPresets :presets="PRESETS_SCROLL_SNAP" @apply="applyPreset" />
         </template>
@@ -65,7 +57,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scroll-
         <div v-html="demoStyle" aria-hidden="true"></div>
         <div class="flex h-full w-full max-w-3xl items-center justify-center p-6">
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <div v-html="demoHtml"></div>
+          <div class="h-full max-h-full w-full min-w-0" v-html="demoHtml"></div>
         </div>
       </PreviewCanvas>
     </template>

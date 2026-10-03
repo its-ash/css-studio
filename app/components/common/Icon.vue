@@ -8,8 +8,11 @@ import {
   PhLockSimple, PhX, PhPlus, PhArrowsLeftRight, PhCheckCircle, PhWarningCircle,
   PhInfo, PhPencilSimple, PhStack, PhPaintBucket, PhCode, PhCircleHalf,
   PhSquare, PhSquaresFour, PhArrowsOut, PhMonitor, PhDeviceTablet, PhDeviceMobileCamera,
-  PhCube, PhLayout, PhSpinnerGap, PhCursor, PhFunnel, PhRuler, PhTag, PhTextT, PhFlashlight, PhDotsNine,
-  PhCornersOut, PhArrowsOutLineHorizontal
+  PhSlidersHorizontal, PhCube, PhLayout, PhSpinnerGap, PhCursor, PhFunnel, PhRuler, PhTag, PhTextT, PhFlashlight, PhDotsNine,
+  PhCornersOut, PhArrowsOutLineHorizontal, PhToggleLeft, PhTextbox, PhRectangle, PhChatCenteredText,
+  PhChats, PhTerminalWindow, PhList, PhUsersThree, PhDotsThree, PhClockCounterClockwise, PhStar,
+  PhTable, PhKeyboard, PhSpiral, PhLink, PhCursorClick, PhBrowser, PhWaves, PhActivity, PhListMagnifyingGlass,
+  PhPlanet
 } from '@phosphor-icons/vue'
 import { computed, type Component } from 'vue'
 
@@ -89,7 +92,29 @@ const registry: Record<string, Entry> = {
   'ph-flashlight': { c: PhFlashlight },
   'ph-dots-nine': { c: PhDotsNine },
   'ph-corners-out': { c: PhCornersOut },
-  'ph-arrows-out-line-horizontal': { c: PhArrowsOutLineHorizontal }
+  'ph-arrows-out-line-horizontal': { c: PhArrowsOutLineHorizontal },
+  'ph-toggle-left': { c: PhToggleLeft },
+  'ph-textbox': { c: PhTextbox },
+  'ph-rectangle': { c: PhRectangle },
+  'ph-chat-centered-text': { c: PhChatCenteredText },
+  'ph-chats': { c: PhChats },
+  'ph-terminal-window': { c: PhTerminalWindow },
+  'ph-list': { c: PhList },
+  'ph-users-three': { c: PhUsersThree },
+  'ph-dots-three': { c: PhDotsThree },
+  'ph-clock-counter-clockwise': { c: PhClockCounterClockwise },
+  'ph-star': { c: PhStar },
+  'ph-orbit': { c: PhPlanet },
+  'ph-table': { c: PhTable },
+  'ph-keyboard': { c: PhKeyboard },
+  'ph-spiral': { c: PhSpiral },
+  'ph-link': { c: PhLink },
+  'ph-cursor-click': { c: PhCursorClick },
+  'ph-browser': { c: PhBrowser },
+  'ph-waves': { c: PhWaves },
+  'ph-activity': { c: PhActivity },
+  'ph-list-magnifying-glass': { c: PhListMagnifyingGlass },
+  'ph-sliders': { c: PhSlidersHorizontal }
 }
 
 const resolved = computed<Entry>(() => registry[props.name] ?? { c: PhCircleDashed })

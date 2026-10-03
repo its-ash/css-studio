@@ -38,16 +38,8 @@ function onMouseMove(e: MouseEvent) {
   el.style.setProperty('--y', `${e.clientY - rect.top}px`)
 }
 
-useSeoMeta({
-  title: 'Spotlight - CSS Studio',
-  description: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.',
-  ogTitle: 'Spotlight - CSS Studio',
-  ogDescription: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.',
-  ogUrl: 'https://css-studio.itsash.in/spotlight',
-  twitterTitle: 'Spotlight - CSS Studio',
-  twitterDescription: 'Cursor-follow spotlight hover effect using CSS radial-gradient and custom properties.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/spotlight' }] })
+
+const variants = computed(() => PRESETS_SPOTLIGHT.map((p) => ({ name: p.name, css: spotlightCss(p.state), html: spotlightHtml() })))
 </script>
 
 <template>
@@ -63,7 +55,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/spotlig
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Spotlight preview" filename="css-studio-spotlight">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Spotlight preview" filename="css-studio-spotlight">
         <template #presets>
           <PreviewPresets :presets="PRESETS_SPOTLIGHT" @apply="applyPreset" />
         </template>

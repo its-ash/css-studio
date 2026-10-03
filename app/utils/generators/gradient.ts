@@ -1,3 +1,4 @@
+import { SURFACE_SIZE } from '../demo'
 export interface GradientStop {
   h: number
   s: number
@@ -97,7 +98,7 @@ export function gradientVars(s: GradientState): Record<string, string> {
 }
 
 export function gradientFullCss(s: GradientState): string {
-  const lines = [`.gradient {`, `  background: ${gradientCss(s)};`]
+  const lines = [`.gradient {`, ...SURFACE_SIZE, `  background: ${gradientCss(s)};`]
   if (s.animate) {
     const animName = `gradient-${s.animationKind}`
     lines.push(`  animation: ${animName} ${s.animationDuration}s ${s.animationDirection} infinite ease-in-out;`)

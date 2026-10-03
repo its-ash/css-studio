@@ -39,16 +39,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Loader - CSS Studio',
-  description: 'CSS-only spinners, progress bars and skeleton shimmer.',
-  ogTitle: 'Loader - CSS Studio',
-  ogDescription: 'CSS-only spinners, progress bars and skeleton shimmer.',
-  ogUrl: 'https://css-studio.itsash.in/loader',
-  twitterTitle: 'Loader - CSS Studio',
-  twitterDescription: 'CSS-only spinners, progress bars and skeleton shimmer.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/loader' }] })
+
+const variants = computed(() => PRESETS_LOADER.map((p) => ({ name: p.name, css: loaderCss(p.state), html: loaderHtml(p.state) })))
 </script>
 
 <template>
@@ -64,7 +56,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/loader'
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Loader preview" filename="css-studio-loader">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Loader preview" filename="css-studio-loader">
         <template #presets>
           <PreviewPresets :presets="PRESETS_LOADER" @apply="applyPreset" />
         </template>

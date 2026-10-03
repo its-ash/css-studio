@@ -21,16 +21,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Shape - CSS Studio',
-  description: '16 pure-CSS shapes using border tricks, clip-path and border-radius.',
-  ogTitle: 'Shape - CSS Studio',
-  ogDescription: '16 pure-CSS shapes using border tricks, clip-path and border-radius.',
-  ogUrl: 'https://css-studio.itsash.in/shape',
-  twitterTitle: 'Shape - CSS Studio',
-  twitterDescription: '16 pure-CSS shapes using border tricks, clip-path and border-radius.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/shape' }] })
+
+const variants = computed(() => PRESETS_SHAPE.map((p) => ({ name: p.name, css: shapeCss(p.state), html: `<div class="shape"></div>` })))
 </script>
 
 <template>
@@ -46,7 +38,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/shape' 
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Shape preview" filename="css-studio-shape">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Shape preview" filename="css-studio-shape">
         <template #presets>
           <PreviewPresets :presets="PRESETS_SHAPE" @apply="applyPreset" />
         </template>

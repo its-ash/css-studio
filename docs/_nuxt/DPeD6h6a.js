@@ -1,0 +1,26 @@
+import{A as e,C as t,M as n,R as r,S as i,X as a,ct as o,lt as s,w as c,wt as l}from"./MitKKUeq.js";import{a as u,i as d,n as f,o as p,r as m,s as h,t as g}from"./DJLqZT_o.js";import{t as _}from"./Dh2B6pZ8.js";import{t as v}from"./BYmGHvE7.js";import{t as y}from"./CcuAq1zZ.js";var b={text:`Gradient Text`,from:`#10b981`,to:`#22d3ee`,angle:90,fontSize:44,fontWeight:800,animate:!1,outline:!1};function x(e){let t=`.gradient-text {
+  font-size: ${e.fontSize}px;
+  font-weight: ${e.fontWeight};
+  background: linear-gradient(${e.angle}deg, ${e.from}, ${e.to});
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}`,n=e.outline?`
+
+.gradient-outline {
+  font-size: ${e.fontSize}px;
+  font-weight: ${e.fontWeight};
+  color: transparent;
+  -webkit-text-stroke: 2px ${e.from};
+}`:``,r=e.animate?`
+
+.gradient-text {
+  background-size: 300% 100%;
+  animation: gradient-flow ${Math.max(3,Math.round(e.fontSize/8))}s linear infinite;
+}
+
+@keyframes gradient-flow {
+  to {
+    background-position: 300% 0;
+  }
+}`:``;return t+n+r}function S(e){return e.outline?`<span class="gradient-text">${e.text}</span>\n<span class="gradient-outline">Outline</span>`:`<span class="gradient-text">${e.text}</span>`}function C(e){return{"--gt-from":e.from,"--gt-to":e.to,"--gt-angle":`${e.angle}deg`}}function w(e,t){let n=[`Gradient Text`,`Ship It`,`CSS Studio`,`Wow`,`Hello World`],r=Math.floor(t.range(0,360));return{...e,text:t.pick(n),from:`hsl(${r} 85% 55%)`,to:`hsl(${(r+120)%360} 85% 60%)`,angle:Math.round(t.range(0,360)),fontSize:Math.round(t.range(30,60)),animate:t.chance(.4),outline:t.chance(.2)}}var T=[{name:`Emerald Flow`,tags:[`brand`],state:{...b}},{name:`Sunset Fade`,tags:[`warm`],state:{...b,from:`#f59e0b`,to:`#f43f5e`,angle:120}},{name:`Violet Pulse`,tags:[`brand`,`animated`],state:{...b,from:`#8b5cf6`,to:`#ec4899`,animate:!0}},{name:`Ocean Sweep`,tags:[`cool`,`animated`],state:{...b,from:`#0ea5e9`,to:`#22d3ee`,angle:45,animate:!0}},{name:`Outline Only`,tags:[`minimal`],state:{...b,outline:!0,from:`#fafafa`,fontSize:38}},{name:`Gold Standard`,tags:[`premium`],state:{...b,from:`#fbbf24`,to:`#92400e`,angle:160,fontWeight:900}},{name:`Neon Rush`,tags:[`neon`,`animated`],state:{...b,from:`#22d3ee`,to:`#a3e635`,animate:!0,angle:270}},{name:`Candy Pop`,tags:[`playful`],state:{...b,from:`#f472b6`,to:`#818cf8`,angle:60,fontSize:52}},{name:`Deep Space`,tags:[`dark`],state:{...b,from:`#e0e7ff`,to:`#6366f1`,angle:30}},{name:`Forest Walk`,tags:[`nature`],state:{...b,from:`#34d399`,to:`#84cc16`,angle:200,fontWeight:700}}],E=[`innerHTML`],D={class:`preview-gt h-full w-full`},O=[`innerHTML`],k=n({__name:`gradient-text`,setup(n){let{state:k,randomize:A,reset:j,undo:M,redo:N,pushHistory:P,shareUrlRef:F}=g({id:`gradient-text`,defaultState:JSON.parse(JSON.stringify(b)),randomize:w}),I=r(`editor:shareUrl`,()=>{});o(()=>I(F.value));let L=i(()=>x(k.value)),R=i(()=>S(k.value)),z=i(()=>C(k.value)),B=i(()=>`<style>.preview-gt { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; height: 100%; } ${L.value}</style>`);function V(e){k.value=JSON.parse(JSON.stringify(T[e].state)),P()}let H=i(()=>T.map(e=>({name:e.name,css:x(e.state),html:S(e.state)})));return(n,r)=>{let i=h,o=p,g=y,b=u,x=_,S=d,C=v,w=m,P=f;return a(),c(P,{title:`Gradient Text`,description:`Flowing gradients and outline text — background-clip.`,css:l(L),html:l(R),vars:l(z),onRandomize:l(A),onReset:l(j),onUndo:l(M),onRedo:l(N)},{preview:s(()=>[e(o,{variants:l(H),onApplyVariant:V,title:`Gradient text preview`,filename:`css-studio-gradient-text`},{presets:s(()=>[e(i,{presets:l(T),onApply:V},null,8,[`presets`])]),default:s(()=>[t(`div`,{innerHTML:l(B),"aria-hidden":`true`},null,8,E),t(`div`,D,[t(`div`,{innerHTML:l(R)},null,8,O)])]),_:1},8,[`variants`])]),controls:s(()=>[e(S,{label:`Text`,icon:`ph-text-aa`},{default:s(()=>[e(g,{modelValue:l(k).text,"onUpdate:modelValue":r[0]||=e=>l(k).text=e,label:`Content`},null,8,[`modelValue`]),e(b,{modelValue:l(k).angle,"onUpdate:modelValue":r[1]||=e=>l(k).angle=e,label:`Angle`,min:0,max:360,suffix:`°`},null,8,[`modelValue`]),e(b,{modelValue:l(k).fontSize,"onUpdate:modelValue":r[2]||=e=>l(k).fontSize=e,label:`Font size`,min:24,max:72,suffix:`px`},null,8,[`modelValue`]),e(b,{modelValue:l(k).fontWeight,"onUpdate:modelValue":r[3]||=e=>l(k).fontWeight=e,label:`Weight`,min:300,max:900,step:100},null,8,[`modelValue`]),e(x,{modelValue:l(k).animate,"onUpdate:modelValue":r[4]||=e=>l(k).animate=e,label:`Animate flow`},null,8,[`modelValue`]),e(x,{modelValue:l(k).outline,"onUpdate:modelValue":r[5]||=e=>l(k).outline=e,label:`Include outline variant`},null,8,[`modelValue`])]),_:1}),e(S,{label:`Colors`,icon:`ph-palette`},{default:s(()=>[e(C,{"model-value":l(k).from,label:`From`,"onUpdate:modelValue":r[6]||=e=>l(k).from=e},null,8,[`model-value`]),e(C,{"model-value":l(k).to,label:`To`,"onUpdate:modelValue":r[7]||=e=>l(k).to=e},null,8,[`model-value`])]),_:1})]),code:s(()=>[e(w,{css:l(L),html:l(R),vars:l(z),filename:`css-studio-gradient-text`},null,8,[`css`,`html`,`vars`])]),_:1},8,[`css`,`html`,`vars`,`onRandomize`,`onReset`,`onUndo`,`onRedo`])}}});export{k as default};

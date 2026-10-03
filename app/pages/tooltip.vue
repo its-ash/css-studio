@@ -32,16 +32,8 @@ function applyPreset(i: number) {
 /** Renders the generated tooltip CSS inside this page only, without leaking to other routes. */
 const demoStyle = computed(() => `<style>${css.value}</style>`)
 
-useSeoMeta({
-  title: 'Tooltip Builder - CSS Studio',
-  description: 'Pure-CSS tooltips with data-tip attribute, arrows, skins and placement.',
-  ogTitle: 'Tooltip Builder - CSS Studio',
-  ogDescription: 'Pure-CSS tooltips with data-tip attribute, arrows, skins and placement.',
-  ogUrl: 'https://css-studio.itsash.in/tooltip',
-  twitterTitle: 'Tooltip Builder - CSS Studio',
-  twitterDescription: 'Pure-CSS tooltips with data-tip attribute, arrows, skins and placement.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/tooltip' }] })
+
+const variants = computed(() => PRESETS_TOOLTIP.map((p) => ({ name: p.name, css: tooltipCss(p.state), html: tooltipHtml() })))
 </script>
 
 <template>
@@ -57,7 +49,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/tooltip
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Tooltip preview" filename="css-studio-tooltip">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Tooltip preview" filename="css-studio-tooltip">
         <template #presets>
           <PreviewPresets :presets="PRESETS_TOOLTIP" @apply="applyPreset" />
         </template>

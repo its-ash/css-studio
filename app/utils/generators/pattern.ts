@@ -1,3 +1,4 @@
+import { SURFACE_SIZE } from '../demo'
 export type PatternKind =
   | 'dots' | 'grid' | 'diagonal' | 'horizontal' | 'vertical' | 'checkerboard'
   | 'crosshatch' | 'zigzag' | 'halftone' | 'plus' | 'diamond' | 'waves'
@@ -164,7 +165,7 @@ export function patternCss(s: PatternState): { image: string; size: string; posi
 
 export function patternFullCss(s: PatternState): string {
   const { image, size, position } = patternCss(s)
-  const lines = [`background-color: #${rHex(s.bg)};`]
+  const lines = [...SURFACE_SIZE.map((l) => l.trim()), `background-color: #${rHex(s.bg)};`]
   if (image) {
     lines.push(`background-image: ${image};`)
     if (size && size !== 'auto') lines.push(`background-size: ${size};`)

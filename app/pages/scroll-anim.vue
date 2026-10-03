@@ -63,16 +63,8 @@ function setTimeline(t: ScrollTimeline) {
   state.value.timeline = t
 }
 
-useSeoMeta({
-  title: 'Scroll-driven Animations - CSS Studio',
-  description: 'CSS scroll() and view() timeline animations: progress bars, reveals and parallax.',
-  ogTitle: 'Scroll-driven Animations - CSS Studio',
-  ogDescription: 'CSS scroll() and view() timeline animations: progress bars, reveals and parallax.',
-  ogUrl: 'https://css-studio.itsash.in/scroll-anim',
-  twitterTitle: 'Scroll-driven Animations - CSS Studio',
-  twitterDescription: 'CSS scroll() and view() timeline animations: progress bars, reveals and parallax.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scroll-anim' }] })
+
+const variants = computed(() => PRESETS_SCROLL_ANIM.map((p) => ({ name: p.name, css: scrollAnimCss(p.state), html: scrollAnimHtml() })))
 </script>
 
 <template>
@@ -88,7 +80,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/scroll-
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Scroll animation preview" filename="css-studio-scroll-anim">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Scroll animation preview" filename="css-studio-scroll-anim">
         <template #presets>
           <PreviewPresets :presets="PRESETS_SCROLL_ANIM" @apply="applyPreset" />
         </template>

@@ -54,16 +54,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Cursor & Selection - CSS Studio',
-  description: 'Custom cursor and ::selection color playground.',
-  ogTitle: 'Cursor & Selection - CSS Studio',
-  ogDescription: 'Custom cursor and ::selection color playground.',
-  ogUrl: 'https://css-studio.itsash.in/cursor',
-  twitterTitle: 'Cursor & Selection - CSS Studio',
-  twitterDescription: 'Custom cursor and ::selection color playground.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/cursor' }] })
+
+const variants = computed(() => PRESETS_CURSOR.map((p) => ({ name: p.name, css: cursorCss(p.state), html: cursorHtml() })))
 </script>
 
 <template>
@@ -79,7 +71,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/cursor'
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Cursor preview" filename="css-studio-cursor">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Cursor preview" filename="css-studio-cursor">
         <template #presets>
           <PreviewPresets :presets="PRESETS_CURSOR" @apply="applyPreset" />
         </template>

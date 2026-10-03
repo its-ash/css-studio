@@ -9,7 +9,7 @@ const emit = defineEmits<{ apply: [index: number] }>()
 <template>
   <div class="shrink-0 border-b border-line bg-panel px-2" aria-label="Presets">
     <div
-      class="flex max-w-full items-center gap-0.5 overflow-x-auto py-1.5 scrollbar-none [&::-webkit-scrollbar]:hidden"
+      class="flex max-w-full items-center gap-0.5 flex-wrap"
       role="tablist"
     >
       <button

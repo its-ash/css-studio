@@ -1,14 +1,30 @@
+import { writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
+import { PAGES, absUrl } from './app/utils/seo'
 
-const SITE_URL = 'https://css-studio.itsash.in'
-const GENERATOR_ROUTES = [
-  '/', '/gradient', '/mesh', '/blob', '/pattern', '/shadow', '/shape', '/border', '/glass',
-  '/neumorphism', '/text', '/animation', '/component', '/background', '/loader', '/badge',
-  '/divider', '/scrollbar', '/scroll-anim', '/tooltip', '/marquee', '/var-font', '/text-ring',
-  '/scroll-snap', '/mask', '/clip', '/aspect-fit', '/marker-list', '/conic-chart',
-  '/cursor', '/filter', '/spotlight', '/noise', '/typescale',
-  '/palette'
-]
+const BUILD_DATE = new Date().toISOString().slice(0, 10)
+
+const pub = (f: string) => fileURLToPath(new URL(`./public/${f}`, import.meta.url))
+
+/** Regenerates sitemap.xml + llms.txt from the SEO registry so they never drift from the routes. */
+function writeSeoFiles() {
+  const urls = PAGES.map((p) => `  <url>
+    <loc>${absUrl(p.path)}</loc>
+    <lastmod>${BUILD_DATE}</lastmod>
+    <changefreq>${p.path === '/' ? 'weekly' : 'monthly'}</changefreq>
+    <priority>${p.path === '/' ? '1.0' : '0.8'}</priority>
+  </url>`).join('\n')
+  writeFileSync(
+    pub('sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  )
+  const [home, ...tools] = PAGES
+  writeFileSync(
+    pub('llms.txt'),
+    `# CSS Studio\n\n> ${home!.description} Runs fully client-side at ${absUrl('/')}\n\n## Generators\n\n${tools.map((p) => `- [${p.name}](${absUrl(p.path)}): ${p.description}`).join('\n')}\n`
+  )
+}
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -17,8 +33,11 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: GENERATOR_ROUTES
+      routes: PAGES.map((p) => p.path)
     }
+  },
+  hooks: {
+    'build:before': writeSeoFiles
   },
   modules: ['@nuxtjs/color-mode'],
   css: ['~/assets/css/main.css'],
@@ -38,21 +57,16 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content: 'Create gradients, blobs, backgrounds, patterns, shadows and animations with pure CSS. Free, client-side CSS generator studio — no signup, export ready-to-use code instantly.'
-        },
-        { name: 'theme-color', content: '#09090b' },
-        { name: 'robots', content: 'index, follow' },
-        { property: 'og:site_name', content: 'CSS Studio' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:image', content: `${SITE_URL}/og-image.png` },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:image', content: `${SITE_URL}/og-image.png` }
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'application-name', content: 'CSS Studio' },
+        { name: 'apple-mobile-web-app-title', content: 'CSS Studio' }
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'canonical', href: SITE_URL }
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+        { rel: 'preconnect', href: 'https://www.googletagmanager.com' }
       ],
       script: [
         { src: 'https://www.googletagmanager.com/gtag/js?id=G-77BK6GF5MN', async: true },

@@ -44,16 +44,8 @@ function updateItem(i: number, v: string) {
   state.value = { ...state.value, items: state.value.items.map((it, idx) => (idx === i ? v : it)) }
 }
 
-useSeoMeta({
-  title: '::marker List Builder - CSS Studio',
-  description: 'Custom list markers: counters, glyphs and list styling in pure CSS.',
-  ogTitle: '::marker List Builder - CSS Studio',
-  ogDescription: 'Custom list markers and counters in pure CSS.',
-  ogUrl: 'https://css-studio.itsash.in/marker-list',
-  twitterTitle: '::marker List Builder - CSS Studio',
-  twitterDescription: 'Custom list markers and counters in pure CSS.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/marker-list' }] })
+
+const variants = computed(() => PRESETS_MARKER_LIST.map((p) => ({ name: p.name, css: markerListCss(p.state), html: markerListHtml(p.state) })))
 </script>
 
 <template>
@@ -69,7 +61,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/marker-
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="List preview" filename="css-studio-marker-list">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="List preview" filename="css-studio-marker-list">
         <template #presets>
           <PreviewPresets :presets="PRESETS_MARKER_LIST" @apply="applyPreset" />
         </template>

@@ -1,3 +1,4 @@
+import { SURFACE_SIZE } from '../demo'
 export interface MeshPoint {
   id: string
   x: number
@@ -53,7 +54,7 @@ export function meshGradientPreviewStyle(s: MeshGradientState): Record<string, s
 }
 
 export function meshGradientFullCss(s: MeshGradientState): string {
-  const lines = [`.mesh-gradient {`, `  background-color: ${s.bg};`, `  background-image: ${meshGradientCss(s)};`]
+  const lines = [`.mesh-gradient {`, ...SURFACE_SIZE, `  background-color: ${s.bg};`, `  background-image: ${meshGradientCss(s)};`]
   if (s.blur > 0) lines.push(`  filter: blur(${s.blur}px);`)
   if (s.opacity < 100) lines.push(`  opacity: ${s.opacity / 100};`)
   lines.push(`}`)

@@ -65,16 +65,8 @@ function moveLayer(id: string, dir: -1 | 1) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Background - CSS Studio',
-  description: 'Layered gradients, patterns and glows composited into one background.',
-  ogTitle: 'Background - CSS Studio',
-  ogDescription: 'Layered gradients, patterns and glows composited into one background.',
-  ogUrl: 'https://css-studio.itsash.in/background',
-  twitterTitle: 'Background - CSS Studio',
-  twitterDescription: 'Layered gradients, patterns and glows composited into one background.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/background' }] })
+
+const variants = computed(() => PRESETS_BACKGROUND.map((p) => ({ name: p.name, css: layersCss(p.build()), html: `<div class="layer-stack"></div>` })))
 </script>
 
 <template>
@@ -89,7 +81,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/backgro
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Background preview" filename="css-studio-background">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Background preview" filename="css-studio-background">
         <template #presets>
           <PreviewPresets :presets="PRESETS_BACKGROUND" @apply="applyPreset" />
         </template>

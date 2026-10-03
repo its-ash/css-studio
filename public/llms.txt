@@ -1,0 +1,69 @@
+# CSS Studio
+
+> Free online CSS generators for gradients, box shadows, glassmorphism, animations, loaders, patterns and UI components. Live preview, copy pure CSS + HTML, no signup. Runs fully client-side at https://css-studio.itsash.in/
+
+## Generators
+
+- [CSS Gradient Generator](https://css-studio.itsash.in/gradient): Create linear, radial, conic and repeating CSS gradients with draggable color stops, presets and animation. Copy production-ready background CSS instantly.
+- [Mesh Gradient Generator](https://css-studio.itsash.in/mesh): Build smooth mesh gradients by dragging color points. Exported as layered radial-gradient CSS — no images, no SVG, no canvas.
+- [CSS Blob Generator](https://css-studio.itsash.in/blob): Generate organic blob shapes from border-radius with gradients, shadows and morphing keyframe animation. Free, copy-paste CSS.
+- [CSS Pattern Generator](https://css-studio.itsash.in/pattern): Tileable CSS background patterns — stripes, dots, checkerboard, grid, zigzag and more — built from repeating gradients. Customize colors and size.
+- [Box Shadow Generator](https://css-studio.itsash.in/shadow): Design layered CSS box-shadow and text-shadow with inset support, live preview and presets. Copy smooth, realistic shadow CSS in one click.
+- [CSS Shape Generator](https://css-studio.itsash.in/shape): 16 pure CSS shapes built with border tricks, clip-path and border-radius: triangles, arrows, stars, hearts, hexagons and more.
+- [CSS Border Generator](https://css-studio.itsash.in/border): Create solid, gradient, animated and glowing CSS borders with per-side widths and individual corner radius controls.
+- [Glassmorphism Generator](https://css-studio.itsash.in/glass): Glassmorphism CSS generator: frosted, liquid, acrylic and clear glass cards, players, widgets and navbars over photo or gradient backdrops.
+- [Neumorphism Generator](https://css-studio.itsash.in/neumorphism): Create soft UI neumorphic elements with dual shadows computed from a virtual light source. Flat, concave, convex and pressed styles.
+- [CSS Text Effects](https://css-studio.itsash.in/text): Style headings with gradient, neon glow, 3D extrude, metallic and glass text effects in pure CSS. Live preview with your own text.
+- [CSS Animation Generator](https://css-studio.itsash.in/animation): Build CSS @keyframes animations visually with timing, easing, delay, iteration and direction controls. Copy ready-to-use animation CSS.
+- [CSS Component Generator](https://css-studio.itsash.in/component): Generate styled buttons, cards, inputs, badges, navbars and hero sections in pure HTML + CSS with shared theme tokens.
+- [CSS Background Generator](https://css-studio.itsash.in/background): Composite multiple gradients, patterns and glows into one CSS background. Reorder layers, tweak blend and copy a single background rule.
+- [CSS Loader Generator](https://css-studio.itsash.in/loader): Pure CSS spinners, dots, bars, progress indicators and skeleton shimmer loaders. Customize size, color and speed — no JavaScript.
+- [CSS Badge Generator](https://css-studio.itsash.in/badge): Create pill badges, status dots, notification counters and corner ribbons in pure CSS with live preview and presets.
+- [CSS Divider Generator](https://css-studio.itsash.in/divider): Style hr and section dividers: gradient fade, dashed, dotted, double, zigzag and ornament separators in pure CSS.
+- [Custom Scrollbar Generator](https://css-studio.itsash.in/scrollbar): Style custom scrollbars with ::-webkit-scrollbar and standard scrollbar-color / scrollbar-width. Cross-browser CSS with live preview.
+- [Scroll-driven Animations](https://css-studio.itsash.in/scroll-anim): Build CSS scroll-driven animations with animation-timeline scroll() and view(): reading progress bars, reveal on scroll and parallax — no JavaScript.
+- [CSS Tooltip Generator](https://css-studio.itsash.in/tooltip): Pure CSS tooltips using a data-tip attribute with four placements, arrows, skins and animation. No JavaScript required.
+- [CSS Marquee Generator](https://css-studio.itsash.in/marquee): Create an infinite scrolling marquee / logo ticker in pure CSS with direction, speed, gap, edge fade and pause on hover.
+- [Variable Font Playground](https://css-studio.itsash.in/var-font): Explore variable font axes — weight, optical size, slant and width — and copy the font-variation-settings CSS.
+- [Circular Text Generator](https://css-studio.itsash.in/text-ring): Place text around a circle and spin it — rotating badge text in pure CSS with radius, spacing and speed controls.
+- [Scroll Snap Carousel](https://css-studio.itsash.in/scroll-snap): Build a pure CSS carousel with scroll-snap-type and scroll-snap-align. Tune snapping, padding and gap — no JavaScript slider needed.
+- [CSS Mask Generator](https://css-studio.itsash.in/mask): Generate mask-image effects: edge fades, spotlight holes, stripes and dot grids applied to any element in pure CSS.
+- [Clip-path Generator](https://css-studio.itsash.in/clip): Drag points to build clip-path polygons, circles, ellipses and insets. Live preview and copy-ready clip-path CSS.
+- [Aspect Ratio & Object Fit](https://css-studio.itsash.in/aspect-fit): Compare aspect-ratio frames with object-fit fill, contain, cover, none and scale-down side by side, plus object-position.
+- [CSS List Marker Builder](https://css-studio.itsash.in/marker-list): Design custom list bullets, glyphs and numbered counters with ::marker and list-style in pure CSS.
+- [CSS Pie Chart Generator](https://css-studio.itsash.in/conic-chart): Turn data into pie and donut charts with conic-gradient. Gaps, legend and center label — pure CSS, no chart library.
+- [Cursor & Selection Generator](https://css-studio.itsash.in/cursor): Preview CSS cursor values and style text selection with ::selection colors. Copy the CSS for your site.
+- [CSS Filter Generator](https://css-studio.itsash.in/filter): Stack CSS filter functions — blur, brightness, contrast, grayscale, hue-rotate, sepia, saturate and duotone — with live image preview.
+- [CSS Spotlight Effect](https://css-studio.itsash.in/spotlight): Cursor-follow spotlight and glow hover effect built from radial-gradient and CSS custom properties.
+- [CSS Noise & Grain Generator](https://css-studio.itsash.in/noise): Add film grain, static and halftone texture overlays in pure CSS. Adjustable opacity, scale and animation.
+- [Fluid Type Scale Generator](https://css-studio.itsash.in/typescale): Generate a fluid type scale with CSS clamp() from min/max viewport widths and a modular ratio. Copy CSS custom properties.
+- [CSS Hover Effects](https://css-studio.itsash.in/hover): Pure CSS hover effects for buttons and cards: lift, glow, underline sweep, fill, tilt and shine micro-interactions.
+- [CSS Toggle Switch Generator](https://css-studio.itsash.in/toggle): Custom toggle switches, checkboxes and radio buttons in pure CSS — accessible native inputs, no JavaScript.
+- [CSS Input Field Generator](https://css-studio.itsash.in/input): Style text inputs with outline, underline, floating label, glow and filled variants plus focus states in pure CSS.
+- [CSS Flip Card Generator](https://css-studio.itsash.in/flip-card): Create 3D flip cards with front and back faces using transform and backface-visibility. Pure CSS, no JavaScript.
+- [Before / After Slider](https://css-studio.itsash.in/compare): Pure CSS before/after image comparison slider with a draggable split handle. No JavaScript required.
+- [CSS Text Animations](https://css-studio.itsash.in/text-anim): Typewriter, wave, glitch, blur-in and staggered reveal text animations built with CSS keyframes only.
+- [CSS Link Underline Effects](https://css-studio.itsash.in/link): 10 animated underline hover styles for links and inline text — slide, grow, gradient and more in pure CSS.
+- [CSS Squircle Generator](https://css-studio.itsash.in/squircle): Approximate iOS-style superellipse smooth corners (squircles) in pure CSS. Adjustable smoothing and size.
+- [CSS Accordion Generator](https://css-studio.itsash.in/accordion): Accessible accordions built on details/summary with smooth open animation and custom icons. Pure HTML + CSS.
+- [CSS Chat Bubble Generator](https://css-studio.itsash.in/chat): Chat bubble UI in pure CSS: 9 skins (iMessage, WhatsApp, glass, gradient, neo-brutal, Slack thread), tails, grouping, avatars, read receipts and typing indicators.
+- [Terminal Window Mockup](https://css-studio.itsash.in/terminal): macOS-style terminal and code window mockups with traffic lights, title bar and themes in pure CSS.
+- [CSS Hamburger Menu Icon](https://css-studio.itsash.in/hamburger): Animated hamburger menu icons in pure CSS: 10 morphs (X, squeeze, spin, arrow, chevron, plus), button shells, staggered bars and a Menu/Close label.
+- [CSS Avatar Stack](https://css-studio.itsash.in/avatar): Overlapping avatar stacks with rings, hover spread and a +N overflow badge in pure CSS.
+- [CSS Pagination Generator](https://css-studio.itsash.in/pagination): Pagination components with number pills, dots, arrows and glowing active states in pure CSS.
+- [CSS Timeline Generator](https://css-studio.itsash.in/timeline): Vertical timelines with dots, cards, alternating sides and changelog styles in pure HTML + CSS.
+- [CSS Star Rating](https://css-studio.itsash.in/rating): Pure CSS star and heart ratings with hover fill and review distribution bars.
+- [CSS 3D Orbit](https://css-studio.itsash.in/orbit): Rotating 3D cubes, planet orbits, gyroscope rings and dot spheres using transform-style preserve-3d only.
+- [CSS Aurora Background](https://css-studio.itsash.in/aurora): Animated aurora, starfield, sunset and moonlight backgrounds in pure CSS.
+- [CSS Table Styles](https://css-studio.itsash.in/table): Style HTML tables with zebra rows, sticky headers, rounded frames and hover glow in pure CSS.
+- [CSS Kbd & Code Chips](https://css-studio.itsash.in/kbd): Style kbd keycaps, shortcut combinations and inline code chips in pure CSS.
+- [Cursor Trail & Scroll Progress](https://css-studio.itsash.in/trail): Sparkle cursor trails and reading progress indicators with CSS and a tiny 10-line JavaScript snippet.
+- [CSS Navbar Generator](https://css-studio.itsash.in/navbar): Navigation bars with floating, underline, pill and sidebar styles in pure HTML + CSS.
+- [CSS Toast Notification](https://css-studio.itsash.in/toast): Success, error, info and warning toast notifications with progress timers and entrance animations.
+- [CSS Progress Bar Generator](https://css-studio.itsash.in/progress-bar): Gradient, striped, animated and indeterminate progress bars in pure CSS.
+- [CSS Skeleton Loader](https://css-studio.itsash.in/skeleton): Skeleton loading placeholders with shimmer, wave and pulse animations in pure CSS.
+- [CSS Gradient Text Generator](https://css-studio.itsash.in/gradient-text): Animated gradient and outline text using background-clip: text. Pick colors, angle and speed.
+- [CSS Modal Generator](https://css-studio.itsash.in/modal): Modals, dialogs and bottom sheets with backdrop and open animations in HTML + CSS.
+- [CSS Card Generator](https://css-studio.itsash.in/card): Elevated, glass, outline and gradient-border card styles in pure CSS.
+- [CSS Wave Generator](https://css-studio.itsash.in/wave): Sine, zigzag, step and blob wave section dividers built in pure CSS — no SVG.
+- [Color Palette Generator](https://css-studio.itsash.in/palette): Generate color harmonies (complementary, analogous, triadic), check WCAG contrast ratios and convert HEX, RGB and HSL.

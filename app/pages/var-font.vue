@@ -52,16 +52,8 @@ function applyPreset(i: number) {
   pushHistory()
 }
 
-useSeoMeta({
-  title: 'Variable Font Playground - CSS Studio',
-  description: 'Font-variation-settings playground: weight, optical size, slant and width axes.',
-  ogTitle: 'Variable Font Playground - CSS Studio',
-  ogDescription: 'Font-variation-settings playground: weight, optical size, slant and width axes.',
-  ogUrl: 'https://css-studio.itsash.in/var-font',
-  twitterTitle: 'Variable Font Playground - CSS Studio',
-  twitterDescription: 'Font-variation-settings playground: weight, optical size, slant and width axes.'
-})
-useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/var-font' }] })
+
+const variants = computed(() => PRESETS_VAR_FONT.map((p) => ({ name: p.name, css: varFontCss(p.state), html: varFontHtml(p.state) })))
 </script>
 
 <template>
@@ -77,7 +69,7 @@ useHead({ link: [{ rel: 'canonical', href: 'https://css-studio.itsash.in/var-fon
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas title="Variable font preview" filename="css-studio-var-font">
+      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Variable font preview" filename="css-studio-var-font">
         <template #presets>
           <PreviewPresets :presets="PRESETS_VAR_FONT" @apply="applyPreset" />
         </template>
