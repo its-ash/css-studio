@@ -5,6 +5,7 @@ import {
   PRESETS_TOAST,
   TOAST_SKINS,
   TOAST_VARIANTS,
+  TOAST_POSITIONS,
   toastCss,
   toastHtml,
   toastVars,
@@ -24,7 +25,7 @@ watchEffect(() => setShareUrl(shareUrlRef.value))
 const css = computed(() => toastCss(state.value))
 const html = computed(() => toastHtml(state.value))
 const vars = computed(() => toastVars(state.value))
-const demoStyle = computed(() => `<style>.preview-toast { display: grid; place-items: center; height: 100%; } .toast-stack { position: static !important; } ${css.value}</style>`)
+const demoStyle = computed(() => `<style>.preview-toast { position: relative; height: 100%; } .preview-toast .toast-stack { position: absolute !important; } ${css.value}</style>`)
 
 function applyPreset(i: number) {
   state.value = JSON.parse(JSON.stringify(PRESETS_TOAST[i]!.state)) as ToastState
@@ -73,12 +74,7 @@ const variants = computed(() => PRESETS_TOAST.map((p) => ({ name: p.name, css: t
         <SelectControl
           v-model="state.position"
           label="Position"
-          :options="[
-            { value: 'top-right', label: 'Top Right' },
-            { value: 'top-center', label: 'Top Center' },
-            { value: 'bottom-right', label: 'Bottom Right' },
-            { value: 'bottom-center', label: 'Bottom Center' }
-          ]"
+          :options="TOAST_POSITIONS"
         />
         <SliderControl v-model="state.duration" label="Timer" :min="1500" :max="8000" :step="250" suffix="ms" />
         <SliderControl v-model="state.radius" label="Radius" :min="0" :max="24" suffix="px" />

@@ -41,6 +41,12 @@ async function copyCss() {
   }
 }
 
+/** Code for PreviewCanvas's Code tab. */
+provide(
+  'editor:code',
+  computed(() => ({ css: props.css, html: props.html, vars: props.vars }))
+)
+
 /** When the page provides a shareUrl via slot, prefer it; fall back to current URL. */
 const sharedUrl = ref<string | null>(null)
 provide('editor:shareUrl', (url: string) => {
@@ -137,14 +143,13 @@ useHotkeys(() => [
         <SidebarNav />
       </aside>
 
-      <main class="flex min-w-0 flex-1 flex-col lg:flex-row">
-        <div class="flex min-w-0 flex-1 flex-col">
+      <main class="flex min-w-0 flex-1 flex-col lg:flex-row lg:overflow-hidden">
+        <div class="flex min-w-0 flex-1" flex-col>
           <slot name="preview" />
         </div>
 
-        <div class="flex w-full shrink-0 flex-col gap-3.5 border-t border-line bg-panel p-3.5 lg:w-[380px] lg:min-h-0 lg:overflow-y-auto lg:border-l lg:border-t-0">
+        <div class="flex w-full lg:w-[380px] lg:min-h-0 lg:overflow-y-auto shrink-0 flex-col gap-3.5 border-t border-line bg-panel p-3.5 lg:border-l lg:border-t-0">
           <slot name="controls" />
-          <slot name="code" />
           <section aria-labelledby="about-heading" class="mt-2 border-t border-line pt-3.5 text-xs leading-relaxed text-muted">
             <h2 id="about-heading" class="mb-1 text-[11px] font-medium tracking-wide uppercase">About this generator</h2>
             <p>{{ seo?.description ?? description }}</p>

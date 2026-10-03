@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { pushToast } from '~/composables/useToast'
+import { minifyCss } from '~/utils/css'
 
 const props = withDefaults(
   defineProps<{
@@ -8,8 +9,10 @@ const props = withDefaults(
     vars?: Record<string, string>
     tailwind?: string
     filename?: string
+    /** Fill the parent flex column instead of capping at max-h-64. */
+    stretch?: boolean
   }>(),
-  { html: undefined, vars: undefined, tailwind: undefined, filename: 'css-studio' }
+  { html: undefined, vars: undefined, tailwind: undefined, filename: 'css-studio', stretch: false }
 )
 
 type Tab = 'css' | 'html' | 'vars' | 'tailwind'
@@ -47,15 +50,6 @@ const code = computed(() => {
 
 const display = computed(() => (minified.value ? minifyCss(code.value) : code.value))
 
-function minifyCss(input: string): string {
-  return input
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\s+/g, ' ')
-    .replace(/\s*([{}:;,])\s*/g, '$1')
-    .replace(/;}/g, '}')
-    .trim()
-}
-
 async function copy() {
   try {
     await navigator.clipboard.writeText(display.value)
@@ -78,7 +72,7 @@ function download() {
 </script>
 
 <template>
-  <div class="flex flex-col overflow-hidden rounded-xl border border-line bg-panel shadow-panel">
+  <div class="flex flex-col overflow-hidden rounded-xl border border-line bg-panel shadow-panel" :class="props.stretch ? 'min-h-0 flex-1' : ''">
     <div class="flex items-center justify-between gap-1 border-b border-line px-2">
       <div class="flex" role="tablist" aria-label="Code output">
         <button
@@ -116,7 +110,7 @@ function download() {
         </button>
       </div>
      </div>
-    <div class="max-h-64 overflow-auto p-3.5">
+    <div class="p-3.5" :class="props.stretch ? 'min-h-0 flex-1 overflow-auto' : 'max-h-64 overflow-auto'">
       <pre class="whitespace-pre-wrap break-words font-mono text-xs leading-relaxed text-fg">{{ display }}</pre>
     </div>
   </div>

@@ -4,23 +4,42 @@ const route = useRoute()
 const navEl = ref<HTMLElement | null>(null)
 const activeEl = ref<HTMLElement | null>(null)
 
-// Keep the active generator link visible: when switching tools, scroll the
-// sidebar only if the newly-active item is out of view — never jump to top.
+/** Sidebar remounts with each page shell, so its scroll offset is kept across navigations. */
+const savedScroll = useState('sidebar:scroll', () => 0)
+let container: HTMLElement | null = null
+const onScroll = () => {
+  if (container) savedScroll.value = container.scrollTop
+}
+
+/** Bring the active link into view without animating, only when it's outside the visible area. */
+function revealActive() {
+  const el = navEl.value?.querySelector<HTMLElement>('[aria-current="page"]') ?? null
+  activeEl.value = el
+  if (!el || !container) return
+  const c = container.getBoundingClientRect()
+  const r = el.getBoundingClientRect()
+  if (r.top < c.top || r.bottom > c.bottom) {
+    container.scrollTop += r.top - c.top - (c.height - r.height) / 2
+  }
+}
+
+onMounted(() => {
+  container = navEl.value?.closest<HTMLElement>('.overflow-y-auto') ?? null
+  if (!container) return
+  container.scrollTop = savedScroll.value
+  revealActive()
+  savedScroll.value = container.scrollTop
+  container.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onBeforeUnmount(() => container?.removeEventListener('scroll', onScroll))
+
 watch(
   () => route.path,
   async () => {
     await nextTick()
-    const el = navEl.value?.querySelector<HTMLElement>('[aria-current="page"]')
-    activeEl.value = el
-    const container = el?.closest('.overflow-y-auto') as HTMLElement | null
-    if (!el || !container) return
-    const eTop = el.offsetTop
-    const eBottom = eTop + el.offsetHeight
-    if (eTop < container.scrollTop || eBottom > container.scrollTop + container.clientHeight) {
-      container.scrollTo({ top: Math.max(0, eTop - container.clientHeight / 2 + el.offsetHeight / 2), behavior: 'smooth' })
-    }
-  },
-  { immediate: true }
+    revealActive()
+  }
 )
 
 const nav = [

@@ -12,7 +12,7 @@ export interface ToastState {
   duration: number
   showIcon: boolean
   showProgress: boolean
-  position: 'top-right' | 'top-center' | 'bottom-right' | 'bottom-center'
+  position: 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'
 }
 
 export const TOAST_SKINS: { value: ToastSkin; label: string }[] = [
@@ -41,10 +41,21 @@ export const DEFAULT_TOAST: ToastState = {
   position: 'top-right'
 }
 
+export const TOAST_POSITIONS: { value: ToastState['position']; label: string }[] = [
+  { value: 'top-left', label: 'Top Left' },
+  { value: 'top-center', label: 'Top Center' },
+  { value: 'top-right', label: 'Top Right' },
+  { value: 'bottom-left', label: 'Bottom Left' },
+  { value: 'bottom-center', label: 'Bottom Center' },
+  { value: 'bottom-right', label: 'Bottom Right' }
+]
+
 export function toastCss(s: ToastState): string {
   const v = TOAST_VARIANTS.find((x) => x.value === s.variant)!
   const positions: Record<ToastState['position'], string> = {
+    'top-left': 'top: 16px; left: 16px;',
     'top-right': 'top: 16px; right: 16px;',
+    'bottom-left': 'bottom: 16px; left: 16px;',
     'top-center': 'top: 16px; left: 50%; transform: translateX(-50%);',
     'bottom-right': 'bottom: 16px; right: 16px;',
     'bottom-center': 'bottom: 16px; left: 50%; transform: translateX(-50%);'
@@ -209,7 +220,7 @@ export const PRESETS_TOAST: { name: string; tags: string[]; state: ToastState }[
   { name: 'Success Card', tags: ['success'], state: { ...DEFAULT_TOAST } },
   { name: 'Error Alert', tags: ['error'], state: { ...DEFAULT_TOAST, variant: 'error', position: 'top-center' } },
   { name: 'Info Banner', tags: ['banner'], state: { ...DEFAULT_TOAST, skin: 'banner', variant: 'info', radius: 0 } },
-  { name: 'Dark Snackbar', tags: ['snackbar'], state: { ...DEFAULT_TOAST, skin: 'snackbar', position: 'bottom-left' as ToastState['position'] } },
+  { name: 'Dark Snackbar', tags: ['snackbar'], state: { ...DEFAULT_TOAST, skin: 'snackbar', position: 'bottom-left' } },
   { name: 'Warning Card', tags: ['warning'], state: { ...DEFAULT_TOAST, variant: 'warning', accent: '#f59e0b' } },
   { name: 'Neon Success', tags: ['neon'], state: { ...DEFAULT_TOAST, accent: '#22d3ee', variant: 'success', showProgress: true } },
   { name: 'Minimal Toast', tags: ['minimal'], state: { ...DEFAULT_TOAST, showIcon: false, showProgress: false, radius: 6 } },

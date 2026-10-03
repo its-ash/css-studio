@@ -1,0 +1,32 @@
+import{A as e,C as t,Gt as n,M as r,R as i,S as a,T as o,X as s,ct as c,lt as l,w as u,wt as d}from"./MitKKUeq.js";import{a as f,i as p,n as m,r as h,s as g,t as _}from"./BPBkcUFJ.js";import{t as v}from"./D3e07OzS.js";import{t as y}from"./BYmGHvE7.js";import{t as b}from"./Cw1rlFxN.js";var x=[{value:`solid`,label:`Solid`},{value:`dashed`,label:`Dashed`},{value:`dotted`,label:`Dotted`},{value:`gradient-fade`,label:`Gradient Fade`},{value:`gradient-glow`,label:`Gradient Glow`},{value:`double`,label:`Double Line`},{value:`zigzag`,label:`Zigzag`}],S={kind:`gradient-fade`,color:`#10b981`,thickness:2,width:320,zigzagSize:12};function C(e){switch(e.kind){case`solid`:return`.divider {
+  width: ${e.width}px;
+  height: ${e.thickness}px;
+  background: ${e.color};
+}`;case`dashed`:return`.divider {
+  width: ${e.width}px;
+  border-top: ${e.thickness}px dashed ${e.color};
+}`;case`dotted`:return`.divider {
+  width: ${e.width}px;
+  border-top: ${e.thickness}px dotted ${e.color};
+}`;case`gradient-fade`:return`.divider {
+  width: ${e.width}px;
+  height: ${e.thickness}px;
+  background: linear-gradient(90deg, transparent, ${e.color}, transparent);
+}`;case`gradient-glow`:return`.divider {
+  width: ${e.width}px;
+  height: ${e.thickness}px;
+  background: linear-gradient(90deg, transparent, ${e.color}, transparent);
+  box-shadow: 0 0 ${e.thickness*4}px ${e.color};
+}`;case`double`:return`.divider {
+  width: ${e.width}px;
+  height: ${e.thickness*3}px;
+  border-top: ${e.thickness}px solid ${e.color};
+  border-bottom: ${e.thickness}px solid ${e.color};
+}`;case`zigzag`:return`.divider {
+  width: ${e.width}px;
+  height: ${e.zigzagSize}px;
+  background: linear-gradient(135deg, ${e.color} 25%, transparent 25%) 0 0,
+    linear-gradient(225deg, ${e.color} 25%, transparent 25%) 0 0;
+  background-size: ${e.zigzagSize}px ${e.zigzagSize}px;
+  background-repeat: repeat-x;
+}`}}function w(){return`<hr class="divider" />`}function T(e){return{"--divider-color":e.color,"--divider-thickness":`${e.thickness}px`,"--divider-width":`${e.width}px`}}function E(e){switch(e.kind){case`solid`:return{width:`${e.width}px`,height:`${e.thickness}px`,background:e.color};case`dashed`:return{width:`${e.width}px`,borderTop:`${e.thickness}px dashed ${e.color}`};case`dotted`:return{width:`${e.width}px`,borderTop:`${e.thickness}px dotted ${e.color}`};case`gradient-fade`:return{width:`${e.width}px`,height:`${e.thickness}px`,background:`linear-gradient(90deg, transparent, ${e.color}, transparent)`};case`gradient-glow`:return{width:`${e.width}px`,height:`${e.thickness}px`,background:`linear-gradient(90deg, transparent, ${e.color}, transparent)`,boxShadow:`0 0 ${e.thickness*4}px ${e.color}`};case`double`:return{width:`${e.width}px`,height:`${e.thickness*3}px`,borderTop:`${e.thickness}px solid ${e.color}`,borderBottom:`${e.thickness}px solid ${e.color}`};case`zigzag`:return{width:`${e.width}px`,height:`${e.zigzagSize}px`,backgroundImage:`linear-gradient(135deg, ${e.color} 25%, transparent 25%), linear-gradient(225deg, ${e.color} 25%, transparent 25%)`,backgroundSize:`${e.zigzagSize}px ${e.zigzagSize}px`,backgroundRepeat:`repeat-x`}}}function D(e,t){let n=x.map(e=>e.value),r=Math.floor(t.range(0,360));return{...e,kind:t.pick(n),color:`hsl(${r} 80% 55%)`,thickness:Math.round(t.range(1,4)),width:Math.round(t.range(200,400))}}var O=[{name:`Emerald Fade`,tags:[`brand`],state:{...S}},{name:`Glow Line`,tags:[`glow`],state:{...S,kind:`gradient-glow`,color:`#06b6d4`}},{name:`Simple Dash`,tags:[`minimal`],state:{...S,kind:`dashed`,color:`#71717a`}},{name:`Dotted Line`,tags:[`minimal`],state:{...S,kind:`dotted`,color:`#a1a1aa`}},{name:`Rose Zigzag`,tags:[`playful`],state:{...S,kind:`zigzag`,color:`#f43f5e`,zigzagSize:14}},{name:`Classic Double`,tags:[`formal`],state:{...S,kind:`double`,color:`#18181b`,thickness:1}},{name:`Violet Glow`,tags:[`glow`,`brand`],state:{...S,kind:`gradient-glow`,color:`#8b5cf6`,thickness:3}},{name:`Amber Fade`,tags:[`warm`],state:{...S,kind:`gradient-fade`,color:`#f59e0b`}}],k={class:`flex h-[420px] w-full max-w-3xl flex-col items-center justify-center gap-6 p-6`},A=r({__name:`divider`,setup(r){let{state:A,randomize:j,reset:M,undo:N,redo:P,pushHistory:F,shareUrlRef:I}=_({id:`divider`,defaultState:JSON.parse(JSON.stringify(S)),randomize:D}),L=i(`editor:shareUrl`,()=>{});c(()=>L(I.value));let R=a(()=>C(A.value)),z=a(()=>w()),B=a(()=>T(A.value)),V=a(()=>E(A.value));function H(e){A.value=JSON.parse(JSON.stringify(O[e].state)),F()}let U=a(()=>O.map(e=>({name:e.name,css:C(e.state),html:w()})));return(r,i)=>{let a=g,c=f,_=v,S=y,C=p,w=h,T=b,E=m;return s(),u(E,{title:`Divider Generator`,description:`Gradient-fade, dashed, dotted, double and zigzag section dividers.`,css:d(R),html:d(z),vars:d(B),onRandomize:d(j),onReset:d(M),onUndo:d(N),onRedo:d(P)},{preview:l(()=>[e(c,{variants:d(U),onApplyVariant:H,title:`Divider preview`,filename:`css-studio-divider`},{presets:l(()=>[e(a,{presets:d(O),onApply:H},null,8,[`presets`])]),default:l(()=>[t(`div`,k,[i[5]||=t(`div`,{class:`text-sm text-muted`},`Section above`,-1),t(`hr`,{class:`border-0`,style:n(d(V)),"aria-label":`Divider preview`},null,4),i[6]||=t(`div`,{class:`text-sm text-muted`},`Section below`,-1)])]),_:1},8,[`variants`])]),controls:l(()=>[e(w,{label:`Divider`,icon:`ph-ruler`},{default:l(()=>[e(_,{modelValue:d(A).kind,"onUpdate:modelValue":i[0]||=e=>d(A).kind=e,label:`Type`,options:d(x)},null,8,[`modelValue`,`options`]),e(S,{"model-value":d(A).color,label:`Color`,"onUpdate:modelValue":i[1]||=e=>d(A).color=e},null,8,[`model-value`]),e(C,{modelValue:d(A).width,"onUpdate:modelValue":i[2]||=e=>d(A).width=e,label:`Width`,min:80,max:600,suffix:`px`},null,8,[`modelValue`]),d(A).kind===`zigzag`?o(``,!0):(s(),u(C,{key:0,modelValue:d(A).thickness,"onUpdate:modelValue":i[3]||=e=>d(A).thickness=e,label:`Thickness`,min:1,max:8,suffix:`px`},null,8,[`modelValue`])),d(A).kind===`zigzag`?(s(),u(C,{key:1,modelValue:d(A).zigzagSize,"onUpdate:modelValue":i[4]||=e=>d(A).zigzagSize=e,label:`Zigzag size`,min:6,max:30,suffix:`px`},null,8,[`modelValue`])):o(``,!0)]),_:1})]),code:l(()=>[e(T,{css:d(R),html:d(z),vars:d(B),filename:`css-studio-divider`},null,8,[`css`,`html`,`vars`])]),_:1},8,[`css`,`html`,`vars`,`onRandomize`,`onReset`,`onUndo`,`onRedo`])}}});export{A as default};

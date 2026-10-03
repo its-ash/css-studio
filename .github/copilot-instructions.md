@@ -23,4 +23,4 @@ Client-side CSS generator studio and visual playground. No backend, no database,
 
 - Generated effects must be real CSS. Do not use canvas or SVG where CSS can do the job.
 - Every generator must have a working preview, valid CSS output, copy, reset, randomize and presets.
-- Keep the app UI itself neutral: zinc neutrals, one emerald accent, no gradient chrome.
+- Keep the app UI itself neutral: pink-tinted neutrals, one baby-pink accent, no gradient chrome.

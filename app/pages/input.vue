@@ -4,6 +4,7 @@ import {
   DEFAULT_INPUT,
   PRESETS_INPUT,
   INPUT_SKINS,
+  INPUT_ICONS,
   inputCss,
   inputHtml,
   inputVars,
@@ -20,16 +21,36 @@ const { state, randomize, reset, undo, redo, pushHistory, shareUrlRef } = useEdi
 const setShareUrl = inject<(url: string) => void>('editor:shareUrl', () => {})
 watchEffect(() => setShareUrl(shareUrlRef.value))
 
-const css = computed(() => inputCss(state.value))
-const html = computed(() => inputHtml(state.value))
-const vars = computed(() => inputVars(state.value))
+/** Index of the variant shown in the preview + Code tab; null = live editing state. */
+const variantIdx = ref<number | null>(null)
+const variantStates = computed(() => PRESETS_INPUT.map((p) => p.state))
+/** Source for the Code tab: picked variant code or the live state's code. */
+const previewState = computed<InputState>(() => (variantIdx.value === null ? state.value : variantStates.value[variantIdx.value]!))
+
+const css = computed(() => inputCss(previewState.value))
+const html = computed(() => inputHtml(previewState.value))
+const vars = computed(() => inputVars(previewState.value))
 const demoStyle = computed(() => `<style>${css.value}</style>`)
+const codeTitle = computed(() => (variantIdx.value === null ? 'Live state' : PRESETS_INPUT[variantIdx.value]!.name))
 
 function applyPreset(i: number) {
+  variantIdx.value = null
   state.value = JSON.parse(JSON.stringify(PRESETS_INPUT[i]!.state)) as InputState
   pushHistory()
 }
 
+function pickVariant(i: number) {
+  variantIdx.value = i
+}
+
+/** Any control, undo or randomize edit drops back to the live state's code. */
+watch(
+  state,
+  () => {
+    variantIdx.value = null
+  },
+  { deep: true }
+)
 
 const variants = computed(() => PRESETS_INPUT.map((p) => ({ name: p.name, css: inputCss(p.state), html: inputHtml(p.state) })))
 </script>
@@ -47,28 +68,41 @@ const variants = computed(() => PRESETS_INPUT.map((p) => ({ name: p.name, css: i
     @redo="redo"
   >
     <template #preview>
-      <PreviewCanvas :variants="variants" @apply-variant="applyPreset" title="Input preview" filename="css-studio-input">
+      <PreviewCanvas
+        :variants="variants"
+        :code-css="css"
+        :code-html="html"
+        :code-vars="vars"
+        :code-title="codeTitle"
+        title="Input preview"
+        filename="css-studio-input"
+        @apply-variant="pickVariant"
+      >
         <template #presets>
           <PreviewPresets :presets="PRESETS_INPUT" @apply="applyPreset" />
         </template>
         <!-- eslint-disable-next-line vue/no-v-html -->
         <div v-html="demoStyle" aria-hidden="true"></div>
-        <div class="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-8 p-6">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <div v-html="html"></div>
-          <p class="max-w-xs text-center text-[11px] text-muted">Click into the field to preview the focus state.</p>
-        </div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div class="flex h-full w-full items-center justify-center p-6" v-html="html"></div>
       </PreviewCanvas>
     </template>
 
     <template #controls>
       <ControlGroup label="Field" icon="ph-textbox">
         <SelectControl v-model="state.skin" label="Skin" :options="INPUT_SKINS" />
+        <SelectControl
+          v-model="state.icon"
+          label="Leading icon"
+          :options="INPUT_ICONS.map((v) => ({ value: v, label: v === 'none' ? 'None' : v[0]!.toUpperCase() + v.slice(1) }))"
+        />
         <TextControl v-model="state.label" label="Label" placeholder="Label" />
         <TextControl v-model="state.placeholder" label="Placeholder" placeholder="you@example.com" />
         <SliderControl v-model="state.width" label="Width" :min="160" :max="360" :step="10" suffix="px" />
         <SliderControl v-model="state.fontSize" label="Font size" :min="12" :max="18" suffix="px" />
         <SliderControl v-model="state.radius" label="Radius" :min="0" :max="24" suffix="px" />
+        <ToggleControl v-model="state.underlineSweep" label="Underline sweep on focus" :hint="state.skin === 'underline' ? 'Underline skin only' : 'Applies to underline skin'" />
+        <ToggleControl v-model="state.error" label="Error state" hint="Uses :user-invalid — type invalid text to trigger" />
       </ControlGroup>
 
       <ControlGroup label="Colors" icon="ph-palette">
@@ -78,8 +112,5 @@ const variants = computed(() => PRESETS_INPUT.map((p) => ({ name: p.name, css: i
       </ControlGroup>
     </template>
 
-    <template #code>
-      <CodePanel :css="css" :html="html" :vars="vars" filename="css-studio-input" />
-    </template>
   </EditorPageShell>
 </template>
