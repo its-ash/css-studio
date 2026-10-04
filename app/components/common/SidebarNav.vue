@@ -106,6 +106,7 @@ const nav = [
   { to: '/modal', label: 'Modal & Dialog', icon: 'ph-browser' },
   { to: '/card', label: 'Card Styles', icon: 'ph-cards' },
   { to: '/wave', label: 'Wave Dividers', icon: 'ph-waves' },
+  { to: '/svg-background', label: 'SVG Backgrounds', icon: 'ph-grid-four' },
   { to: '/palette', label: 'Color Tools', icon: 'ph-palette' }
 ]
 </script>

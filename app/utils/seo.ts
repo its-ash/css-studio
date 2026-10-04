@@ -83,6 +83,7 @@ export const PAGES: PageSeo[] = [
   g('/modal', 'CSS Modal Generator', 'CSS Modal & Dialog Generator — Overlays & Bottom Sheets', 'Modals, dialogs and bottom sheets with backdrop and open animations in HTML + CSS.', 'Components'),
   g('/card', 'CSS Card Generator', 'CSS Card Generator — Elevated, Glass & Gradient Border', 'Elevated, glass, outline and gradient-border card styles in pure CSS.', 'Components'),
   g('/wave', 'CSS Wave Generator', 'CSS Wave Section Divider Generator', 'Sine, zigzag, step and blob wave section dividers built in pure CSS — no SVG.', 'Layout'),
+  g('/svg-background', 'SVG Background Generator', 'SVG Background Generator — Layered Waves, Blobs, Low Poly & Gradients', 'Generative SVG backgrounds (layered waves, blob scenes, peaks, low poly, blurry gradients and more) exported as CSS data URIs.', 'Layout'),
   g('/palette', 'Color Palette Generator', 'Color Palette Generator & WCAG Contrast Checker', 'Generate color harmonies (complementary, analogous, triadic), check WCAG contrast ratios and convert HEX, RGB and HSL.', 'Color')
 ]
 

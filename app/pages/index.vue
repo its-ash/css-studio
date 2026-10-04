@@ -62,7 +62,8 @@ const generators = [
   { to: '/gradient-text', title: 'Gradient Text', desc: 'Flowing gradient and outline text.', icon: 'ph-text-aa' },
   { to: '/modal', title: 'Modal & Dialog', desc: 'Overlays, sheets and dialogs with animations.', icon: 'ph-browser' },
   { to: '/card', title: 'Card Styles', desc: 'Elevated, glass, gradient-border cards.', icon: 'ph-cards' },
-  { to: '/wave', title: 'Wave Dividers', desc: 'Sine, zigzag, step and blob waves.', icon: 'ph-waves' }
+  { to: '/wave', title: 'Wave Dividers', desc: 'Sine, zigzag, step and blob waves.', icon: 'ph-waves' },
+  { to: '/svg-background', title: 'SVG Backgrounds', desc: 'Waves, blobs, peaks and low poly scenes.', icon: 'ph-grid-four' }
 ]
 
 const route = useRoute()

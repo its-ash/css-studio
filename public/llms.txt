@@ -66,4 +66,5 @@
 - [CSS Modal Generator](https://css-studio.itsash.in/modal): Modals, dialogs and bottom sheets with backdrop and open animations in HTML + CSS.
 - [CSS Card Generator](https://css-studio.itsash.in/card): Elevated, glass, outline and gradient-border card styles in pure CSS.
 - [CSS Wave Generator](https://css-studio.itsash.in/wave): Sine, zigzag, step and blob wave section dividers built in pure CSS — no SVG.
+- [SVG Background Generator](https://css-studio.itsash.in/svg-background): Generative SVG backgrounds (layered waves, blob scenes, peaks, low poly, blurry gradients and more) exported as CSS data URIs.
 - [Color Palette Generator](https://css-studio.itsash.in/palette): Generate color harmonies (complementary, analogous, triadic), check WCAG contrast ratios and convert HEX, RGB and HSL.
