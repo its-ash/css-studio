@@ -207,7 +207,7 @@ async function exportPng() {
           ]"
           :key="vp.v"
           class="inline-flex h-7 w-7 items-center justify-center rounded-md text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
-          :class="viewport === vp.v ? 'bg-accent/12 text-fg' : ''"
+          :class="viewport === vp.v ? 'bg-secondary text-secondary-fg' : ''"
           :aria-label="`Preview at ${vp.label} size`"
           :title="vp.label"
           @click="setViewport(vp.v as Viewport)"
@@ -217,7 +217,7 @@ async function exportPng() {
         <span class="mx-1 h-4 w-px bg-line" aria-hidden="true"></span>
         <button
           class="inline-flex h-7 items-center rounded-md px-2 text-xs font-medium text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
-          :class="fit === 'fit' ? 'bg-accent/12 text-fg' : ''"
+          :class="fit === 'fit' ? 'bg-secondary text-secondary-fg' : ''"
           aria-label="Fit preview"
           @click="setFit('fit')"
         >
@@ -227,7 +227,7 @@ async function exportPng() {
           v-for="z in [50, 75, 100, 150]"
           :key="z"
           class="inline-flex h-7 items-center rounded-md px-2 text-xs font-medium text-muted transition-colors duration-100 hover:bg-line/30 hover:text-fg"
-          :class="fit === z ? 'bg-accent/12 text-fg' : ''"
+          :class="fit === z ? 'bg-secondary text-secondary-fg' : ''"
           :aria-label="`Zoom ${z}%`"
           @click="setFit(z)"
         >

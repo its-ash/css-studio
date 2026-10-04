@@ -36,7 +36,7 @@ useSeoMeta({
   twitterImage: OG_IMAGE,
   twitterImageAlt: 'CSS Studio — free browser-based CSS generators',
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  themeColor: () => (colorMode.value === 'light' ? '#ffffff' : '#09090b')
+  themeColor: () => (colorMode.value === 'light' ? '#fbfbfe' : '#010104')
 })
 
 /** Site-wide graph plus per-tool WebApplication + BreadcrumbList for rich results. */

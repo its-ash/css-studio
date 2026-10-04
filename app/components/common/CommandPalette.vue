@@ -199,7 +199,7 @@ watch(paletteOpen, (open) => {
                 v-for="(cmd, i) in filtered"
                 :key="cmd.id"
                 class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors duration-100"
-                :class="i === activeIndex ? 'bg-accent/12 text-fg' : 'text-muted hover:text-fg'"
+                :class="i === activeIndex ? 'bg-secondary text-secondary-fg' : 'text-muted hover:text-fg'"
                 :data-index="i"
                 @mouseenter="activeIndex = i"
                 @click="runCommand(cmd)"

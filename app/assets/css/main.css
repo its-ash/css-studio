@@ -6,31 +6,35 @@
 @import "@fontsource/geist-mono/500.css";
 
 :root {
-  --bg: #fdf4f7;
+  --bg: #fbfbfe;
   --panel: #ffffff;
-  --line: #f3dbe4;
-  --line-strong: #e8bfcf;
-  --fg: #2a1a21;
-  --muted: #7d6570;
-  --accent: #c2386f;
-  --accent-fg: #fff5f9;
+  --line: #e4e3f5;
+  --line-strong: #cbc9ee;
+  --fg: #050315;
+  --muted: #5b5a72;
+  --accent: #2f27ce;
+  --accent-fg: #fbfbfe;
+  --secondary: #dedcff;
+  --secondary-fg: #1b1680;
   --radius: 10px;
-  --panel-shadow: 0 1px 2px #6b1f3d0f, 0 1px 1px #6b1f3d0a;
-  --panel-shadow-lg: 0 8px 24px #6b1f3d14, 0 2px 8px #6b1f3d0c;
+  --panel-shadow: 0 1px 2px #0503150d, 0 1px 1px #05031508;
+  --panel-shadow-lg: 0 10px 30px #2f27ce14, 0 2px 8px #0503150d;
   color-scheme: light;
 }
 
 html.dark {
-  --bg: #120c0f;
-  --panel: #1b1317;
-  --line: #2f2228;
-  --line-strong: #463239;
-  --fg: #f8eef2;
-  --muted: #a8929b;
-  --accent: #f8a5c8;
-  --accent-fg: #2a1a21;
-  --panel-shadow: 0 1px 2px #00000060, 0 1px 1px #00000040;
-  --panel-shadow-lg: 0 12px 32px #00000070, 0 2px 8px #00000050;
+  --bg: #010104;
+  --panel: #0b0a17;
+  --line: #1d1b33;
+  --line-strong: #2e2b52;
+  --fg: #eae9fc;
+  --muted: #9d9bb8;
+  --accent: #8a84ff;
+  --accent-fg: #050315;
+  --secondary: #1a1745;
+  --secondary-fg: #d6d4ff;
+  --panel-shadow: 0 1px 2px #00000080, 0 1px 1px #00000060;
+  --panel-shadow-lg: 0 12px 32px #000000a0, 0 2px 8px #3a31d826;
   color-scheme: dark;
 }
 
@@ -43,6 +47,8 @@ html.dark {
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
+  --color-secondary: var(--secondary);
+  --color-secondary-fg: var(--secondary-fg);
   --radius-control: var(--radius);
 }
 
@@ -64,7 +70,8 @@ body {
 }
 
 h1, h2, h3 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-weight: 600;
   line-height: 1.15;
 }
 
@@ -83,12 +90,15 @@ p {
   .text-accent { color: var(--color-accent); }
   .bg-accent { background-color: var(--color-accent); }
   .text-accent-fg { color: var(--color-accent-fg); }
+  .bg-secondary { background-color: var(--color-secondary); }
+  .text-secondary-fg { color: var(--color-secondary-fg); }
   .shadow-panel { box-shadow: var(--panel-shadow); }
   .shadow-panel-lg { box-shadow: var(--panel-shadow-lg); }
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  background: var(--color-secondary);
+  color: var(--color-secondary-fg);
 }
 
 /* Focus visibility everywhere */
@@ -120,6 +130,6 @@ p {
 }
 
 @media (prefers-contrast: more) {
-  :root:not(.dark) { --line: #d9a9bb; --muted: #5e4852; --accent: #a52d5d; }
-  html.dark { --line: #6a4a56; --muted: #c9b5bd; }
+  :root:not(.dark) { --line: #a9a6d6; --muted: #3f3e55; --accent: #231c9e; }
+  html.dark { --line: #4a4680; --muted: #c4c2dd; --accent: #a9a4ff; }
 }

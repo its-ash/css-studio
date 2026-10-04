@@ -113,7 +113,7 @@ const variants = computed(() =>
                 <button
                   type="button"
                   class="w-full rounded-md px-2 py-1 text-[11px] font-medium transition-[background-color,color] duration-150 active:scale-[0.97]"
-                  :class="state.morph === g.value ? 'bg-accent/12 text-fg' : 'text-muted hover:bg-line/30 hover:text-fg'"
+                  :class="state.morph === g.value ? 'bg-secondary text-secondary-fg' : 'text-muted hover:bg-line/30 hover:text-fg'"
                   :aria-pressed="state.morph === g.value"
                   @click="useMorph(g.value)"
                 >

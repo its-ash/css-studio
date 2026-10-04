@@ -5,7 +5,7 @@ Client-side CSS generator studio and visual playground. No backend, no database,
 ## Stack
 
 - Nuxt 4 (sources in `app/`), Vue 3, TypeScript strict
-- Tailwind CSS v4 via `@tailwindcss/vite` (tokens in `app/assets/css/main.css`, `@theme inline` semantic classes: `bg-bg`, `bg-panel`, `border-line`, `text-fg`, `text-muted`, `text-accent`)
+- Tailwind CSS v4 via `@tailwindcss/vite` (tokens in `app/assets/css/main.css`, `@theme inline` semantic classes: `bg-bg`, `bg-panel`, `border-line`, `text-fg`, `text-muted`, `text-accent`, `bg-secondary`, `text-secondary-fg`)
 - Fonts: `@fontsource/geist` + `@fontsource/geist-mono`
 - Icons: `@phosphor-icons/vue` exclusively, used through `app/components/common/Icon.vue`. Never hand-roll SVG icons.
 - Dark/light theme via `@nuxtjs/color-mode` (class `dark` on `<html>`)
@@ -23,4 +23,4 @@ Client-side CSS generator studio and visual playground. No backend, no database,
 
 - Generated effects must be real CSS. Do not use canvas or SVG where CSS can do the job.
 - Every generator must have a working preview, valid CSS output, copy, reset, randomize and presets.
-- Keep the app UI itself neutral: pink-tinted neutrals, one baby-pink accent, no gradient chrome.
+- Keep the app UI itself neutral, inspired by realtimecolors.com: indigo-tinted neutrals, one indigo primary (`--accent`), soft lavender `--secondary` for selected/hover fills, no gradient chrome.
